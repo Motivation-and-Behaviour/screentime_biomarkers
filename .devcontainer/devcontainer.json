@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+  "name": "Project Dockerfile",
+  "build": {
+    // Sets the run context to the root folder.
+    "context": "..",
+    // Update the 'dockerFile' property to use the Dockerfile in the devcontainer.
+    "dockerfile": "./Dockerfile"
+  },
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {
+  // },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+  // Uncomment the next line to run commands after the container is created.
+  // "postCreateCommand": "cat /etc/os-release",
+  // "remoteEnv": {
+  // },
+  // "mounts": [
+  //   "source=${localEnv:GCS_AUTH_FILE},target=/auth/gcs-auth.json,type=bind"
+  // ],
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker", // Makes it easy to create, manage, and debug containerized applications
+        "yzhang.markdown-all-in-one", // All you need to write Markdown (keyboard shortcuts, table of contents, auto preview and more)
+        "DavidAnson.vscode-markdownlint", // Markdown linting and style checking for Visual Studio Code
+        "tomoki1207.pdf", // Display pdf file in VSCode
+        "REditorSupport.r", // R Extension for Visual Studio Code
+        "REditorSupport.r-lsp", // R Language Server Protocol support for Visual Studio Code
+        "RDebugger.r-debugger", // R Debugger for VS Code
+        "christian-kohler.path-intellisense", // Visual Studio Code plugin that autocompletes filenames
+        "ionutvmi.path-autocomplete", // Path autocomplete for Visual Studio Code
+        "GitHub.vscode-pull-request-github", // GitHub Pull Requests and Issues
+        "GitHub.copilot", // GitHub Copilot
+        "GitHub.copilot-chat", // GitHub Copilot Chat
+        "mechatroner.rainbow-csv" // Rainbow CSV - Highlight CSV and TSV files in different colors
+      ]
+    }
+  }
+  // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "vscode"
+}
