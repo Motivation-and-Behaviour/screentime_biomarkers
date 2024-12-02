@@ -17,9 +17,9 @@
   // "postCreateCommand": "cat /etc/os-release",
   // "remoteEnv": {
   // },
-  // "mounts": [
-  //   "source=${localEnv:GCS_AUTH_FILE},target=/auth/gcs-auth.json,type=bind"
-  // ],
+  "mounts": [
+    "source=/Users/tasanders/Library/CloudStorage/OneDrive-AustralianCatholicUniversity/LSAC,target=/workspace/data,type=bind"
+  ],
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
