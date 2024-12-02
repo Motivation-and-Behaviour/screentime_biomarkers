@@ -67,5 +67,3 @@ fit_model <- function(..., data, max_iter = 1e5) {
   mod@call$formula <- butcher::axe_env(mod@call$formula)
   mod
 }
-  
-}
