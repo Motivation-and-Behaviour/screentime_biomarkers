@@ -56,8 +56,11 @@ tar_plan(
     clean_data(waves_joined, biomarkers_data),
   ),
   tar_target(
-    df_clean_checkpoint,
-    clean_data(waves_joined, biomarkers_data, checkpoint_only = TRUE),
+    df_clean_alt, # This is the sensitivity dataset
+    clean_data(
+      waves_joined, biomarkers_data,
+      checkpoint_only = FALSE, remove_outliers = FALSE
+    ),
   ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
