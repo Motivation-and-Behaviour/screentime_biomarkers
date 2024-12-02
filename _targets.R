@@ -45,6 +45,12 @@ tar_plan(
       )
     )
   ),
+  # supporting data
+  tar_file_read(
+    bio_ref_data,
+   file.path("sources/biomarker_reference.xlsx"),
+         read_norm_data(!!.x)
+  ),
   tar_target(
     waves_data,
     read_waves_data(waves),
