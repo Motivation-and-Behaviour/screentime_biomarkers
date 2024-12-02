@@ -1,7 +1,7 @@
 #' Fit a Linear Mixed-Effects Model with Multiple Optimizers
 #'
-#' This function fits a linear mixed-effects model using the `lme4` package, 
-#' attempting multiple optimizers until convergence is achieved or all 
+#' This function fits a linear mixed-effects model using the `lme4` package,
+#' attempting multiple optimizers until convergence is achieved or all
 #' optimizers are exhausted.
 #'
 #' @param ... Additional arguments passed to `lme4::lmer`
