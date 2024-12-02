@@ -10,6 +10,10 @@ read_biomarkers_data <- function(filepath) {
   )
   raw_data %>%
     dplyr::transmute(
+      id = hicid,
+      wave = 6.5,
+      sex = zf02m1cp,
+      age_weeks = fcagew,
       vo2 = fcvo2mxm,
       waistcm = fcwaist,
       waist2height = fcwhrat,
