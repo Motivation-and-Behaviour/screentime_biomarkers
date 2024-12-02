@@ -51,5 +51,3 @@ clean_data <- function(
 
   tidy_df
 }
-
-tidy_df %>% select(starts_with("acc"))
