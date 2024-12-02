@@ -9,20 +9,40 @@ tar_option_set(
   controller = crew_controller_local(workers = 3, seconds_idle = 15)
 )
 
+lsac_path <- Sys.getenv("LSAC_PATH")
+
 tar_plan(
   tar_file_read(
     biomarkers_data,
-    "/workspace/data/Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav", # nolint
+    file.path(
+      lsac_path,
+      "Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav"
+    ), # nolint
     read_biomarkers_data(!!.x)
   ),
   tar_files_input(
     waves,
     c(
-      "/workspace/data/9.1_C2 General Release/Survey data/SPSS/lsacgrb2.sav",
-      "/workspace/data/9.1_C2 General Release/Survey data/SPSS/lsacgrb4.sav",
-      "/workspace/data/9.1_C2 General Release/Survey data/SPSS/lsacgrb6.sav",
-      "/workspace/data/9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav",
-      "/workspace/data/9.1_C2 General Release/Survey data/SPSS/lsacgrb12.sav"
+      file.path(
+        lsac_path,
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb2.sav"
+      ),
+      file.path(
+        lsac_path,
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb4.sav"
+      ),
+      file.path(
+        lsac_path,
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb6.sav"
+      ),
+      file.path(
+        lsac_path,
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav"
+      ),
+      file.path(
+        lsac_path,
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb12.sav"
+      )
     )
   ),
   tar_target(
