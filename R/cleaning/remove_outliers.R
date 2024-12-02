@@ -8,11 +8,11 @@
 #' @return A numeric vector with outliers replaced by NA
 #'
 #' @examples
-#' x <- c(1, 2, 3, 100)  # 100 is an outlier
+#' x <- c(rnorm(n = 20), -100)  # -100 is an outlier
 #' remove_outliers(x)
 #' 
 remove_outliers <- function(x) {
- x[scale(x) > 4] <- NA
+ x[abs(scale(x)) > 4] <- NA
  x
 }
 
