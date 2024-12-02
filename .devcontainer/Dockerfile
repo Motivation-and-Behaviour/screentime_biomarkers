@@ -16,6 +16,7 @@ RUN apt-get install -y \
   libfribidi-dev \
   libfontconfig1-dev \
   libgit2-dev \
+  libglpk-dev \
   libharfbuzz-dev \ 
   libjpeg-dev \
   libpng-dev\

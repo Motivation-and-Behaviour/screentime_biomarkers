@@ -17,6 +17,7 @@ Suggests:
     lintr,
     styler,
     tflow (>= 0.4.1),
+    usethis,
     visNetwork
 Remotes: 
     milesmcbain/tflow,
