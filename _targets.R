@@ -16,8 +16,8 @@ tar_plan(
     biomarkers_data,
     file.path(
       lsac_path,
-      "Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav"
-    ), # nolint
+      "Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav" # nolint
+    ),
     read_biomarkers_data(!!.x)
   ),
   tar_files_input(
