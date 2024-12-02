@@ -20,7 +20,7 @@
 #' @export
 #'
 get_cardio_index <- function(age,
-                             gender,
+                             sex,
                              SBP,
                              DBP,
                              waist_circumference,
@@ -33,14 +33,13 @@ get_cardio_index <- function(age,
   calc_z <- function(value, mean, sd) {
     (value - mean) / sd
   }
+
   inverted_HDL_C <- HDL_C * -1
 
   get_z <- function(val, outcome) {
     if (!is.null(val)) {
-      mean_i <- bio_ref_data[Variable == "Mean" &
-                             Sex == gender & Age_years == age,
-                             outcome, with = FALSE]
-      sd_i <- bio_ref_data[Variable == "SD" & Sex == gender, outcome, with = FALSE]
+      mean_i <- bio_ref_data[Variable == "Mean" & Sex == sex & Age_years == age, outcome, with = FALSE]
+      sd_i <- bio_ref_data[Variable == "SD" & Sex == sex, outcome, with = FALSE]
       if(length(mean_i) > 0 && length(sd_i) > 0) {
         z <- calc_z(val, mean_i, sd_i)
         z
@@ -49,8 +48,7 @@ get_cardio_index <- function(age,
       NA
     }
   }
-   metrics <- c("SBP (mmHg)", "DBP (mmHg)", "WC (cm)",
-                "HDL-C (mmol/L)", "TG (mmol/L)", "Glucose (mmol/L)")
+   metrics <- c("SBP (mmHg)", "DBP (mmHg)", "WC (cm)", "HDL-C (mmol/L)", "TG (mmol/L)", "Glucose (mmol/L)")
 
   vals <- c(SBP, DBP, waist_circumference,
             inverted_HDL_C, triglycerides, glucose)
