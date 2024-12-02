@@ -25,10 +25,6 @@ tar_plan(
     c(
       file.path(
         lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb2.sav"
-      ),
-      file.path(
-        lsac_path,
         "9.1_C2 General Release/Survey data/SPSS/lsacgrb4.sav"
       ),
       file.path(
