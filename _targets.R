@@ -51,5 +51,13 @@ tar_plan(
     dplyr::bind_rows(waves_data),
     pattern = map(waves_data)
   ),
+  tar_target(
+    df_clean,
+    clean_data(waves_joined, biomarkers_data),
+  ),
+  tar_target(
+    df_clean_checkpoint,
+    clean_data(waves_joined, biomarkers_data, checkpoint_only = TRUE),
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
