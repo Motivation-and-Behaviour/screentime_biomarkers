@@ -5,7 +5,8 @@
 #' @title
 #' @param filepath
 read_biomarkers_data <- function(filepath) {
-
-  foreign::read.spss(filepath, to.data.frame = TRUE, use.value.labels = TRUE)
-
+  foreign::read.spss(filepath,
+    to.data.frame = TRUE, use.value.labels = TRUE
+  ) %>%
+    dplyr::as_tibble()
 }
