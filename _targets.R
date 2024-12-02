@@ -37,11 +37,11 @@ tar_plan(
       ),
       file.path(
         lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav"
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb8.sav"
       ),
       file.path(
         lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb12.sav"
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav"
       )
     )
   ),
