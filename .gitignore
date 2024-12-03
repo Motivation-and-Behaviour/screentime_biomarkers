@@ -53,3 +53,5 @@ doc/*.tex
 .vscode
 _targets/meta
 .Renviron_backup
+.Renviron
+.Rprofile

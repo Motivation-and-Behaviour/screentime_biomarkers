@@ -16,17 +16,13 @@ tar_plan(
     biomarkers_data,
     file.path(
       lsac_path,
-      "Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav"
-    ), # nolint
+      "Special Purpose Dataset - CHP (Biomarkers) General Release/SPSS/lsacgrcp.sav" # nolint
+    ),
     read_biomarkers_data(!!.x)
   ),
   tar_files_input(
     waves,
     c(
-      file.path(
-        lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb2.sav"
-      ),
       file.path(
         lsac_path,
         "9.1_C2 General Release/Survey data/SPSS/lsacgrb4.sav"
@@ -37,11 +33,11 @@ tar_plan(
       ),
       file.path(
         lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav"
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb8.sav"
       ),
       file.path(
         lsac_path,
-        "9.1_C2 General Release/Survey data/SPSS/lsacgrb12.sav"
+        "9.1_C2 General Release/Survey data/SPSS/lsacgrb10.sav"
       )
     )
   ),
