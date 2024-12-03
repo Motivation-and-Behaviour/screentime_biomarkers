@@ -27,17 +27,34 @@ clean_data <- function(
       ) %>% as.factor(),
       age = age_weeks / 52.1775, # Number of weeks in a year
       # Make NA those with insufficent wear time
+      valid_pa = if_else(accvalidwkdays >= 3 & accvalidwedays >= 1,
+        "Valid", "Insufficient"
+      ) %>% as.factor(),
       across(c(accmvpa, accsed), ~
-        if_else(accvalidwkdays >= 3 & accvalidwedays >= 1, .x, NA_real_))
+        if_else(valid_pa == "Valid", .x, NA_real_))
     )
 
+  # Identify kids with health conditions
+  conditions_ids <-
+    dplyr::filter(
+      tidy_df, wave == 6.5,
+      condition_vision == "Not selected",
+      condition_pa == "Not selected",
+      condition_breath == "Not selected",
+      condition_feetlegs == "Not selected"
+    ) %>%
+    dplyr::pull(id)
+
+  tidy_df <- tidy_df %>%
+    mutate(health_condition = if_else(
+      id %in% conditions_ids, "Health condition", "No health condition"
+    ) %>% as.factor())
+
   if (remove_outliers) {
-    tidy_df <-
-      apply_remove_outliers(
-        tidy_df,
-        dplyr::select(tidy_df, where(is.numeric), -c(id, wave)) %>% colnames()
-      ) %>%
-      as_tibble()
+    vars_to_scale <-
+      dplyr::select(tidy_df, where(is.numeric), -c(id, wave)) %>% colnames()
+
+    tidy_df[, vars_to_scale] <- apply_remove_outliers(tidy_df, vars_to_scale)
   }
 
   if (checkpoint_only) {
