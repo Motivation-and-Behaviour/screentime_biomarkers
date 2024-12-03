@@ -69,8 +69,12 @@ tar_plan(
     ),
   ),
   tar_target(
-    transformed_data,
-    transform_data(df_clean)
+    scored_data,
+    score_data(df_clean, bio_ref_data)
   ),
+  tar_target(
+    transformed_data,
+    transform_data(scored_data)
+),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
