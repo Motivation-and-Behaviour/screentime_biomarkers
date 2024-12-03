@@ -56,3 +56,4 @@ _targets/meta
 .Renviron
 _targets/
 .Rprofile
+.lintr
