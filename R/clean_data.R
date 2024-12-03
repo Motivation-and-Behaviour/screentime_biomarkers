@@ -14,6 +14,10 @@
 clean_data <- function(
     waves_joined, biomarkers_data,
     checkpoint_only = TRUE, remove_outliers = TRUE) {
+    waves_joined[waves_joined == -9] <- NA
+    # biomarkers_data <- dplyr::as_tibble(biomarkers_data)
+    # biomarkers_data[biomarkers_data == -9] <- NA
+
   full_df <-
     dplyr::bind_rows(waves_joined, biomarkers_data)
 
