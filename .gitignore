@@ -52,3 +52,4 @@ doc/*.tex
 .DS_Store
 .vscode
 .Renviron_backup
+.Renviron
