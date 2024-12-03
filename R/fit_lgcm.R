@@ -21,7 +21,7 @@ fit_lgcm <- function(transformed_data) {
 
   transformed_data <-
     transformed_data %>%
-    filter(!is.na(st_total_w3) & !is.na(st_total_w4) & !is.na(st_total_w5) & !is.na(st_total_w6))
+    dplyr::filter(!is.na(st_total_w3) & !is.na(st_total_w4) & !is.na(st_total_w5) & !is.na(st_total_w6))
 
   lgcm_fit <- lavaan::growth(model, data = transformed_data)
   lavInspect(lgcm_fit, "fit")
