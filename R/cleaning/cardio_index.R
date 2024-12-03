@@ -33,11 +33,12 @@ get_cardio_index <- function(age,
   calc_z <- function(value, mean, sd) {
     (value - mean) / sd
   }
-
   inverted_HDL_C <- HDL_C * -1
+  age <- max(age, 6)
 
-  get_z <- function(val, outcome) {
+  get_z <- function(val, outcome, i) {
     if (!is.null(val)) {
+      # message(i)
       mean_i <- bio_ref_data[Variable == "Mean" & Sex == sex & Age_years == age, outcome, with = FALSE]
       sd_i <- bio_ref_data[Variable == "SD" & Sex == sex, outcome, with = FALSE]
       if(length(mean_i) > 0 && length(sd_i) > 0) {
@@ -54,11 +55,11 @@ get_cardio_index <- function(age,
             inverted_HDL_C, triglycerides, glucose)
 
   cardio_index <- lapply(seq_along(metrics),
-                         function(i) get_z(vals[i], metrics[i]))
+                         function(i) get_z(vals[i], metrics[i], i))
   names(cardio_index) <- metrics
   cardio_index$BP_combined <- mean(unlist(cardio_index[c("SBP (mmHg)", "DBP (mmHg)")]))
   
   cardio_index[c("SBP (mmHg)", "DBP (mmHg)")] <- NULL
-  out <- mean(unlist(cardio_index))
+  out <- mean(unlist(cardio_index), na.rm = TRUE)
   out
 }
