@@ -68,5 +68,13 @@ tar_plan(
       checkpoint_only = FALSE, remove_outliers = FALSE
     ),
   ),
+  tar_target(
+    scored_data,
+    score_data(df_clean)
+  ),
+  tar_target(
+    transformed_data,
+    transform_data(scored_data, bio_ref_data)
+),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
