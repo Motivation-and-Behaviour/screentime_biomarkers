@@ -13,7 +13,7 @@ score_data <- function(df_clean, bio_ref_data) {
   df_clean$age_integer <- as.integer(round(df_clean$age,0))
   df_clean$sex
 
-  df_clean$cardio_index <- future.apply::future_sapply(seq_len(nrow(df_clean)), function(i) {
+  df_clean$cardio_index <- sapply(seq_len(nrow(df_clean)), function(i) {
     get_cardio_index(
       age = df_clean$age_integer[i],
       sex = df_clean$sex[i],
