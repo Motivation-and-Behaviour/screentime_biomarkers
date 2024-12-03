@@ -54,9 +54,11 @@ get_cardio_index <- function(age,
             inverted_HDL_C, triglycerides, glucose)
 
   cardio_index <- lapply(seq_along(metrics),
-                         function(i) get_z(vals[i], metrics[i])) |>
-    unlist() |>
-    mean()
-
-  cardio_index
+                         function(i) get_z(vals[i], metrics[i]))
+  names(cardio_index) <- metrics
+  cardio_index$BP_combined <- mean(unlist(cardio_index[c("SBP (mmHg)", "DBP (mmHg)")]))
+  
+  cardio_index[c("SBP (mmHg)", "DBP (mmHg)")] <- NULL
+  out <- mean(unlist(cardio_index))
+  out
 }
