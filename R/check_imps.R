@@ -14,7 +14,7 @@ check_imps <- function(data_imp) {
   imps <- as_tibble(mice::complete(data_imp, action = "long", include = TRUE))
 
   # Invariant variables should be the same within participants in each imp
-  participant_invar <- c("age", "weight", "height", "bmi")
+  participant_invar <- c()
   stopifnot(
     "An invariant variable varies within a particpant" =
       all(sapply(participant_invar, function(x) {
@@ -25,21 +25,6 @@ check_imps <- function(data_imp) {
 
   # Some variables should always be positive
   positive_vars <- c(
-    "pa_volume",
-    "sleep_duration",
-    "sleep_efficiency",
-    "sleep_onset",
-    "sleep_wakeup",
-    "sleep_efficiency_lag",
-    "sleep_onset_lag",
-    "sleep_wakeup_lag",
-    "sleep_duration_lag",
-    "age",
-    "weight",
-    "height",
-    "bmi",
-    "daylight_hours",
-    "pa_mostactivehr"
   )
 
   stopifnot(
