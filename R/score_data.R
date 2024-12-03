@@ -11,7 +11,7 @@ score_data <- function(df_clean) {
 
   # Cardio score variable
   df_clean$age_integer <- as.integer(round(df_clean$age, 0))
-  # Estiamte st_total and remove outliers
+  # Estimate st_total and remove outliers
   df_clean$st_total <- df_clean$st_comp_minweek + df_clean$st_vg_minweek + df_clean$st_tv_minweek
   df_clean$st_total <- remove_outliers(df_clean$st_total)
   # scale st_total and constituents
