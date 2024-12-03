@@ -1,5 +1,5 @@
 # History files
-.Rhistory
+
 .Rapp.history
 
 # Session Data files
@@ -54,4 +54,5 @@ doc/*.tex
 _targets/meta
 .Renviron_backup
 .Renviron
+_targets/
 .Rprofile

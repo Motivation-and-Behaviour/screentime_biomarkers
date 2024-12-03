@@ -57,5 +57,16 @@ tar_plan(
     dplyr::bind_rows(waves_data),
     pattern = map(waves_data)
   ),
+  tar_target(
+    df_clean,
+    clean_data(waves_joined, biomarkers_data),
+  ),
+  tar_target(
+    df_clean_alt, # This is the sensitivity dataset
+    clean_data(
+      waves_joined, biomarkers_data,
+      checkpoint_only = FALSE, remove_outliers = FALSE
+    ),
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )

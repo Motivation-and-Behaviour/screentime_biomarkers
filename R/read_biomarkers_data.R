@@ -43,6 +43,10 @@ read_biomarkers_data <- function(filepath) {
       accvalidwkdays = fcvalwkday,
       accvalidwedays = fcvalweday,
       accmvpa = fca52mvtm,
-      accsed = fca52sdtm
+      accsed = fca52sdtm,
+      condition_vision = fch01c07v,
+      condition_pa = fch01c07t,
+      condition_breath = fch01c07u,
+      condition_feetlegs = fch01c07p
     )
 }
