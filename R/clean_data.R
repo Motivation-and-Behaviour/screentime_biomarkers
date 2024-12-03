@@ -39,10 +39,10 @@ clean_data <- function(
   conditions_ids <-
     dplyr::filter(
       tidy_df, wave == 6.5,
-      condition_vision == "Not selected",
-      condition_pa == "Not selected",
-      condition_breath == "Not selected",
-      condition_feetlegs == "Not selected"
+      condition_vision == "Selected",
+      condition_pa == "Selected",
+      condition_breath == "Selected",
+      condition_feetlegs == "Selected"
     ) %>%
     dplyr::pull(id)
 
