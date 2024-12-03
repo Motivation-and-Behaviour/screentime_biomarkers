@@ -74,7 +74,11 @@ tar_plan(
   ),
   tar_target(
     transformed_data,
-    transform_data(scored_data, bio_ref_data)
+    transform_data(scored_data, bio_ref_data),
 ),
+  tar_target(
+    transformed_data_no_filter,
+    transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
