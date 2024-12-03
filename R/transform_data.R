@@ -69,7 +69,14 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
       health_condition_w6.5,
       valid_pa_w6.5
                         ) ]
-   attr(transformed_data, "has_condition") <- has_condition
-   attr(transformed_data, "is_valid_wear") <- is_valid_wear
+    
+    if(filter_valid) {
+      attr(transformed_data, "has_condition") <- has_condition
+      attr(transformed_data, "is_valid_wear") <- is_valid_wear
+    } else{
+      attr(transformed_data, "has_condition") <- NULL
+      attr(transformed_data, "is_valid_wear") <- NULL
+    }
+
    transformed_data
 }
