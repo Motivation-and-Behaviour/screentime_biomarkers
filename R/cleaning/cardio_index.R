@@ -33,7 +33,6 @@ get_cardio_index <- function(age,
     (value - mean) / sd
   }
   inverted_HDL_C <- HDL_C * -1
-  age <- max(age, 6)
 
   get_z <- function(val, outcome, i) {
     if (!is.null(val)) {
