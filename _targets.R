@@ -68,5 +68,9 @@ tar_plan(
       checkpoint_only = FALSE, remove_outliers = FALSE
     ),
   ),
+  tar_target(
+    transformed_data,
+    transform_data(df_clean)
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
