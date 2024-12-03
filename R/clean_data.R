@@ -31,7 +31,8 @@ clean_data <- function(
         "Valid", "Insufficient"
       ) %>% as.factor(),
       across(c(accmvpa, accsed), ~
-        if_else(valid_pa == "Valid", .x, NA_real_))
+        if_else(valid_pa == "Valid", .x, NA_real_)),
+      mean_bloodpressure = rowMeans(cbind(bpsys, bpdia), na.rm = TRUE),
     )
 
   # Identify kids with health conditions
