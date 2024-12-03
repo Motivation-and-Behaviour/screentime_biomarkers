@@ -57,7 +57,7 @@ get_cardio_index <- function(age,
   cardio_index <- lapply(seq_along(metrics),
                          function(i) get_z(vals[i], metrics[i], i))
   names(cardio_index) <- metrics
-  cardio_index$BP_combined <- mean(unlist(cardio_index[c("SBP (mmHg)", "DBP (mmHg)")]))
+  cardio_index$BP_combined <- mean(unlist(cardio_index[c("SBP (mmHg)", "DBP (mmHg)")]), na.rm = TRUE)
   
   cardio_index[c("SBP (mmHg)", "DBP (mmHg)")] <- NULL
   out <- mean(unlist(cardio_index), na.rm = TRUE)
