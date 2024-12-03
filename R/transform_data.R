@@ -1,10 +1,20 @@
-transform_data <- function(scored_data, bio_ref_data) {
+transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
   transformed_data <- scored_data |>
     tidyr::pivot_wider(
       names_from = wave, # Create columns based on wave
       values_from = -c(id, wave), # Keep id fixed, spread all other variables
     names_sep = "_w"
   ) |> data.table()
+
+  if(filter_valid) {
+    # When in doubt keep the data (when validity is not provided)
+    is_valid_wear <- transformed_data$valid_pa_w6.5 == "Valid" | is.na(transformed_data$valid_pa_w6.5)
+    transformed_data <- transformed_data[is_valid_wear]
+    ## Remove kids with health conditions
+    has_condition <- transformed_data$health_condition_w6.5 == "Health condition"
+    transformed_data <- transformed_data[!has_condition]
+  }
+
   # get cardio index
     transformed_data$cardio_index_w6.5 <- sapply(seq_len(nrow(transformed_data)), function(i) {
     get_cardio_index(
@@ -19,7 +29,7 @@ transform_data <- function(scored_data, bio_ref_data) {
       bio_ref_data = bio_ref_data
     )
   })
-# Only get varaibles we want.
+# Only get variables we want.
     transformed_data[,.(
       id,
       age = age_w6.5,
@@ -55,6 +65,11 @@ transform_data <- function(scored_data, bio_ref_data) {
       ses_w4,
       ses_w5,
       ses_w6,
-      ses_w6.5
+      ses_w6.5,
+      health_condition_w6.5,
+      valid_pa_w6.5
                         ) ]
+   attr(transformed_data, "has_condition") <- has_condition
+   attr(transformed_data, "is_valid_wear") <- is_valid_wear
+   transformed_data
 }
