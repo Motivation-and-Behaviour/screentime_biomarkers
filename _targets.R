@@ -80,5 +80,13 @@ tar_plan(
     transformed_data_no_filter,
     transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
   ),
+  tar_target(
+    lgcm1,
+    fit_lgcm(transformed_data)
+  ),
+  tar_target(
+    lgcm1_table,
+    make_lgcm_table(lgcm1)
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )

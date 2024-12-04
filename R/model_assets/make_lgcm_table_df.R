@@ -1,4 +1,4 @@
-make_lgcm_table <- function(fit) {
+make_lgcm_table_df <- function(fit) {
   require(lavaan)
   est <- parameterEstimates(fit) |>
     as.data.table()
