@@ -37,7 +37,7 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
 
     # regression of health outcome on latent factors and covariates
     {outcome} ~ 1 + st_intercept + st_slope + {covariates}
-    st_intercept ~ ses_w6 + female + indig
+    st_intercept ~ 1 + ses_w6 + female + indig + sexualmaturity_numeric_w6.5 # starting values depend on basic demographics
     "
     # nolint end
   )
@@ -54,7 +54,8 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     data = transformed_data, missing = "fiml"
   )
   mi <- lavaan::modindices(model_outputs$lgcm_fit)
-  mi[order(mi$mi, decreasing = TRUE),]
+  mi[order(mi$mi, decreasing = TRUE),][1:10,]
+browser()
   fitMeasures(model_outputs$lgcm_fit, c("rmsea", "cfi", "tli", "bic", "aic"))
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
