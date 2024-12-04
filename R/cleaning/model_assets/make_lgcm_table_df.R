@@ -11,7 +11,7 @@ make_lgcm_table_df <- function(fit) {
   tabby$se <- round(tabby$se, 2)
   tabby$z <- round(tabby$z, 2)
   # assemble final table
-  tabby[, .(
+  tabby[lhs != "st_intercept", .(
             Outcome = lhs,
             Term = rhs,
             Coef = est_95,
