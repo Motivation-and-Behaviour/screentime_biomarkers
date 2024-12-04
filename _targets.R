@@ -75,6 +75,7 @@ tar_plan(
   tar_target(
     transformed_data,
     transform_data(scored_data, bio_ref_data)
-),
+  ),
+  tar_target(table1, make_table1(scored_data)),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
