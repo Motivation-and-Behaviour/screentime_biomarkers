@@ -20,13 +20,13 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     # nolint start
     "
     # lgcm
-    intercept =~ 1 * st_total_w3_scaled + 1 * st_total_w4_scaled + 1 * st_total_w5_scaled + 1 * st_total_w6_scaled
-    slope =~ 0 * st_total_w3_scaled + 1 * st_total_w4_scaled + 2 * st_total_w5_scaled + 3 * st_total_w6_scaled
+    st_intercept =~ 1 * st_total_w3_scaled + 1 * st_total_w4_scaled + 1 * st_total_w5_scaled + 1 * st_total_w6_scaled
+    st_slope =~ 0 * st_total_w3_scaled + 1 * st_total_w4_scaled + 2 * st_total_w5_scaled + 3 * st_total_w6_scaled
 
     # variances and covariances
-    intercept ~~ intercept
-    slope ~~ slope
-    intercept ~~ slope
+    st_intercept ~~ st_intercept
+    st_slope ~~ st_slope
+    st_intercept ~~ st_slope
 
     # residual variances
     st_total_w3_scaled ~~ residual_var*st_total_w3_scaled
@@ -36,8 +36,8 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     residual_var > 0
 
     # regression of health outcome on latent factors and covariates
-    {outcome} ~ 1 + intercept + slope + {covariates}
-    intercept ~ ses_w6 + female + indig
+    {outcome} ~ 1 + st_intercept + st_slope + {covariates}
+    st_intercept ~ ses_w6 + female + indig
     "
     # nolint end
   )
