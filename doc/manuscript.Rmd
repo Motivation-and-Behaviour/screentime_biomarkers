@@ -16,3 +16,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+```{r diagnostic-outputs, include = FALSE}
+# outputs csv for diagnostic purposes
+tar_read(model_tables) |> 
+  data.table::fwrite("outputs/model_tables.csv")
+
+```
