@@ -14,11 +14,6 @@ score_data <- function(df_clean) {
   # Estimate st_total and remove outliers
   df_clean$st_total <- df_clean$st_comp_minweek + df_clean$st_vg_minweek + df_clean$st_tv_minweek
   df_clean$st_total <- remove_outliers(df_clean$st_total)
-  # scale st_total and constituents
-  df_clean$scale_st_total <- scale(df_clean$st_total)
-  df_clean$scale_st_comp_minweek <- scale(df_clean$st_comp_minweek)
-  df_clean$scale_st_vg_minweek <- scale(df_clean$st_vg_minweek)
-  df_clean$scale_st_tv_minweek <- scale(df_clean$st_tv_minweek)
   # return df_clean
   df_clean
 }
