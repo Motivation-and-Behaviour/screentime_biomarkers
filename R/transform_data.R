@@ -30,21 +30,26 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
     )
   })
 # Only get variables we want.
-    transformed_data[,.(
+    transformed_data <- transformed_data[,.(
       id,
       age = age_w6.5,
       sex = sex_w6.5,
       indig = indig_w6, # most complete
       diet = diet_w6.5, 
       sexualmaturity_w6.5,
+      sexualmaturity_numeric_w6.5,
       fastingtime_w6.5,
       st_total_w3,
       st_total_w4,
       st_total_w5,
       st_total_w6,
       st_total_w6.5,
-      bpsys_w6.5,
       bpdia_w6.5,
+      bpsys_w6.5,
+      bpsysamp_w6.5,
+      bpsysz_w6.5,
+      bpdiaz_w6.5,
+      pulsepressamp_w6.5,
       waistcm_w6.5,
       cholesttotalhdl_w6.5,
       cholesttotal_w6.5,
@@ -69,7 +74,13 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
       health_condition_w6.5,
       valid_pa_w6.5
                         ) ]
-   attr(transformed_data, "has_condition") <- has_condition
-   attr(transformed_data, "is_valid_wear") <- is_valid_wear
+
+    transformed_data <- scale_variables(transformed_data, id_var = "id")
+    
+    if(filter_valid) {
+      attr(transformed_data, "has_condition") <- has_condition
+      attr(transformed_data, "is_valid_wear") <- is_valid_wear
+    }
+
    transformed_data
 }

@@ -56,10 +56,13 @@ clean_data <- function(
     ) %>% as.factor())
 
   if (remove_outliers) {
-    vars_to_scale <-
+    vars_to_remove_outliers <-
       dplyr::select(tidy_df, where(is.numeric), -c(id, wave)) %>% colnames()
-
-    tidy_df[, vars_to_scale] <- apply_remove_outliers(tidy_df, vars_to_scale)
+    # don't remove outliers from vars starting with screentime variables
+    vars_to_remove_outliers <-
+      vars_to_remove_outliers[!stringr::str_detect(vars_to_remove_outliers, "^st")]
+    # perform outlier removal 
+    tidy_df[, vars_to_remove_outliers] <- apply_remove_outliers(tidy_df, vars_to_remove_outliers)
   }
 
   if (checkpoint_only) {
