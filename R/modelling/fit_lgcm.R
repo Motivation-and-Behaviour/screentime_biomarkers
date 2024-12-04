@@ -10,33 +10,36 @@
 #' @author {Taren Sanders}
 #' @export
 fit_lgcm <- function(transformed_data, outcome, bloods) {
-  covariates <- "sex + indig + ses_w6 + diet + sexualmaturity_numeric_w6.5"
+  covariates <- "female + indig + ses_w6 + bad_diet + sexualmaturity_numeric_w6.5"
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
   }
-  browser()
 
   model <- glue::glue(
     # nolint start
     "
-    # LGCM
+    # lgcm
     intercept =~ 1 * st_total_w3_scaled + 1 * st_total_w4_scaled + 1 * st_total_w5_scaled + 1 * st_total_w6_scaled
     slope =~ 0 * st_total_w3_scaled + 1 * st_total_w4_scaled + 2 * st_total_w5_scaled + 3 * st_total_w6_scaled
 
-    # Variances and covariances
+    # variances and covariances
     intercept ~~ intercept
     slope ~~ slope
     intercept ~~ slope
+    
+    # include var intercepts
+    bpsysamp_w6.5 ~ 1
 
-    # Residual variances
+    # residual variances
     st_total_w3_scaled ~~ residual_var*st_total_w3_scaled
     st_total_w4_scaled ~~ residual_var*st_total_w4_scaled
     st_total_w5_scaled ~~ residual_var*st_total_w5_scaled
     st_total_w6_scaled ~~ residual_var*st_total_w6_scaled
     residual_var > 0
 
-    # Regression of health outcome on latent factors and covariates
+    # regression of health outcome on latent factors and covariates
     {outcome} ~ intercept + slope + {covariates}
+    intercept ~ ses_w6 + female + indig
     "
     # nolint end
   )
@@ -52,6 +55,10 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     model,
     data = transformed_data, missing = "fiml"
   )
+  mi <- lavaan::modindices(model_outputs$lgcm_fit)
+  mi[order(mi$mi, decreasing = TRUE),]
+  fitMeasures(model_outputs$lgcm_fit, c("rmsea", "cfi", "tli", "bic", "aic"))
+
   model_outputs$lgcm_adj_fit <- lavaan::growth(
     adj_model,
     data = transformed_data, missing = "fiml"
