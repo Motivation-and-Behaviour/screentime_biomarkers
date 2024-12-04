@@ -19,15 +19,15 @@ outcome_variables <- tribble(
   "glycoprotein_w6.5", TRUE,
   "phospholipids_w6.5", TRUE,
   # Additional outcomes
-  "vo2_w6.5", TRUE,
-  "waistcm_w6.5", TRUE,
-  "waist2height_w6.5", TRUE,
-  "bmiz_w6.5", TRUE,
-  "bodyfat_w6.5", TRUE,
-  "bpsysamp_w6.5", TRUE,
-  "pulsepressamp_w6.5", TRUE,
-  "bpsysz_w6.5", TRUE,
-  "bpdiaz_w6.5", TRUE,
+  "vo2_w6.5", FALSE,
+  "waistcm_w6.5", FALSE,
+  "waist2height_w6.5", FALSE,
+  "bmiz_w6.5", FALSE,
+  "bodyfat_w6.5", FALSE,
+  "bpsysamp_w6.5", FALSE,
+  "pulsepressamp_w6.5", FALSE,
+  "bpsysz_w6.5", FALSE,
+  "bpdiaz_w6.5", FALSE,
   "trigly_w6.5", TRUE,
   "cholesttotal_w6.5", TRUE,
   "cholesttotalhdl_w6.5", TRUE,
@@ -35,9 +35,14 @@ outcome_variables <- tribble(
   "glucose_w6.5", TRUE
 )
 
-model_vector <- paste0("model_", outcome_variables$variable) |>
-  paste(collapse = ", ")
-fit_measures_cmd <- glue::glue("fit_measures_table({model_vector})")
+model_builder <- tar_map(
+  values = outcome_variables,
+  names = "variable",
+  tar_target(model, fit_lgcm(transformed_data, variable, bloods)),
+  tar_target(model_fit_measures, get_measures(model),
+    pattern = map(model)
+  )
+)
 
 list(
   tar_file_read(
@@ -108,36 +113,16 @@ list(
     transformed_data_no_filter,
     transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
   ),
-  tar_map(
-    values = outcome_variables,
-    names = "variable",
-    tar_target(model, fit_lgcm(transformed_data, variable, bloods))
-  ),
-tar_target(
-  all_models,
-  list(
-      model_cardio_index_w6.5 = model_cardio_index_w6.5,
-      glycoprotein_w6.5 = model_glycoprotein_w6.5,
-      phospholipids_w6.5 = model_phospholipids_w6.5,
-      vo2_w6.5 = model_vo2_w6.5,
-      waistcm_w6.5 = model_waistcm_w6.5,
-      waist2height_w6.5 = model_waist2height_w6.5,
-      bmiz_w6.5 = model_bmiz_w6.5,
-      bodyfat_w6.5 = model_bodyfat_w6.5,
-      bpsysamp_w6.5 = model_bpsysamp_w6.5,
-      pulsepressamp_w6.5 = model_pulsepressamp_w6.5,
-      bpsysz_w6.5 = model_bpsysz_w6.5,
-      bpdiaz_w6.5 = model_bpdiaz_w6.5,
-      trigly_w6.5 = model_trigly_w6.5,
-      cholesttotal_w6.5 = model_cholesttotal_w6.5,
-      cholesttotalhdl_w6.5 = model_cholesttotalhdl_w6.5,
-      cholestnonhdl_w6.5 = model_cholestnonhdl_w6.5,
-      glucose_w6.5 = model_glucose_w6.5
-    )
-  ),
-  tar_target(
+  model_builder,
+  tar_combine(
     fit_measures,
-    fit_measures_table(all_models)
+    model_builder[["model_fit_measures"]],
+    command = dplyr::bind_rows(!!!.x, .id = "variable") |>
+      dplyr::mutate(
+        model_name = stringr::str_remove(variable, "model_fit_measures_"),
+        across(where(is.numeric), round, 2)
+      ) |>
+      dplyr::select(model_name, everything(), -variable)
   ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
