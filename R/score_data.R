@@ -21,5 +21,8 @@ score_data <- function(df_clean) {
 
   # Handle factors with  factors cannot have more than 2 levels
   df_clean$sexualmaturity_numeric <- as.numeric(gsub("Tanner", "", df_clean$sexualmaturity))
+  df_clean$indig <- as.numeric(df_clean$indig == "Indigenous")
+  df_clean$female <- as.numeric(df_clean$sex == "Female")
+  df_clean$bad_diet <- as.numeric(df_clean$diet == "does not meet guidelines")
   df_clean
 }

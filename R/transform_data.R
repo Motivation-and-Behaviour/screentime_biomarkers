@@ -33,9 +33,10 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
     transformed_data <- transformed_data[,.(
       id,
       age = age_w6.5,
-      sex = sex_w6.5,
+      female = female_w6.5,
       indig = indig_w6, # most complete
       diet = diet_w6.5, 
+      bad_diet = bad_diet_w6.5,
       sexualmaturity_w6.5,
       sexualmaturity_numeric_w6.5,
       fastingtime_w6.5,
