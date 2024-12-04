@@ -13,7 +13,7 @@ scale_variables <- function(data, id_var = "id") {
     if (all(is.na(x))) next
     scaled_name <- paste0(var_name, "_scaled")
     scaled_x <- scale(x)
-    mean_diff_x <- mean(x - scaled_x, na.rm = TRUE)
+    mean_diff_x <- abs(mean(x - scaled_x, na.rm = TRUE))
     # if variable is not close to being standardised
     if (mean_diff_x < 0.5) {
       # add the scaled variable to the data
