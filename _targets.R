@@ -42,8 +42,7 @@ model_builder <- tar_map(
   tar_target(model_fit_measures, get_measures(model),
     pattern = map(model)
   ),
-  tar_target(model_tables, get_model_table(model),
-  pattern = map(model)
+  tar_target(model_tables, get_model_table(model)
 ))
 
 list(
@@ -128,8 +127,7 @@ list(
   ),
    tar_combine(
     model_tables,
-    model_builder[["model_tables"]],
-    command = dplyr::bind_rows(!!!.x)
+    model_builder[["model_tables"]]
    ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
