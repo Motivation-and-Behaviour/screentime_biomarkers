@@ -47,6 +47,8 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
       bpdia_w6.5,
       bpsys_w6.5,
       bpsysamp_w6.5,
+      bpsysz_w6.5,
+      pulsepressamp_w6.5,
       waistcm_w6.5,
       cholesttotalhdl_w6.5,
       cholesttotal_w6.5,
