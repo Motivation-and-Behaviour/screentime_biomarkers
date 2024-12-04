@@ -62,5 +62,6 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     data = transformed_data, missing = "fiml"
   )
 
+  attr(model_outputs, "covariates") <- covariates
   model_outputs
 }
