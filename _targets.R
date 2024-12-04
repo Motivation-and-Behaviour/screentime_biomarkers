@@ -7,7 +7,7 @@ tar_source()
 # Use parallel processing where possible
 tar_option_set(
   controller = crew_controller_local(
-    workers = max(parallel::detectCores() - 2, 20), seconds_idle = 15
+    workers = min(parallel::detectCores() - 2, 20), seconds_idle = 15
   )
 )
 
