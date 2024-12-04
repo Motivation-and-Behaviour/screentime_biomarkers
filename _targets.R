@@ -124,14 +124,5 @@ list(
       ) |>
       dplyr::select(model_name, everything(), -variable)
   ),
-    fit_measures,
-    model_builder[["model_fit_measures"]],
-    command = dplyr::bind_rows(!!!.x, .id = "variable") |>
-      dplyr::mutate(
-        model_name = stringr::str_remove("model_fit_measures_", variable),
-        across(where(is.numeric), round, 2)
-      ) |>
-      dplyr::select(model_name, everything(), -variable)
-  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
