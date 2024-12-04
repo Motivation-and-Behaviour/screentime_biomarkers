@@ -28,9 +28,6 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     slope ~~ slope
     intercept ~~ slope
     
-    # include var intercepts
-    bpsysamp_w6.5 ~ 1
-
     # residual variances
     st_total_w3_scaled ~~ residual_var*st_total_w3_scaled
     st_total_w4_scaled ~~ residual_var*st_total_w4_scaled
