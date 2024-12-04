@@ -18,5 +18,8 @@ score_data <- function(df_clean) {
   df_clean$st_total <- df_clean$st_comp_minweek + df_clean$st_vg_minweek + df_clean$st_tv_minweek
   df_clean$st_total <- remove_outliers(df_clean$st_total)
   # return df_clean
+
+  # Handle factors with  factors cannot have more than 2 levels
+  df_clean$sexualmaturity_numeric <- as.numeric(gsub("Tanner", "", df_clean$sexualmaturity))
   df_clean
 }
