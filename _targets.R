@@ -21,7 +21,7 @@ outcome_variables <- tribble(
   # Additional outcomes
   "vo2_w6.5", FALSE,
   "waistcm_w6.5", FALSE,
-  "waist2height_w6.5", FALSE,
+  # "waist2height_w6.5", FALSE,
   "bmiz_w6.5", FALSE,
   "bodyfat_w6.5", FALSE,
   "bpsysamp_w6.5", FALSE,
@@ -41,8 +41,10 @@ model_builder <- tar_map(
   tar_target(model, fit_lgcm(transformed_data, variable, bloods)),
   tar_target(model_fit_measures, get_measures(model),
     pattern = map(model)
-  )
-)
+  ),
+  tar_target(model_tables, get_model_table(model),
+  pattern = map(model)
+))
 
 list(
   tar_file_read(
@@ -124,5 +126,10 @@ list(
       ) |>
       dplyr::select(model_name, everything(), -variable)
   ),
+   tar_combine(
+    model_tables,
+    model_builder[["model_tables"]],
+    command = dplyr::bind_rows(!!!.x)
+   ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
