@@ -21,7 +21,7 @@ outcome_variables <- tribble(
   # Additional outcomes
   "vo2_w6.5", FALSE,
   "waistcm_w6.5", FALSE,
-  # "waist2height_w6.5", FALSE,
+  "waist2height_w6.5", FALSE,
   "bmiz_w6.5", FALSE,
   "bodyfat_w6.5", FALSE,
   "bpsysamp_w6.5", FALSE,
