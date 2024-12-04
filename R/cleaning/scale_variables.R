@@ -18,6 +18,7 @@ scale_variables <- function(data, id_var = "id") {
     if (all(is.na(x))) next
     scaled_name <- paste0(var_name, "_scaled")
     scaled_x <- scale(x)
+    data[[scaled_name]] <- scaled_x
   }
   data
 }
