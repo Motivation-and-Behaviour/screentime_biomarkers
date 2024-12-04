@@ -53,9 +53,6 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     model,
     data = transformed_data, missing = "fiml"
   )
-  mi <- lavaan::modindices(model_outputs$lgcm_fit)
-  mi[order(mi$mi, decreasing = TRUE),][1:10,]
-  fitMeasures(model_outputs$lgcm_fit, c("rmsea", "cfi", "tli", "bic", "aic"))
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
     adj_model,
