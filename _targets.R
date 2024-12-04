@@ -119,7 +119,7 @@ list(
     model_builder[["model_fit_measures"]],
     command = dplyr::bind_rows(!!!.x, .id = "variable") |>
       dplyr::mutate(
-        model_name = stringr::str_remove("model_fit_measures_", variable),
+        model_name = stringr::str_remove(variable, "model_fit_measures_"),
         across(where(is.numeric), round, 2)
       ) |>
       dplyr::select(model_name, everything(), -variable)
