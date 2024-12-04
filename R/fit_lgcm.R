@@ -10,7 +10,7 @@
 #' @author {Taren Sanders}
 #' @export
 fit_lgcm <- function(transformed_data, outcome, bloods) {
-  covariates <- "sex + indig + ses + diet + sexualmaturity_numeric_w6.5"
+  covariates <- "sex + indig + ses_w6 + diet + sexualmaturity_numeric_w6.5"
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
   }
