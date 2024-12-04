@@ -11,9 +11,23 @@
 #' @export
 fit_lgcm <- function(transformed_data, outcome, bloods) {
   require(lavaan)
-  covariates <- "female + indig + ses_w6 + bad_diet + sexualmaturity_numeric_w6.5"
+  covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
+  covariates <- paste(covariates, collapse = " + ")
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
+  }
+  # Check for factors in the transformed_data using all_vars_used
+  # These need to be converted to numeric to prevent mistakes
+  all_vars_used <- c(
+    covariates_v,
+    outcome,
+    grep("^st", names(transformed_data), value = TRUE),
+    grep("^acc", names(transformed_data), value = TRUE)
+  )
+  factor_vars <- sapply(transformed_data[, all_vars_used, with = FALSE], is.factor)
+  if (any(factor_vars)) {
+    stop("The following columns are factors:", 
+         paste(names(factor_vars)[factor_vars], collapse = ", "))
   }
 
   model <- glue::glue(
