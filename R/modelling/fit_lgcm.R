@@ -13,7 +13,7 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
   require(lavaan)
   
   covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
-  covariates <- paste(covariates, collapse = " + ")
+  covariates <- paste(covariates_v, collapse = " + ")
 
   if (standardised_outcome) {
     transformed_data[[outcome]] <- scale(transformed_data[[outcome]])
