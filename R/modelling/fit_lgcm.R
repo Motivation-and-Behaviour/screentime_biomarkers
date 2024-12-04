@@ -25,8 +25,8 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     # nolint start
     "
     # lgcm
-    st_intercept =~ 1 * st_total_w3_scaled + 1 * st_total_w4_scaled + 1 * st_total_w5_scaled + 1 * st_total_w6_scaled
-    st_slope =~ 0 * st_total_w3_scaled + 1 * st_total_w4_scaled + 2 * st_total_w5_scaled + 3 * st_total_w6_scaled
+    st_intercept =~ 1 * st_totalz_w3 + 1 * st_totalz_w4 + 1 * st_totalz_w5 + 1 * st_totalz_w6
+    st_slope =~ 0 * st_totalz_w3 + 1 * st_totalz_w4 + 2 * st_totalz_w5 + 3 * st_totalz_w6
 
     # variances and covariances
     st_intercept ~~ st_intercept
@@ -34,10 +34,10 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     st_intercept ~~ st_slope
 
     # residual variances
-    st_total_w3_scaled ~~ residual_var*st_total_w3_scaled
-    st_total_w4_scaled ~~ residual_var*st_total_w4_scaled
-    st_total_w5_scaled ~~ residual_var*st_total_w5_scaled
-    st_total_w6_scaled ~~ residual_var*st_total_w6_scaled
+    st_totalz_w3 ~~ residual_var*st_totalz_w3
+    st_totalz_w4 ~~ residual_var*st_totalz_w4
+    st_totalz_w5 ~~ residual_var*st_totalz_w5
+    st_totalz_w6 ~~ residual_var*st_totalz_w6
     residual_var > 0
 
     # regression of health outcome on latent factors and covariates
@@ -59,7 +59,7 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     data = transformed_data, missing = "fiml"
   )
   mi <- lavaan::modindices(model_outputs$lgcm_fit)
-  mi[order(mi$mi, decreasing = TRUE),][1:10,]
+  mi[order(mi$mi, decreasing = TRUE), ][1:10, ]
   fitMeasures(model_outputs$lgcm_fit, c("rmsea", "cfi", "tli", "bic", "aic"))
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
