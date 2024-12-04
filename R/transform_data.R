@@ -37,6 +37,7 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
       indig = indig_w6, # most complete
       diet = diet_w6.5, 
       sexualmaturity_w6.5,
+      sexualmaturity_numeric_w6.5,
       fastingtime_w6.5,
       st_total_w3,
       st_total_w4,
