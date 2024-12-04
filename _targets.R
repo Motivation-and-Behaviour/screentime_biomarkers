@@ -6,7 +6,9 @@ tar_source()
 
 # Use parallel processing where possible
 tar_option_set(
-  controller = crew_controller_local(workers = 20, seconds_idle = 15)
+  controller = crew_controller_local(
+    workers = min(parallel::detectCores() - 2, 20), seconds_idle = 15
+  )
 )
 
 lsac_path <- Sys.getenv("LSAC_PATH")
