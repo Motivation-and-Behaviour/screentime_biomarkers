@@ -1,7 +1,7 @@
 # get_measures for a single model
 fm <- function(i, title) {
   require(lavaan)
-  measures <- c("chisq", "cfi", "tli", "rmsea", "srmr")
+  measures <- c("cfi", "tli", "rmsea", "srmr")
   out <- as.list(fitMeasures(i, measures))
   out$model_type <- title
   out
