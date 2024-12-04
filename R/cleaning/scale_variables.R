@@ -9,16 +9,15 @@ scale_variables <- function(data, id_var = "id") {
     if (var_name == id_var) {
       next
     }
+    # Don't scale variables that end in 'z'
+    if (stringr::str_remove(var_name, "_w[0-9.]+") %>%
+      stringr::str_detect(".*z$")) {
+      next
+    }
     # If all missing nothing to do
     if (all(is.na(x))) next
     scaled_name <- paste0(var_name, "_scaled")
     scaled_x <- scale(x)
-    mean_diff_x <- abs(mean(x - scaled_x, na.rm = TRUE))
-    # if variable is not close to being standardised
-    if (mean_diff_x > 0.5) {
-      # add the scaled variable to the data
-      data[[scaled_name]] <- scaled_x
-    }
   }
   data
 }
