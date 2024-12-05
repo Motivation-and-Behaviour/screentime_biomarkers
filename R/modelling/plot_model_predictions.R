@@ -37,5 +37,9 @@ plot_predictions <- function(model_predictions){
     theme(text = element_text(family = "serif")) + 
     labs(color = "Model Type", x = "Screen Time", y = "Health Outcome")
 
-  ggplot2::ggsave(fig_plot, filename = "outputs/model_predictions.png")
+  ggplot2::ggsave(fig_plot,
+                  width = 35,
+                  height = 20,
+                  units = "cm",
+                  filename = "outputs/model_predictions.png")
 }
