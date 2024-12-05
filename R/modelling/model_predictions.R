@@ -26,7 +26,6 @@ make_prediction <- function(m, type, vals = c(-2,0,2), outcome, covariates, tran
   pred_data_low <- pred_data
   pred_data_low[, st_vars] <- rep(vals,3)
   pred_data_low[, covariates] <- 0
-browser()
   preds <- lavPredictY(m,
     newdata = pred_data_low,
     ynames = lavNames(m, "ov.y"),

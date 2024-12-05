@@ -134,5 +134,6 @@ list(
     model_predictions,
     model_builder[["model_predictions"]]
     ),
-  tar_render(manuscript, "doc/manuscript.Rmd")
+    tar_target(prediction_plot, plot_predictions(model_predictions)),
+    tar_render(manuscript, "doc/manuscript.Rmd")
 )
