@@ -42,8 +42,9 @@ model_builder <- tar_map(
   tar_target(model_fit_measures, get_measures(model),
     pattern = map(model)
   ),
-  tar_target(model_tables, get_model_table(model)
-))
+  tar_target(model_tables, get_model_table(model)),
+  tar_target(model_predictions, make_model_predictions(model, transformed_data))
+)
 
 list(
   tar_file_read(
@@ -129,9 +130,9 @@ list(
     model_tables,
     model_builder[["model_tables"]]
    ),
-    tar_target(
+    tar_combine(
     model_predictions,
-    make_model_predictions(model_vo2_w6.5, transformed_data)
+    model_builder[["model_predictions"]]
     ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )

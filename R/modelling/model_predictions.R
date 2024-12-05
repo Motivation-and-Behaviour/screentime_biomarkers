@@ -11,6 +11,8 @@ make_model_predictions <- function(m = model_vo2_w6.5, transformed_data) {
                            covariates,
                            transformed_data)
               })
+  plot_dat <- data.table::rbindlist(plot_dat)
+  plot_dat$type <- dplyr::recode(plot_dat$type, "lgcm_fit" = "Not adjusted", "lgcm_adj_fit" = "Adjusted")
   plot_dat
 }
 
