@@ -7,7 +7,8 @@ make_model_predictions <- function(m = model_vo2_w6.5, transformed_data) {
            make_prediction(
                            m[[x]],
                            type = names(m)[x],
-                           vals = c(-2,0,2),
+                           int_vals = c(-1,0,1),
+                           slope_vals = c(-1,0,1),
                            outcome,
                            covariates,
                            transformed_data)
@@ -17,21 +18,34 @@ make_model_predictions <- function(m = model_vo2_w6.5, transformed_data) {
   plot_dat
 }
 
-make_prediction <- function(m, type, vals = c(-2,0,2), outcome, covariates, transformed_data) {
+make_prediction <- function(m, type, int_vals = c(-1,0,1), slope_vals = c(-1,0,1), outcome, covariates, transformed_data) {
 
-  pred_data <- transformed_data[1:9,]
-  st_vars <- grep("^st.*_scaled", colnames(pred_data), value = TRUE)
+  st_vars <- grep("^st.*_scaled", colnames(pred_data), value = TRUE) |>
+    sort()
 
   # Set all screen time variables to
-  pred_data_low <- pred_data
-  pred_data_low[, st_vars] <- rep(vals,3)
-  pred_data_low <- as.data.frame(pred_data_low)
-  pred_data_low[, covariates] <- sapply(pred_data_low[, covariates], mean, na.rm = TRUE)
-  preds <- lavPredictY(m,
-    newdata = pred_data_low,
+  param_grid <- expand.grid(int = int_vals, slope = slope_vals)
+  pred_data_fin <- lapply(seq_len(nrow(param_grid)), function(i) {
+    pred_data_n <- data.frame(transformed_data[1,])
+    increments <- length(st_vars)
+    seq <- seq(from = param_grid$int[i], to = param_grid$int[i] + param_grid$slope[i], length.out = increments)
+    pred_data_n[, st_vars] <- seq
+    pred_data_n
+    }) |> data.table::rbindlist() |>
+  data.frame()
+  
+  for(i in seq_along(covariates)) {
+    # set all covariates to their respective means from the main data
+    pred_data_fin[,covariates[i]] <- mean(transformed_data[[covariates[i]]], na.rm = TRUE)
+    }
+
+  preds <- lavPredictY(
+    m,
+    newdata = rbindlist(list(pred_data_fin, transformed_data)), # pred funciton assumes a large dataset
     ynames = lavNames(m, "ov.y"),
     xnames = c(st_vars, covariates),
     )
+ preds <- preds[seq_len(nrow(pred_data_fin))]
 
-data.frame(outcome = outcome, mean = preds[1:3], type = type, st_vals = vals)
+data.frame(outcome = outcome, mean = preds, type = type, st_int = param_grid[,"int"], st_slope = param_grid[,"slope"])
 }
