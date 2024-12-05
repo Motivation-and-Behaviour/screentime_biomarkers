@@ -74,11 +74,3 @@ clean_data <- function(
 
   tidy_df
 }
-
-full_df %>%
-  group_by(wave) %>%
-  dplyr::summarise(n())
-
-tidy_df %>%
-  group_by(wave) %>%
-  dplyr::summarise(n())
