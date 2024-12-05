@@ -105,7 +105,7 @@ list(
     df_clean_alt, # This is the sensitivity dataset
     clean_data(
       waves_joined, biomarkers_data,
-      checkpoint_only = FALSE, remove_outliers = FALSE
+      checkpoint_only = FALSE, no_outliers = FALSE
     ),
   ),
   tar_target(
