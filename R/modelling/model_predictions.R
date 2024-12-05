@@ -20,7 +20,7 @@ make_model_predictions <- function(m = model_vo2_w6.5, transformed_data) {
 
 make_prediction <- function(m, type, int_vals = c(-1,0,1), slope_vals = c(-1,0,1), outcome, covariates, transformed_data) {
 
-  st_vars <- grep("^st.*_scaled", colnames(pred_data), value = TRUE) |>
+  st_vars <- grep("^st.*_scaled", colnames(transformed_data), value = TRUE) |>
     sort()
 
   # Set all screen time variables to
