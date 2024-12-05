@@ -101,7 +101,7 @@ list(
     df_clean_alt, # This is the sensitivity dataset
     clean_data(
       waves_joined, biomarkers_data,
-      checkpoint_only = FALSE, remove_outliers = FALSE
+      checkpoint_only = FALSE, no_outliers = FALSE
     ),
   ),
   tar_target(
@@ -131,6 +131,6 @@ list(
     model_tables,
     model_builder[["model_tables"]]
   ),
-   tar_target(table1, make_table1(scored_data)),
+  tar_target(table1, make_table1(scored_data)),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )

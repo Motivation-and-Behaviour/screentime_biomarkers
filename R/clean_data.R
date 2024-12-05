@@ -13,10 +13,8 @@
 #' @export
 clean_data <- function(
     waves_joined, biomarkers_data,
-    checkpoint_only = TRUE, remove_outliers = TRUE) {
-    waves_joined[waves_joined == -9] <- NA
-    # biomarkers_data <- dplyr::as_tibble(biomarkers_data)
-    # biomarkers_data[biomarkers_data == -9] <- NA
+    checkpoint_only = TRUE, no_outliers = TRUE) {
+  waves_joined[waves_joined == -9] <- NA
 
   full_df <-
     dplyr::bind_rows(waves_joined, biomarkers_data)
@@ -44,9 +42,9 @@ clean_data <- function(
     dplyr::filter(
       tidy_df, wave == 6.5,
       (condition_vision == "Selected" |
-      condition_pa == "Selected" |
-      condition_breath == "Selected" |
-      condition_feetlegs == "Selected")
+        condition_pa == "Selected" |
+        condition_breath == "Selected" |
+        condition_feetlegs == "Selected")
     ) %>%
     dplyr::pull(id)
 
@@ -55,13 +53,13 @@ clean_data <- function(
       id %in% conditions_ids, "Health condition", "No health condition"
     ) %>% as.factor())
 
-  if (remove_outliers) {
+  if (no_outliers) {
     vars_to_remove_outliers <-
       dplyr::select(tidy_df, where(is.numeric), -c(id, wave)) %>% colnames()
     # don't remove outliers from vars starting with screentime variables
     vars_to_remove_outliers <-
       vars_to_remove_outliers[!stringr::str_detect(vars_to_remove_outliers, "^st")]
-    # perform outlier removal 
+    # perform outlier removal
     tidy_df[, vars_to_remove_outliers] <- apply_remove_outliers(tidy_df, vars_to_remove_outliers)
   }
 
@@ -76,3 +74,11 @@ clean_data <- function(
 
   tidy_df
 }
+
+full_df %>%
+  group_by(wave) %>%
+  dplyr::summarise(n())
+
+tidy_df %>%
+  group_by(wave) %>%
+  dplyr::summarise(n())
