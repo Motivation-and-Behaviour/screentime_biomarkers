@@ -1,307 +1,307 @@
-Outcome,Term,Coef,SE,z,p,type
-cardio_index_w6.5,st_intercept,"0.04 [-0.04, 0.12]",0.04,1.03,0.30,unadjusted
-cardio_index_w6.5,st_slope,"0.41 [-0.21, 1.04]",0.32,1.29,0.20,unadjusted
-cardio_index_w6.5,female,"0.07 [-0.02, 0.17]",0.05,1.6,0.11,unadjusted
-cardio_index_w6.5,indig,"0.25 [-0.17, 0.67]",0.21,1.18,0.24,unadjusted
-cardio_index_w6.5,ses_w6,"-0.1 [-0.14, -0.05]",0.02,-3.99,< 0.001,unadjusted
-cardio_index_w6.5,bad_diet,"0 [-0.12, 0.12]",0.06,-0.03,0.98,unadjusted
-cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.06 [0.01, 0.1]",0.02,2.53,0.011,unadjusted
-cardio_index_w6.5,fastingtime_w6.5,"-0.04 [-0.08, -0.01]",0.02,-2.34,0.019,unadjusted
-cardio_index_w6.5,st_intercept,"0.04 [-0.07, 0.15]",0.05,0.77,0.44,adjusted
-cardio_index_w6.5,st_slope,"0.44 [-0.61, 1.49]",0.54,0.82,0.41,adjusted
-cardio_index_w6.5,female,"0.03 [-0.08, 0.14]",0.06,0.59,0.56,adjusted
-cardio_index_w6.5,indig,"0.03 [-0.51, 0.57]",0.28,0.11,0.92,adjusted
-cardio_index_w6.5,ses_w6,"-0.09 [-0.15, -0.03]",0.03,-3.17,0.002,adjusted
-cardio_index_w6.5,bad_diet,"-0.01 [-0.14, 0.12]",0.07,-0.13,0.89,adjusted
-cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.05 [0, 0.1]",0.03,1.93,0.053,adjusted
-cardio_index_w6.5,fastingtime_w6.5,"-0.04 [-0.08, 0]",0.02,-2,0.045,adjusted
-cardio_index_w6.5,accmvpa_w6.5_scaled,"-0.09 [-0.15, -0.03]",0.03,-2.96,0.003,adjusted
-cardio_index_w6.5,accsed_w6.5_scaled,"-0.01 [-0.07, 0.05]",0.03,-0.25,0.80,adjusted
-ApoBA1_ratio_w6.5,st_intercept,"0 [-0.01, 0.01]",0.01,0.06,0.95,unadjusted
-ApoBA1_ratio_w6.5,st_slope,"0.02 [-0.06, 0.1]",0.04,0.4,0.69,unadjusted
-ApoBA1_ratio_w6.5,female,"0.02 [0.01, 0.03]",0.01,3,0.003,unadjusted
-ApoBA1_ratio_w6.5,indig,"0.02 [-0.04, 0.08]",0.03,0.66,0.51,unadjusted
-ApoBA1_ratio_w6.5,ses_w6,"-0.01 [-0.01, 0]",0,-2.13,0.033,unadjusted
-ApoBA1_ratio_w6.5,bad_diet,"-0.01 [-0.03, 0.01]",0.01,-1.29,0.20,unadjusted
-ApoBA1_ratio_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0.01]",0,1.28,0.20,unadjusted
-ApoBA1_ratio_w6.5,fastingtime_w6.5,"-0.01 [-0.01, 0]",0,-2.7,0.007,unadjusted
-ApoBA1_ratio_w6.5,st_intercept,"0 [-0.02, 0.01]",0.01,-0.63,0.53,adjusted
-ApoBA1_ratio_w6.5,st_slope,"0 [-0.14, 0.14]",0.07,0.04,0.97,adjusted
-ApoBA1_ratio_w6.5,female,"0.01 [0, 0.03]",0.01,1.5,0.13,adjusted
-ApoBA1_ratio_w6.5,indig,"0.02 [-0.05, 0.09]",0.04,0.58,0.56,adjusted
-ApoBA1_ratio_w6.5,ses_w6,"-0.01 [-0.02, 0]",0,-2.47,0.013,adjusted
-ApoBA1_ratio_w6.5,bad_diet,"-0.01 [-0.03, 0.01]",0.01,-1.23,0.22,adjusted
-ApoBA1_ratio_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.01, 0.01]",0,0.27,0.79,adjusted
-ApoBA1_ratio_w6.5,fastingtime_w6.5,"-0.01 [-0.01, 0]",0,-2.81,0.005,adjusted
-ApoBA1_ratio_w6.5,accmvpa_w6.5_scaled,"-0.01 [-0.02, -0.01]",0,-3.59,< 0.001,adjusted
-ApoBA1_ratio_w6.5,accsed_w6.5_scaled,"0 [0, 0.01]",0,1.18,0.24,adjusted
-glycoprotein_w6.5,st_intercept,"0.01 [0, 0.03]",0.01,1.37,0.17,unadjusted
-glycoprotein_w6.5,st_slope,"0.06 [-0.06, 0.17]",0.06,0.98,0.32,unadjusted
-glycoprotein_w6.5,female,"0.03 [0.01, 0.04]",0.01,3.23,0.001,unadjusted
-glycoprotein_w6.5,indig,"0 [-0.08, 0.07]",0.04,-0.1,0.92,unadjusted
-glycoprotein_w6.5,ses_w6,"-0.01 [-0.02, -0.01]",0,-3.18,0.001,unadjusted
-glycoprotein_w6.5,bad_diet,"-0.02 [-0.04, 0]",0.01,-1.9,0.058,unadjusted
-glycoprotein_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.01, 0]",0,-1.37,0.17,unadjusted
-glycoprotein_w6.5,fastingtime_w6.5,"0 [-0.01, 0]",0,-1.32,0.19,unadjusted
-glycoprotein_w6.5,st_intercept,"0.01 [-0.01, 0.03]",0.01,1.03,0.30,adjusted
-glycoprotein_w6.5,st_slope,"0.1 [-0.11, 0.3]",0.1,0.92,0.36,adjusted
-glycoprotein_w6.5,female,"0.02 [0, 0.04]",0.01,2.18,0.029,adjusted
-glycoprotein_w6.5,indig,"-0.04 [-0.14, 0.06]",0.05,-0.81,0.42,adjusted
-glycoprotein_w6.5,ses_w6,"-0.01 [-0.02, 0]",0.01,-2.55,0.011,adjusted
-glycoprotein_w6.5,bad_diet,"-0.02 [-0.05, 0]",0.01,-1.81,0.070,adjusted
-glycoprotein_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.02, 0]",0.01,-2.57,0.010,adjusted
-glycoprotein_w6.5,fastingtime_w6.5,"0 [-0.01, 0]",0,-1.13,0.26,adjusted
-glycoprotein_w6.5,accmvpa_w6.5_scaled,"-0.02 [-0.03, -0.01]",0.01,-3.47,< 0.001,adjusted
-glycoprotein_w6.5,accsed_w6.5_scaled,"0 [-0.01, 0.01]",0.01,0.42,0.67,adjusted
-phospholipids_w6.5,st_intercept,"-0.01 [-0.03, 0]",0.01,-1.81,0.070,unadjusted
-phospholipids_w6.5,st_slope,"-0.06 [-0.18, 0.06]",0.06,-1.03,0.30,unadjusted
-phospholipids_w6.5,female,"0 [-0.02, 0.01]",0.01,-0.51,0.61,unadjusted
-phospholipids_w6.5,indig,"0 [-0.09, 0.08]",0.04,-0.04,0.97,unadjusted
-phospholipids_w6.5,ses_w6,"0.01 [0, 0.02]",0,1.58,0.11,unadjusted
-phospholipids_w6.5,bad_diet,"0 [-0.02, 0.03]",0.01,0.2,0.84,unadjusted
-phospholipids_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.03, -0.01]",0,-4.03,< 0.001,unadjusted
-phospholipids_w6.5,fastingtime_w6.5,"0.01 [0, 0.01]",0,1.51,0.13,unadjusted
-phospholipids_w6.5,st_intercept,"-0.01 [-0.03, 0.01]",0.01,-0.8,0.43,adjusted
-phospholipids_w6.5,st_slope,"-0.06 [-0.26, 0.14]",0.1,-0.58,0.56,adjusted
-phospholipids_w6.5,female,"0.01 [-0.02, 0.03]",0.01,0.57,0.57,adjusted
-phospholipids_w6.5,indig,"-0.05 [-0.16, 0.06]",0.05,-0.93,0.35,adjusted
-phospholipids_w6.5,ses_w6,"0.01 [0, 0.02]",0.01,1.34,0.18,adjusted
-phospholipids_w6.5,bad_diet,"0.01 [-0.02, 0.03]",0.01,0.43,0.67,adjusted
-phospholipids_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.03, -0.01]",0.01,-3.02,0.003,adjusted
-phospholipids_w6.5,fastingtime_w6.5,"0 [0, 0.01]",0,1,0.32,adjusted
-phospholipids_w6.5,accmvpa_w6.5_scaled,"0.02 [0.01, 0.03]",0.01,3.19,0.001,adjusted
-phospholipids_w6.5,accsed_w6.5_scaled,"-0.01 [-0.02, 0.01]",0.01,-0.92,0.36,adjusted
-vo2_w6.5,st_intercept,"-3.7 [-4.84, -2.57]",0.58,-6.41,< 0.001,unadjusted
-vo2_w6.5,st_slope,"-8.19 [-16.02, -0.36]",3.99,-2.05,0.040,unadjusted
-vo2_w6.5,female,"-5.3 [-6.57, -4.04]",0.64,-8.24,< 0.001,unadjusted
-vo2_w6.5,indig,"-0.93 [-5.71, 3.86]",2.44,-0.38,0.70,unadjusted
-vo2_w6.5,ses_w6,"0.09 [-0.55, 0.73]",0.32,0.28,0.78,unadjusted
-vo2_w6.5,bad_diet,"-0.55 [-2.22, 1.13]",0.86,-0.64,0.52,unadjusted
-vo2_w6.5,sexualmaturity_numeric_w6.5,"-1.11 [-1.73, -0.49]",0.32,-3.51,< 0.001,unadjusted
-vo2_w6.5,st_intercept,"-3.29 [-4.71, -1.87]",0.72,-4.54,< 0.001,adjusted
-vo2_w6.5,st_slope,"-9.93 [-22.23, 2.38]",6.28,-1.58,0.11,adjusted
-vo2_w6.5,female,"-3.31 [-4.8, -1.82]",0.76,-4.34,< 0.001,adjusted
-vo2_w6.5,indig,"-3.09 [-9.12, 2.93]",3.07,-1.01,0.31,adjusted
-vo2_w6.5,ses_w6,"0.04 [-0.69, 0.76]",0.37,0.1,0.92,adjusted
-vo2_w6.5,bad_diet,"-0.93 [-2.74, 0.88]",0.92,-1.01,0.31,adjusted
-vo2_w6.5,sexualmaturity_numeric_w6.5,"-0.62 [-1.34, 0.1]",0.37,-1.69,0.091,adjusted
-vo2_w6.5,accmvpa_w6.5_scaled,"3.28 [2.46, 4.1]",0.42,7.86,< 0.001,adjusted
-vo2_w6.5,accsed_w6.5_scaled,"0.27 [-0.51, 1.05]",0.4,0.67,0.50,adjusted
-waistcm_w6.5,st_intercept,"1.33 [0.57, 2.09]",0.39,3.43,< 0.001,unadjusted
-waistcm_w6.5,st_slope,"5.34 [-0.07, 10.76]",2.76,1.93,0.053,unadjusted
-waistcm_w6.5,female,"-3.18 [-4.04, -2.32]",0.44,-7.25,< 0.001,unadjusted
-waistcm_w6.5,indig,"-0.36 [-3.17, 2.45]",1.44,-0.25,0.80,unadjusted
-waistcm_w6.5,ses_w6,"-0.61 [-1.03, -0.19]",0.22,-2.83,0.005,unadjusted
-waistcm_w6.5,bad_diet,"-0.61 [-1.78, 0.56]",0.6,-1.02,0.31,unadjusted
-waistcm_w6.5,sexualmaturity_numeric_w6.5,"2.24 [1.82, 2.66]",0.21,10.47,< 0.001,unadjusted
-waistcm_w6.5,st_intercept,"1.13 [0.16, 2.11]",0.5,2.27,0.023,adjusted
-waistcm_w6.5,st_slope,"2.24 [-6.22, 10.71]",4.32,0.52,0.60,adjusted
-waistcm_w6.5,female,"-4.19 [-5.26, -3.12]",0.55,-7.68,< 0.001,adjusted
-waistcm_w6.5,indig,"0.09 [-3.83, 4]",2,0.04,0.97,adjusted
-waistcm_w6.5,ses_w6,"-0.64 [-1.14, -0.13]",0.26,-2.47,0.014,adjusted
-waistcm_w6.5,bad_diet,"-0.23 [-1.55, 1.08]",0.67,-0.35,0.73,adjusted
-waistcm_w6.5,sexualmaturity_numeric_w6.5,"1.83 [1.33, 2.34]",0.26,7.11,< 0.001,adjusted
-waistcm_w6.5,accmvpa_w6.5_scaled,"-1.53 [-2.12, -0.93]",0.3,-5.03,< 0.001,adjusted
-waistcm_w6.5,accsed_w6.5_scaled,"-0.26 [-0.84, 0.31]",0.29,-0.91,0.37,adjusted
-waist2height_w6.5,st_intercept,"0.01 [0.01, 0.02]",0,4.39,< 0.001,unadjusted
-waist2height_w6.5,st_slope,"0.03 [-0.01, 0.06]",0.02,1.58,0.11,unadjusted
-waist2height_w6.5,female,"-0.01 [-0.02, -0.01]",0,-3.92,< 0.001,unadjusted
-waist2height_w6.5,indig,"-0.01 [-0.02, 0.01]",0.01,-0.57,0.57,unadjusted
-waist2height_w6.5,ses_w6,"0 [-0.01, 0]",0,-3.03,0.002,unadjusted
-waist2height_w6.5,bad_diet,"0 [-0.01, 0.01]",0,0.02,0.98,unadjusted
-waist2height_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0]",0,1.51,0.13,unadjusted
-waist2height_w6.5,st_intercept,"0.01 [0, 0.02]",0,3.48,< 0.001,adjusted
-waist2height_w6.5,st_slope,"0.01 [-0.04, 0.06]",0.03,0.4,0.69,adjusted
-waist2height_w6.5,female,"-0.01 [-0.02, -0.01]",0,-4.32,< 0.001,adjusted
-waist2height_w6.5,indig,"0 [-0.03, 0.02]",0.01,-0.27,0.79,adjusted
-waist2height_w6.5,ses_w6,"0 [-0.01, 0]",0,-2.36,0.018,adjusted
-waist2height_w6.5,bad_diet,"0 [-0.01, 0.01]",0,0.35,0.73,adjusted
-waist2height_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0]",0,-0.07,0.94,adjusted
-waist2height_w6.5,accmvpa_w6.5_scaled,"-0.01 [-0.01, 0]",0,-3.68,< 0.001,adjusted
-waist2height_w6.5,accsed_w6.5_scaled,"0 [0, 0]",0,-0.77,0.44,adjusted
-bmiz_w6.5,st_intercept,"0.18 [0.09, 0.28]",0.05,3.78,< 0.001,unadjusted
-bmiz_w6.5,st_slope,"0.29 [-0.37, 0.95]",0.34,0.87,0.38,unadjusted
-bmiz_w6.5,female,"-0.16 [-0.27, -0.05]",0.06,-2.89,0.004,unadjusted
-bmiz_w6.5,indig,"0.02 [-0.32, 0.37]",0.18,0.14,0.89,unadjusted
-bmiz_w6.5,ses_w6,"-0.05 [-0.1, 0]",0.03,-1.8,0.071,unadjusted
-bmiz_w6.5,bad_diet,"-0.15 [-0.3, 0]",0.07,-1.99,0.047,unadjusted
-bmiz_w6.5,sexualmaturity_numeric_w6.5,"0.26 [0.21, 0.31]",0.03,9.75,< 0.001,unadjusted
-bmiz_w6.5,st_intercept,"0.15 [0.02, 0.27]",0.06,2.34,0.020,adjusted
-bmiz_w6.5,st_slope,"-0.15 [-1.25, 0.95]",0.56,-0.26,0.79,adjusted
-bmiz_w6.5,female,"-0.26 [-0.4, -0.13]",0.07,-3.76,< 0.001,adjusted
-bmiz_w6.5,indig,"-0.05 [-0.54, 0.45]",0.25,-0.18,0.86,adjusted
-bmiz_w6.5,ses_w6,"-0.05 [-0.12, 0.01]",0.03,-1.56,0.12,adjusted
-bmiz_w6.5,bad_diet,"-0.1 [-0.26, 0.07]",0.09,-1.14,0.26,adjusted
-bmiz_w6.5,sexualmaturity_numeric_w6.5,"0.22 [0.16, 0.29]",0.03,6.8,< 0.001,adjusted
-bmiz_w6.5,accmvpa_w6.5_scaled,"-0.17 [-0.25, -0.09]",0.04,-4.4,< 0.001,adjusted
-bmiz_w6.5,accsed_w6.5_scaled,"-0.06 [-0.13, 0.01]",0.04,-1.65,0.100,adjusted
-bodyfat_w6.5,st_intercept,"2.3 [1.48, 3.12]",0.42,5.51,< 0.001,unadjusted
-bodyfat_w6.5,st_slope,"4.27 [-1.39, 9.92]",2.88,1.48,0.14,unadjusted
-bodyfat_w6.5,female,"3.13 [2.2, 4.05]",0.47,6.61,< 0.001,unadjusted
-bodyfat_w6.5,indig,"-0.02 [-3.01, 2.97]",1.52,-0.01,0.99,unadjusted
-bodyfat_w6.5,ses_w6,"-0.65 [-1.11, -0.19]",0.23,-2.79,0.005,unadjusted
-bodyfat_w6.5,bad_diet,"-0.44 [-1.7, 0.83]",0.65,-0.68,0.50,unadjusted
-bodyfat_w6.5,sexualmaturity_numeric_w6.5,"0.56 [0.11, 1.02]",0.23,2.45,0.014,unadjusted
-bodyfat_w6.5,st_intercept,"2.13 [1.1, 3.16]",0.53,4.04,< 0.001,adjusted
-bodyfat_w6.5,st_slope,"1.04 [-7.92, 10]",4.57,0.23,0.82,adjusted
-bodyfat_w6.5,female,"1.89 [0.77, 3.01]",0.57,3.29,< 0.001,adjusted
-bodyfat_w6.5,indig,"-0.13 [-4.25, 3.99]",2.1,-0.06,0.95,adjusted
-bodyfat_w6.5,ses_w6,"-0.59 [-1.13, -0.06]",0.27,-2.18,0.029,adjusted
-bodyfat_w6.5,bad_diet,"-0.22 [-1.61, 1.17]",0.71,-0.31,0.76,adjusted
-bodyfat_w6.5,sexualmaturity_numeric_w6.5,"-0.08 [-0.61, 0.45]",0.27,-0.29,0.77,adjusted
-bodyfat_w6.5,accmvpa_w6.5_scaled,"-2.43 [-3.06, -1.81]",0.32,-7.61,< 0.001,adjusted
-bodyfat_w6.5,accsed_w6.5_scaled,"-0.47 [-1.07, 0.13]",0.31,-1.53,0.13,adjusted
-bpsysamp_w6.5,st_intercept,"-0.13 [-0.43, 0.17]",0.15,-0.86,0.39,unadjusted
-bpsysamp_w6.5,st_slope,"1.11 [-1.02, 3.24]",1.09,1.02,0.31,unadjusted
-bpsysamp_w6.5,female,"-0.97 [-1.31, -0.63]",0.17,-5.58,< 0.001,unadjusted
-bpsysamp_w6.5,indig,"-0.2 [-1.29, 0.88]",0.55,-0.36,0.72,unadjusted
-bpsysamp_w6.5,ses_w6,"-0.06 [-0.23, 0.11]",0.09,-0.72,0.47,unadjusted
-bpsysamp_w6.5,bad_diet,"-0.1 [-0.56, 0.36]",0.24,-0.43,0.67,unadjusted
-bpsysamp_w6.5,sexualmaturity_numeric_w6.5,"0.4 [0.23, 0.57]",0.08,4.71,< 0.001,unadjusted
-bpsysamp_w6.5,st_intercept,"0.03 [-0.36, 0.43]",0.2,0.17,0.87,adjusted
-bpsysamp_w6.5,st_slope,"1.7 [-1.81, 5.21]",1.79,0.95,0.34,adjusted
-bpsysamp_w6.5,female,"-0.7 [-1.12, -0.27]",0.22,-3.18,0.001,adjusted
-bpsysamp_w6.5,indig,"-0.27 [-1.85, 1.3]",0.8,-0.34,0.73,adjusted
-bpsysamp_w6.5,ses_w6,"-0.03 [-0.23, 0.18]",0.1,-0.25,0.80,adjusted
-bpsysamp_w6.5,bad_diet,"-0.03 [-0.56, 0.5]",0.27,-0.11,0.91,adjusted
-bpsysamp_w6.5,sexualmaturity_numeric_w6.5,"0.37 [0.17, 0.57]",0.1,3.57,< 0.001,adjusted
-bpsysamp_w6.5,accmvpa_w6.5_scaled,"0.28 [0.03, 0.52]",0.12,2.21,0.027,adjusted
-bpsysamp_w6.5,accsed_w6.5_scaled,"-0.01 [-0.24, 0.22]",0.12,-0.08,0.93,adjusted
-pulsepressamp_w6.5,st_intercept,"-0.02 [-0.05, 0.01]",0.02,-1.43,0.15,unadjusted
-pulsepressamp_w6.5,st_slope,"-0.17 [-0.39, 0.05]",0.11,-1.5,0.13,unadjusted
-pulsepressamp_w6.5,female,"-0.02 [-0.05, 0.02]",0.02,-1.05,0.29,unadjusted
-pulsepressamp_w6.5,indig,"-0.03 [-0.14, 0.08]",0.06,-0.55,0.58,unadjusted
-pulsepressamp_w6.5,ses_w6,"0.01 [-0.01, 0.03]",0.01,1.26,0.21,unadjusted
-pulsepressamp_w6.5,bad_diet,"-0.03 [-0.08, 0.02]",0.02,-1.19,0.23,unadjusted
-pulsepressamp_w6.5,sexualmaturity_numeric_w6.5,"0.02 [0.01, 0.04]",0.01,2.85,0.004,unadjusted
-pulsepressamp_w6.5,st_intercept,"-0.02 [-0.07, 0.02]",0.02,-1.14,0.26,adjusted
-pulsepressamp_w6.5,st_slope,"-0.26 [-0.64, 0.12]",0.19,-1.33,0.18,adjusted
-pulsepressamp_w6.5,female,"0 [-0.04, 0.05]",0.02,0.15,0.88,adjusted
-pulsepressamp_w6.5,indig,"-0.04 [-0.2, 0.12]",0.08,-0.48,0.63,adjusted
-pulsepressamp_w6.5,ses_w6,"0 [-0.02, 0.03]",0.01,0.42,0.67,adjusted
-pulsepressamp_w6.5,bad_diet,"-0.05 [-0.1, 0.01]",0.03,-1.71,0.087,adjusted
-pulsepressamp_w6.5,sexualmaturity_numeric_w6.5,"0.03 [0.01, 0.05]",0.01,2.92,0.004,adjusted
-pulsepressamp_w6.5,accmvpa_w6.5_scaled,"0.03 [0, 0.05]",0.01,1.98,0.048,adjusted
-pulsepressamp_w6.5,accsed_w6.5_scaled,"0.01 [-0.01, 0.03]",0.01,0.83,0.41,adjusted
-bpsysz_w6.5,st_intercept,"0.12 [0.04, 0.19]",0.04,3.1,0.002,unadjusted
-bpsysz_w6.5,st_slope,"0.55 [0.01, 1.1]",0.28,1.99,0.047,unadjusted
-bpsysz_w6.5,female,"0.17 [0.09, 0.26]",0.04,3.93,< 0.001,unadjusted
-bpsysz_w6.5,indig,"0.01 [-0.27, 0.28]",0.14,0.05,0.96,unadjusted
-bpsysz_w6.5,ses_w6,"-0.04 [-0.08, 0]",0.02,-1.89,0.059,unadjusted
-bpsysz_w6.5,bad_diet,"-0.01 [-0.13, 0.1]",0.06,-0.24,0.81,unadjusted
-bpsysz_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.05, 0.04]",0.02,-0.17,0.86,unadjusted
-bpsysz_w6.5,st_intercept,"0.13 [0.03, 0.23]",0.05,2.51,0.012,adjusted
-bpsysz_w6.5,st_slope,"0.64 [-0.26, 1.53]",0.46,1.4,0.16,adjusted
-bpsysz_w6.5,female,"0.22 [0.11, 0.33]",0.05,4.01,< 0.001,adjusted
-bpsysz_w6.5,indig,"-0.19 [-0.59, 0.21]",0.2,-0.93,0.35,adjusted
-bpsysz_w6.5,ses_w6,"-0.04 [-0.09, 0.01]",0.03,-1.44,0.15,adjusted
-bpsysz_w6.5,bad_diet,"-0.01 [-0.14, 0.12]",0.07,-0.15,0.88,adjusted
-bpsysz_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.07, 0.03]",0.03,-0.87,0.38,adjusted
-bpsysz_w6.5,accmvpa_w6.5_scaled,"0 [-0.06, 0.06]",0.03,-0.06,0.95,adjusted
-bpsysz_w6.5,accsed_w6.5_scaled,"0.01 [-0.04, 0.07]",0.03,0.43,0.67,adjusted
-bpdiaz_w6.5,st_intercept,"0.09 [0.04, 0.15]",0.03,3.45,< 0.001,unadjusted
-bpdiaz_w6.5,st_slope,"0.4 [0.01, 0.78]",0.2,2.03,0.043,unadjusted
-bpdiaz_w6.5,female,"0.15 [0.09, 0.21]",0.03,4.92,< 0.001,unadjusted
-bpdiaz_w6.5,indig,"-0.03 [-0.23, 0.16]",0.1,-0.32,0.75,unadjusted
-bpdiaz_w6.5,ses_w6,"-0.01 [-0.04, 0.02]",0.02,-0.54,0.59,unadjusted
-bpdiaz_w6.5,bad_diet,"0.09 [0.01, 0.17]",0.04,2.09,0.037,unadjusted
-bpdiaz_w6.5,sexualmaturity_numeric_w6.5,"-0.09 [-0.12, -0.06]",0.02,-5.87,< 0.001,unadjusted
-bpdiaz_w6.5,st_intercept,"0.09 [0.02, 0.17]",0.04,2.58,0.010,adjusted
-bpdiaz_w6.5,st_slope,"0.54 [-0.12, 1.19]",0.33,1.61,0.11,adjusted
-bpdiaz_w6.5,female,"0.14 [0.07, 0.22]",0.04,3.68,< 0.001,adjusted
-bpdiaz_w6.5,indig,"-0.09 [-0.37, 0.19]",0.14,-0.65,0.51,adjusted
-bpdiaz_w6.5,ses_w6,"-0.01 [-0.04, 0.03]",0.02,-0.35,0.72,adjusted
-bpdiaz_w6.5,bad_diet,"0.09 [0, 0.18]",0.05,1.93,0.054,adjusted
-bpdiaz_w6.5,sexualmaturity_numeric_w6.5,"-0.11 [-0.14, -0.07]",0.02,-5.82,< 0.001,adjusted
-bpdiaz_w6.5,accmvpa_w6.5_scaled,"-0.05 [-0.09, -0.01]",0.02,-2.41,0.016,adjusted
-bpdiaz_w6.5,accsed_w6.5_scaled,"0 [-0.04, 0.05]",0.02,0.23,0.82,adjusted
-trigly_w6.5,st_intercept,"0.03 [-0.04, 0.09]",0.03,0.82,0.41,unadjusted
-trigly_w6.5,st_slope,"0.34 [-0.16, 0.85]",0.26,1.33,0.18,unadjusted
-trigly_w6.5,female,"0.13 [0.05, 0.2]",0.04,3.36,< 0.001,unadjusted
-trigly_w6.5,indig,"0.13 [-0.22, 0.47]",0.18,0.72,0.47,unadjusted
-trigly_w6.5,ses_w6,"-0.06 [-0.1, -0.02]",0.02,-3.2,0.001,unadjusted
-trigly_w6.5,bad_diet,"-0.04 [-0.14, 0.05]",0.05,-0.87,0.39,unadjusted
-trigly_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.05, 0.02]",0.02,-0.78,0.44,unadjusted
-trigly_w6.5,fastingtime_w6.5,"-0.04 [-0.07, -0.01]",0.01,-2.76,0.006,unadjusted
-trigly_w6.5,st_intercept,"0.02 [-0.07, 0.11]",0.05,0.46,0.65,adjusted
-trigly_w6.5,st_slope,"0.42 [-0.47, 1.3]",0.45,0.92,0.36,adjusted
-trigly_w6.5,female,"0.09 [0, 0.18]",0.05,1.85,0.064,adjusted
-trigly_w6.5,indig,"-0.06 [-0.5, 0.37]",0.22,-0.28,0.78,adjusted
-trigly_w6.5,ses_w6,"-0.08 [-0.12, -0.03]",0.02,-3.17,0.002,adjusted
-trigly_w6.5,bad_diet,"-0.06 [-0.17, 0.05]",0.06,-1.13,0.26,adjusted
-trigly_w6.5,sexualmaturity_numeric_w6.5,"-0.03 [-0.07, 0.02]",0.02,-1.25,0.21,adjusted
-trigly_w6.5,fastingtime_w6.5,"-0.04 [-0.07, -0.01]",0.02,-2.63,0.009,adjusted
-trigly_w6.5,accmvpa_w6.5_scaled,"-0.07 [-0.12, -0.03]",0.02,-3,0.003,adjusted
-trigly_w6.5,accsed_w6.5_scaled,"-0.02 [-0.07, 0.03]",0.02,-0.88,0.38,adjusted
-cholesttotal_w6.5,st_intercept,"-0.04 [-0.13, 0.04]",0.04,-1,0.32,unadjusted
-cholesttotal_w6.5,st_slope,"-0.04 [-0.67, 0.58]",0.32,-0.14,0.89,unadjusted
-cholesttotal_w6.5,female,"0.13 [0.04, 0.23]",0.05,2.78,0.005,unadjusted
-cholesttotal_w6.5,indig,"0.06 [-0.38, 0.51]",0.23,0.28,0.78,unadjusted
-cholesttotal_w6.5,ses_w6,"-0.03 [-0.08, 0.02]",0.02,-1.15,0.25,unadjusted
-cholesttotal_w6.5,bad_diet,"-0.09 [-0.21, 0.04]",0.06,-1.4,0.16,unadjusted
-cholesttotal_w6.5,sexualmaturity_numeric_w6.5,"-0.12 [-0.17, -0.07]",0.02,-5.1,< 0.001,unadjusted
-cholesttotal_w6.5,fastingtime_w6.5,"0 [-0.04, 0.03]",0.02,-0.08,0.93,unadjusted
-cholesttotal_w6.5,st_intercept,"-0.04 [-0.15, 0.08]",0.06,-0.64,0.52,adjusted
-cholesttotal_w6.5,st_slope,"-0.13 [-1.23, 0.96]",0.56,-0.24,0.81,adjusted
-cholesttotal_w6.5,female,"0.12 [0, 0.24]",0.06,1.91,0.056,adjusted
-cholesttotal_w6.5,indig,"-0.2 [-0.78, 0.37]",0.29,-0.69,0.49,adjusted
-cholesttotal_w6.5,ses_w6,"-0.04 [-0.11, 0.02]",0.03,-1.45,0.15,adjusted
-cholesttotal_w6.5,bad_diet,"-0.05 [-0.19, 0.09]",0.07,-0.74,0.46,adjusted
-cholesttotal_w6.5,sexualmaturity_numeric_w6.5,"-0.14 [-0.19, -0.08]",0.03,-4.76,< 0.001,adjusted
-cholesttotal_w6.5,fastingtime_w6.5,"-0.02 [-0.06, 0.02]",0.02,-0.88,0.38,adjusted
-cholesttotal_w6.5,accmvpa_w6.5_scaled,"-0.05 [-0.11, 0.02]",0.03,-1.42,0.15,adjusted
-cholesttotal_w6.5,accsed_w6.5_scaled,"0.01 [-0.06, 0.07]",0.03,0.27,0.79,adjusted
-cholesttotalhdl_w6.5,st_intercept,"-0.02 [-0.06, 0.01]",0.02,-1.23,0.22,unadjusted
-cholesttotalhdl_w6.5,st_slope,"-0.11 [-0.37, 0.15]",0.13,-0.81,0.42,unadjusted
-cholesttotalhdl_w6.5,female,"0 [-0.04, 0.04]",0.02,-0.2,0.84,unadjusted
-cholesttotalhdl_w6.5,indig,"-0.02 [-0.21, 0.16]",0.09,-0.26,0.79,unadjusted
-cholesttotalhdl_w6.5,ses_w6,"0.01 [-0.01, 0.03]",0.01,1.12,0.26,unadjusted
-cholesttotalhdl_w6.5,bad_diet,"0 [-0.05, 0.05]",0.03,-0.05,0.96,unadjusted
-cholesttotalhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.05 [-0.07, -0.03]",0.01,-5.33,< 0.001,unadjusted
-cholesttotalhdl_w6.5,fastingtime_w6.5,"0.01 [0, 0.03]",0.01,1.55,0.12,unadjusted
-cholesttotalhdl_w6.5,st_intercept,"-0.01 [-0.05, 0.04]",0.02,-0.3,0.77,adjusted
-cholesttotalhdl_w6.5,st_slope,"-0.09 [-0.53, 0.35]",0.22,-0.4,0.69,adjusted
-cholesttotalhdl_w6.5,female,"0.02 [-0.02, 0.07]",0.02,1,0.32,adjusted
-cholesttotalhdl_w6.5,indig,"-0.12 [-0.35, 0.11]",0.12,-1.03,0.31,adjusted
-cholesttotalhdl_w6.5,ses_w6,"0.01 [-0.01, 0.04]",0.01,1.21,0.23,adjusted
-cholesttotalhdl_w6.5,bad_diet,"0 [-0.05, 0.06]",0.03,0.15,0.88,adjusted
-cholesttotalhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.05 [-0.07, -0.03]",0.01,-4.17,< 0.001,adjusted
-cholesttotalhdl_w6.5,fastingtime_w6.5,"0.01 [-0.01, 0.03]",0.01,1.23,0.22,adjusted
-cholesttotalhdl_w6.5,accmvpa_w6.5_scaled,"0.05 [0.02, 0.07]",0.01,3.5,< 0.001,adjusted
-cholesttotalhdl_w6.5,accsed_w6.5_scaled,"-0.01 [-0.03, 0.02]",0.01,-0.57,0.57,adjusted
-cholestnonhdl_w6.5,st_intercept,"-0.01 [-0.05, 0.02]",0.02,-0.86,0.39,unadjusted
-cholestnonhdl_w6.5,st_slope,"-0.02 [-0.27, 0.23]",0.13,-0.16,0.87,unadjusted
-cholestnonhdl_w6.5,female,"0.07 [0.03, 0.11]",0.02,3.66,< 0.001,unadjusted
-cholestnonhdl_w6.5,indig,"0.01 [-0.17, 0.19]",0.09,0.09,0.93,unadjusted
-cholestnonhdl_w6.5,ses_w6,"-0.01 [-0.03, 0.01]",0.01,-1.38,0.17,unadjusted
-cholestnonhdl_w6.5,bad_diet,"-0.05 [-0.1, 0]",0.03,-1.88,0.061,unadjusted
-cholestnonhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.04, 0]",0.01,-2.26,0.024,unadjusted
-cholestnonhdl_w6.5,fastingtime_w6.5,"-0.01 [-0.03, 0]",0.01,-1.46,0.14,unadjusted
-cholestnonhdl_w6.5,st_intercept,"-0.02 [-0.07, 0.02]",0.02,-1.05,0.29,adjusted
-cholestnonhdl_w6.5,st_slope,"-0.1 [-0.54, 0.34]",0.22,-0.45,0.65,adjusted
-cholestnonhdl_w6.5,female,"0.05 [0.01, 0.1]",0.02,2.21,0.027,adjusted
-cholestnonhdl_w6.5,indig,"-0.09 [-0.32, 0.14]",0.12,-0.75,0.45,adjusted
-cholestnonhdl_w6.5,ses_w6,"-0.02 [-0.05, 0]",0.01,-1.95,0.052,adjusted
-cholestnonhdl_w6.5,bad_diet,"-0.04 [-0.1, 0.01]",0.03,-1.54,0.12,adjusted
-cholestnonhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.03 [-0.05, -0.01]",0.01,-2.84,0.005,adjusted
-cholestnonhdl_w6.5,fastingtime_w6.5,"-0.02 [-0.03, 0]",0.01,-1.82,0.069,adjusted
-cholestnonhdl_w6.5,accmvpa_w6.5_scaled,"-0.04 [-0.07, -0.01]",0.01,-3.04,0.002,adjusted
-cholestnonhdl_w6.5,accsed_w6.5_scaled,"0.01 [-0.01, 0.04]",0.01,0.84,0.40,adjusted
-glucose_w6.5,st_intercept,"-0.04 [-0.1, 0.02]",0.03,-1.42,0.15,unadjusted
-glucose_w6.5,st_slope,"-0.06 [-0.5, 0.38]",0.22,-0.27,0.78,unadjusted
-glucose_w6.5,female,"-0.04 [-0.11, 0.02]",0.03,-1.27,0.20,unadjusted
-glucose_w6.5,indig,"-0.07 [-0.38, 0.25]",0.16,-0.42,0.67,unadjusted
-glucose_w6.5,ses_w6,"-0.01 [-0.04, 0.03]",0.02,-0.35,0.73,unadjusted
-glucose_w6.5,bad_diet,"-0.02 [-0.1, 0.07]",0.04,-0.38,0.70,unadjusted
-glucose_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.04, 0.02]",0.02,-0.59,0.56,unadjusted
-glucose_w6.5,fastingtime_w6.5,"-0.06 [-0.09, -0.04]",0.01,-4.93,< 0.001,unadjusted
-glucose_w6.5,st_intercept,"-0.03 [-0.11, 0.05]",0.04,-0.77,0.44,adjusted
-glucose_w6.5,st_slope,"0 [-0.77, 0.78]",0.39,0.01,0.99,adjusted
-glucose_w6.5,female,"-0.01 [-0.1, 0.08]",0.04,-0.21,0.83,adjusted
-glucose_w6.5,indig,"-0.03 [-0.44, 0.38]",0.21,-0.13,0.89,adjusted
-glucose_w6.5,ses_w6,"0 [-0.04, 0.04]",0.02,-0.04,0.97,adjusted
-glucose_w6.5,bad_diet,"-0.04 [-0.14, 0.06]",0.05,-0.75,0.45,adjusted
-glucose_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.05, 0.03]",0.02,-0.38,0.71,adjusted
-glucose_w6.5,fastingtime_w6.5,"-0.06 [-0.09, -0.03]",0.02,-3.96,< 0.001,adjusted
-glucose_w6.5,accmvpa_w6.5_scaled,"0.03 [-0.02, 0.07]",0.02,1.16,0.24,adjusted
-glucose_w6.5,accsed_w6.5_scaled,"0.01 [-0.04, 0.05]",0.02,0.36,0.72,adjusted
+Outcome,Term,Coef,SE,z,p
+cardio_index_w6.5,st_intercept,"0.14 [0, 0.27]",0.07,2.02,0.043
+cardio_index_w6.5,st_slope,"0.17 [-0.21, 0.55]",0.19,0.89,0.38
+cardio_index_w6.5,female,"-0.06 [-0.17, 0.05]",0.05,-1.12,0.26
+cardio_index_w6.5,indig,"0.21 [-0.18, 0.6]",0.2,1.04,0.30
+cardio_index_w6.5,ses_w6,"-0.11 [-0.17, -0.06]",0.03,-4.1,< 0.001
+cardio_index_w6.5,bad_diet,"0.21 [0.07, 0.35]",0.07,2.98,0.003
+cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.15 [0.09, 0.2]",0.03,5.52,< 0.001
+cardio_index_w6.5,fastingtime_w6.5,"-0.32 [-0.36, -0.28]",0.02,-15.85,< 0.001
+cardio_index_w6.5,st_intercept,"0.13 [0, 0.26]",0.07,1.92,0.054
+cardio_index_w6.5,st_slope,"0.11 [-0.27, 0.49]",0.19,0.59,0.56
+cardio_index_w6.5,female,"-0.11 [-0.22, 0.01]",0.06,-1.83,0.067
+cardio_index_w6.5,indig,"0.2 [-0.19, 0.58]",0.2,0.98,0.33
+cardio_index_w6.5,ses_w6,"-0.11 [-0.16, -0.06]",0.03,-3.98,< 0.001
+cardio_index_w6.5,bad_diet,"0.2 [0.06, 0.34]",0.07,2.81,0.005
+cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.12 [0.07, 0.17]",0.03,4.53,< 0.001
+cardio_index_w6.5,fastingtime_w6.5,"-0.31 [-0.35, -0.27]",0.02,-15.68,< 0.001
+cardio_index_w6.5,accmvpa_w6.5_scaled,"-0.11 [-0.18, -0.04]",0.04,-2.91,0.004
+cardio_index_w6.5,accsed_w6.5_scaled,"0 [-0.07, 0.07]",0.04,-0.06,0.95
+ApoBA1_ratio_w6.5,st_intercept,"0 [-0.02, 0.01]",0.01,-0.34,0.74
+ApoBA1_ratio_w6.5,st_slope,"0 [-0.04, 0.05]",0.02,0.17,0.87
+ApoBA1_ratio_w6.5,female,"0.02 [0.01, 0.03]",0.01,2.92,0.004
+ApoBA1_ratio_w6.5,indig,"0 [-0.05, 0.05]",0.02,-0.03,0.98
+ApoBA1_ratio_w6.5,ses_w6,"-0.01 [-0.01, 0]",0,-2.23,0.025
+ApoBA1_ratio_w6.5,bad_diet,"-0.01 [-0.02, 0.01]",0.01,-1.06,0.29
+ApoBA1_ratio_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0.01]",0,1.41,0.16
+ApoBA1_ratio_w6.5,fastingtime_w6.5,"-0.01 [-0.01, 0]",0,-2.44,0.015
+ApoBA1_ratio_w6.5,st_intercept,"0 [-0.02, 0.01]",0.01,-0.63,0.53
+ApoBA1_ratio_w6.5,st_slope,"0 [-0.04, 0.04]",0.02,-0.03,0.98
+ApoBA1_ratio_w6.5,female,"0.01 [0, 0.02]",0.01,1.92,0.054
+ApoBA1_ratio_w6.5,indig,"0 [-0.05, 0.04]",0.02,-0.21,0.84
+ApoBA1_ratio_w6.5,ses_w6,"-0.01 [-0.01, 0]",0,-2.27,0.023
+ApoBA1_ratio_w6.5,bad_diet,"-0.01 [-0.02, 0.01]",0.01,-1.1,0.27
+ApoBA1_ratio_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0.01]",0,0.35,0.73
+ApoBA1_ratio_w6.5,fastingtime_w6.5,"-0.01 [-0.01, 0]",0,-2.37,0.018
+ApoBA1_ratio_w6.5,accmvpa_w6.5_scaled,"-0.01 [-0.02, 0]",0,-3.31,< 0.001
+ApoBA1_ratio_w6.5,accsed_w6.5_scaled,"0 [0, 0.01]",0,1.2,0.23
+glycoprotein_w6.5,st_intercept,"0.01 [-0.02, 0.03]",0.01,0.54,0.59
+glycoprotein_w6.5,st_slope,"0.03 [-0.03, 0.09]",0.03,0.95,0.34
+glycoprotein_w6.5,female,"0.02 [0.01, 0.04]",0.01,2.81,0.005
+glycoprotein_w6.5,indig,"-0.03 [-0.09, 0.04]",0.03,-0.77,0.44
+glycoprotein_w6.5,ses_w6,"-0.02 [-0.02, -0.01]",0,-3.56,< 0.001
+glycoprotein_w6.5,bad_diet,"-0.02 [-0.04, 0]",0.01,-1.86,0.063
+glycoprotein_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.01, 0]",0,-1.09,0.28
+glycoprotein_w6.5,fastingtime_w6.5,"0 [-0.01, 0]",0,-1.12,0.26
+glycoprotein_w6.5,st_intercept,"0 [-0.02, 0.02]",0.01,0.38,0.71
+glycoprotein_w6.5,st_slope,"0.02 [-0.04, 0.08]",0.03,0.81,0.42
+glycoprotein_w6.5,female,"0.02 [0, 0.03]",0.01,1.77,0.077
+glycoprotein_w6.5,indig,"-0.03 [-0.09, 0.03]",0.03,-0.93,0.35
+glycoprotein_w6.5,ses_w6,"-0.02 [-0.02, -0.01]",0,-3.5,< 0.001
+glycoprotein_w6.5,bad_diet,"-0.02 [-0.04, 0]",0.01,-1.9,0.058
+glycoprotein_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.02, 0]",0,-1.98,0.048
+glycoprotein_w6.5,fastingtime_w6.5,"0 [-0.01, 0]",0,-1.02,0.31
+glycoprotein_w6.5,accmvpa_w6.5_scaled,"-0.02 [-0.03, -0.01]",0.01,-3.23,0.001
+glycoprotein_w6.5,accsed_w6.5_scaled,"0 [-0.01, 0.01]",0.01,0.39,0.69
+phospholipids_w6.5,st_intercept,"-0.01 [-0.03, 0.01]",0.01,-0.95,0.34
+phospholipids_w6.5,st_slope,"-0.04 [-0.11, 0.02]",0.03,-1.29,0.20
+phospholipids_w6.5,female,"0 [-0.02, 0.02]",0.01,-0.09,0.93
+phospholipids_w6.5,indig,"0.02 [-0.05, 0.09]",0.04,0.66,0.51
+phospholipids_w6.5,ses_w6,"0.01 [0, 0.02]",0,1.93,0.054
+phospholipids_w6.5,bad_diet,"0 [-0.02, 0.03]",0.01,0.24,0.81
+phospholipids_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.03, -0.01]",0,-4.13,< 0.001
+phospholipids_w6.5,fastingtime_w6.5,"0.01 [0, 0.01]",0,1.52,0.13
+phospholipids_w6.5,st_intercept,"-0.01 [-0.03, 0.01]",0.01,-0.7,0.48
+phospholipids_w6.5,st_slope,"-0.04 [-0.1, 0.03]",0.03,-1.13,0.26
+phospholipids_w6.5,female,"0.01 [-0.01, 0.02]",0.01,0.68,0.50
+phospholipids_w6.5,indig,"0.03 [-0.04, 0.1]",0.04,0.8,0.42
+phospholipids_w6.5,ses_w6,"0.01 [0, 0.02]",0,1.92,0.055
+phospholipids_w6.5,bad_diet,"0 [-0.02, 0.03]",0.01,0.24,0.81
+phospholipids_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.02, -0.01]",0,-3.19,0.001
+phospholipids_w6.5,fastingtime_w6.5,"0 [0, 0.01]",0,1.39,0.16
+phospholipids_w6.5,accmvpa_w6.5_scaled,"0.02 [0.01, 0.03]",0.01,2.86,0.004
+phospholipids_w6.5,accsed_w6.5_scaled,"-0.01 [-0.02, 0.01]",0.01,-1,0.32
+vo2_w6.5,st_intercept,"-4.42 [-6.03, -2.81]",0.82,-5.37,< 0.001
+vo2_w6.5,st_slope,"-4.58 [-9.18, 0.03]",2.35,-1.95,0.051
+vo2_w6.5,female,"-5.1 [-6.39, -3.82]",0.65,-7.8,< 0.001
+vo2_w6.5,indig,"-0.73 [-5.6, 4.13]",2.48,-0.3,0.77
+vo2_w6.5,ses_w6,"0.03 [-0.62, 0.68]",0.33,0.09,0.93
+vo2_w6.5,bad_diet,"-0.21 [-1.9, 1.48]",0.86,-0.24,0.81
+vo2_w6.5,sexualmaturity_numeric_w6.5,"-0.96 [-1.59, -0.33]",0.32,-3,0.003
+vo2_w6.5,st_intercept,"-4.11 [-5.68, -2.55]",0.8,-5.14,< 0.001
+vo2_w6.5,st_slope,"-3.98 [-8.44, 0.49]",2.28,-1.75,0.081
+vo2_w6.5,female,"-3.57 [-4.9, -2.25]",0.68,-5.29,< 0.001
+vo2_w6.5,indig,"-0.13 [-4.9, 4.64]",2.43,-0.05,0.96
+vo2_w6.5,ses_w6,"-0.01 [-0.64, 0.61]",0.32,-0.04,0.96
+vo2_w6.5,bad_diet,"-0.36 [-2.01, 1.29]",0.84,-0.43,0.67
+vo2_w6.5,sexualmaturity_numeric_w6.5,"-0.39 [-1.02, 0.24]",0.32,-1.21,0.22
+vo2_w6.5,accmvpa_w6.5_scaled,"3.17 [2.39, 3.94]",0.39,8.02,< 0.001
+vo2_w6.5,accsed_w6.5_scaled,"0.23 [-0.52, 0.98]",0.38,0.6,0.55
+waistcm_w6.5,st_intercept,"1.27 [0.18, 2.35]",0.55,2.29,0.022
+waistcm_w6.5,st_slope,"2.95 [-0.19, 6.09]",1.6,1.84,0.065
+waistcm_w6.5,female,"-3.47 [-4.33, -2.6]",0.44,-7.86,< 0.001
+waistcm_w6.5,indig,"0.18 [-2.55, 2.91]",1.39,0.13,0.90
+waistcm_w6.5,ses_w6,"-0.7 [-1.14, -0.27]",0.22,-3.19,0.001
+waistcm_w6.5,bad_diet,"-0.71 [-1.89, 0.47]",0.6,-1.19,0.24
+waistcm_w6.5,sexualmaturity_numeric_w6.5,"2.24 [1.81, 2.66]",0.22,10.34,< 0.001
+waistcm_w6.5,st_intercept,"1.3 [0.22, 2.38]",0.55,2.37,0.018
+waistcm_w6.5,st_slope,"2.52 [-0.59, 5.64]",1.59,1.59,0.11
+waistcm_w6.5,female,"-4.27 [-5.19, -3.34]",0.47,-9.03,< 0.001
+waistcm_w6.5,indig,"0.09 [-2.64, 2.83]",1.4,0.07,0.95
+waistcm_w6.5,ses_w6,"-0.62 [-1.05, -0.19]",0.22,-2.81,0.005
+waistcm_w6.5,bad_diet,"-0.64 [-1.81, 0.53]",0.6,-1.07,0.28
+waistcm_w6.5,sexualmaturity_numeric_w6.5,"2 [1.57, 2.44]",0.22,9.05,< 0.001
+waistcm_w6.5,accmvpa_w6.5_scaled,"-1.56 [-2.14, -0.99]",0.29,-5.3,< 0.001
+waistcm_w6.5,accsed_w6.5_scaled,"-0.48 [-1.03, 0.07]",0.28,-1.7,0.089
+waist2height_w6.5,st_intercept,"0.01 [0.01, 0.02]",0,3.58,< 0.001
+waist2height_w6.5,st_slope,"0.02 [0, 0.03]",0.01,1.53,0.13
+waist2height_w6.5,female,"-0.01 [-0.02, -0.01]",0,-4.07,< 0.001
+waist2height_w6.5,indig,"0 [-0.02, 0.01]",0.01,-0.29,0.77
+waist2height_w6.5,ses_w6,"0 [-0.01, 0]",0,-3,0.003
+waist2height_w6.5,bad_diet,"0 [-0.01, 0.01]",0,-0.15,0.88
+waist2height_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0]",0,1.1,0.27
+waist2height_w6.5,st_intercept,"0.01 [0.01, 0.02]",0,3.65,< 0.001
+waist2height_w6.5,st_slope,"0.01 [-0.01, 0.03]",0.01,1.38,0.17
+waist2height_w6.5,female,"-0.02 [-0.02, -0.01]",0,-5.04,< 0.001
+waist2height_w6.5,indig,"0 [-0.02, 0.01]",0.01,-0.31,0.76
+waist2height_w6.5,ses_w6,"0 [-0.01, 0]",0,-2.71,0.007
+waist2height_w6.5,bad_diet,"0 [-0.01, 0.01]",0,-0.05,0.96
+waist2height_w6.5,sexualmaturity_numeric_w6.5,"0 [0, 0]",0,0.29,0.77
+waist2height_w6.5,accmvpa_w6.5_scaled,"-0.01 [-0.01, 0]",0,-3.88,< 0.001
+waist2height_w6.5,accsed_w6.5_scaled,"0 [-0.01, 0]",0,-1.51,0.13
+bmiz_w6.5,st_intercept,"0.22 [0.09, 0.36]",0.07,3.19,0.001
+bmiz_w6.5,st_slope,"0.15 [-0.24, 0.54]",0.2,0.75,0.45
+bmiz_w6.5,female,"-0.18 [-0.28, -0.07]",0.06,-3.18,0.001
+bmiz_w6.5,indig,"0.02 [-0.31, 0.36]",0.17,0.14,0.89
+bmiz_w6.5,ses_w6,"-0.05 [-0.11, 0]",0.03,-1.96,0.050
+bmiz_w6.5,bad_diet,"-0.2 [-0.34, -0.05]",0.07,-2.67,0.008
+bmiz_w6.5,sexualmaturity_numeric_w6.5,"0.24 [0.19, 0.3]",0.03,9.06,< 0.001
+bmiz_w6.5,st_intercept,"0.23 [0.09, 0.37]",0.07,3.31,< 0.001
+bmiz_w6.5,st_slope,"0.12 [-0.27, 0.51]",0.2,0.59,0.56
+bmiz_w6.5,female,"-0.27 [-0.38, -0.15]",0.06,-4.5,< 0.001
+bmiz_w6.5,indig,"0.02 [-0.32, 0.36]",0.17,0.13,0.90
+bmiz_w6.5,ses_w6,"-0.04 [-0.1, 0.01]",0.03,-1.6,0.11
+bmiz_w6.5,bad_diet,"-0.19 [-0.33, -0.04]",0.07,-2.53,0.011
+bmiz_w6.5,sexualmaturity_numeric_w6.5,"0.22 [0.17, 0.28]",0.03,8.1,< 0.001
+bmiz_w6.5,accmvpa_w6.5_scaled,"-0.17 [-0.24, -0.1]",0.04,-4.57,< 0.001
+bmiz_w6.5,accsed_w6.5_scaled,"-0.07 [-0.14, -0.01]",0.04,-2.11,0.035
+bodyfat_w6.5,st_intercept,"2.85 [1.68, 4.02]",0.6,4.76,< 0.001
+bodyfat_w6.5,st_slope,"2.05 [-1.31, 5.41]",1.72,1.2,0.23
+bodyfat_w6.5,female,"3.14 [2.2, 4.07]",0.48,6.58,< 0.001
+bodyfat_w6.5,indig,"-0.16 [-3.05, 2.73]",1.48,-0.11,0.91
+bodyfat_w6.5,ses_w6,"-0.63 [-1.1, -0.17]",0.24,-2.66,0.008
+bodyfat_w6.5,bad_diet,"-0.78 [-2, 0.43]",0.62,-1.26,0.21
+bodyfat_w6.5,sexualmaturity_numeric_w6.5,"0.41 [-0.04, 0.86]",0.23,1.8,0.072
+bodyfat_w6.5,st_intercept,"2.83 [1.66, 3.99]",0.59,4.76,< 0.001
+bodyfat_w6.5,st_slope,"1.34 [-1.99, 4.67]",1.7,0.79,0.43
+bodyfat_w6.5,female,"1.96 [0.97, 2.94]",0.5,3.89,< 0.001
+bodyfat_w6.5,indig,"-0.41 [-3.31, 2.49]",1.48,-0.28,0.78
+bodyfat_w6.5,ses_w6,"-0.51 [-0.97, -0.05]",0.23,-2.17,0.030
+bodyfat_w6.5,bad_diet,"-0.64 [-1.83, 0.55]",0.61,-1.05,0.29
+bodyfat_w6.5,sexualmaturity_numeric_w6.5,"0.03 [-0.42, 0.48]",0.23,0.12,0.90
+bodyfat_w6.5,accmvpa_w6.5_scaled,"-2.39 [-3, -1.78]",0.31,-7.71,< 0.001
+bodyfat_w6.5,accsed_w6.5_scaled,"-0.51 [-1.1, 0.08]",0.3,-1.7,0.088
+bpsysamp_w6.5,st_intercept,"-0.39 [-0.81, 0.03]",0.22,-1.81,0.070
+bpsysamp_w6.5,st_slope,"0.72 [-0.52, 1.96]",0.63,1.13,0.26
+bpsysamp_w6.5,female,"-1.09 [-1.43, -0.75]",0.17,-6.34,< 0.001
+bpsysamp_w6.5,indig,"-0.16 [-1.2, 0.87]",0.53,-0.31,0.76
+bpsysamp_w6.5,ses_w6,"-0.1 [-0.27, 0.07]",0.09,-1.12,0.26
+bpsysamp_w6.5,bad_diet,"-0.1 [-0.54, 0.35]",0.23,-0.43,0.66
+bpsysamp_w6.5,sexualmaturity_numeric_w6.5,"0.41 [0.25, 0.57]",0.08,4.98,< 0.001
+bpsysamp_w6.5,st_intercept,"-0.37 [-0.8, 0.05]",0.22,-1.71,0.086
+bpsysamp_w6.5,st_slope,"0.81 [-0.44, 2.05]",0.63,1.27,0.20
+bpsysamp_w6.5,female,"-0.97 [-1.33, -0.6]",0.19,-5.22,< 0.001
+bpsysamp_w6.5,indig,"-0.13 [-1.17, 0.91]",0.53,-0.24,0.81
+bpsysamp_w6.5,ses_w6,"-0.11 [-0.28, 0.06]",0.09,-1.26,0.21
+bpsysamp_w6.5,bad_diet,"-0.11 [-0.56, 0.33]",0.23,-0.5,0.62
+bpsysamp_w6.5,sexualmaturity_numeric_w6.5,"0.46 [0.29, 0.62]",0.08,5.46,< 0.001
+bpsysamp_w6.5,accmvpa_w6.5_scaled,"0.27 [0.04, 0.5]",0.12,2.29,0.022
+bpsysamp_w6.5,accsed_w6.5_scaled,"0 [-0.22, 0.22]",0.11,-0.02,0.99
+pulsepressamp_w6.5,st_intercept,"0 [-0.05, 0.04]",0.02,-0.12,0.91
+pulsepressamp_w6.5,st_slope,"-0.08 [-0.21, 0.04]",0.06,-1.32,0.19
+pulsepressamp_w6.5,female,"-0.02 [-0.05, 0.01]",0.02,-1.14,0.25
+pulsepressamp_w6.5,indig,"-0.03 [-0.14, 0.07]",0.05,-0.59,0.56
+pulsepressamp_w6.5,ses_w6,"0.02 [0, 0.03]",0.01,1.92,0.055
+pulsepressamp_w6.5,bad_diet,"-0.03 [-0.07, 0.02]",0.02,-1.22,0.22
+pulsepressamp_w6.5,sexualmaturity_numeric_w6.5,"0.02 [0.01, 0.04]",0.01,2.87,0.004
+pulsepressamp_w6.5,st_intercept,"0 [-0.05, 0.04]",0.02,-0.16,0.87
+pulsepressamp_w6.5,st_slope,"-0.08 [-0.21, 0.04]",0.06,-1.28,0.20
+pulsepressamp_w6.5,female,"-0.01 [-0.04, 0.03]",0.02,-0.38,0.71
+pulsepressamp_w6.5,indig,"-0.03 [-0.14, 0.07]",0.05,-0.61,0.54
+pulsepressamp_w6.5,ses_w6,"0.02 [0, 0.03]",0.01,1.77,0.077
+pulsepressamp_w6.5,bad_diet,"-0.03 [-0.08, 0.02]",0.02,-1.27,0.20
+pulsepressamp_w6.5,sexualmaturity_numeric_w6.5,"0.03 [0.01, 0.04]",0.01,3.19,0.001
+pulsepressamp_w6.5,accmvpa_w6.5_scaled,"0.02 [0, 0.05]",0.01,1.96,0.050
+pulsepressamp_w6.5,accsed_w6.5_scaled,"0.01 [-0.01, 0.03]",0.01,0.95,0.34
+bpsysz_w6.5,st_intercept,"0.1 [0, 0.2]",0.05,1.88,0.060
+bpsysz_w6.5,st_slope,"0.32 [0.01, 0.62]",0.16,2.03,0.042
+bpsysz_w6.5,female,"0.15 [0.06, 0.23]",0.04,3.44,< 0.001
+bpsysz_w6.5,indig,"-0.01 [-0.27, 0.25]",0.13,-0.07,0.94
+bpsysz_w6.5,ses_w6,"-0.04 [-0.09, 0]",0.02,-2.09,0.037
+bpsysz_w6.5,bad_diet,"0 [-0.11, 0.11]",0.06,-0.06,0.96
+bpsysz_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.04, 0.04]",0.02,0.06,0.95
+bpsysz_w6.5,st_intercept,"0.1 [-0.01, 0.2]",0.05,1.8,0.071
+bpsysz_w6.5,st_slope,"0.31 [0, 0.62]",0.16,1.98,0.047
+bpsysz_w6.5,female,"0.15 [0.06, 0.24]",0.05,3.15,0.002
+bpsysz_w6.5,indig,"-0.02 [-0.28, 0.24]",0.13,-0.12,0.90
+bpsysz_w6.5,ses_w6,"-0.04 [-0.09, 0]",0.02,-2.08,0.037
+bpsysz_w6.5,bad_diet,"-0.01 [-0.11, 0.1]",0.06,-0.09,0.93
+bpsysz_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.04, 0.04]",0.02,-0.05,0.96
+bpsysz_w6.5,accmvpa_w6.5_scaled,"-0.01 [-0.06, 0.05]",0.03,-0.21,0.83
+bpsysz_w6.5,accsed_w6.5_scaled,"0.01 [-0.04, 0.07]",0.03,0.43,0.67
+bpdiaz_w6.5,st_intercept,"0.07 [0, 0.15]",0.04,1.88,0.060
+bpdiaz_w6.5,st_slope,"0.26 [0.04, 0.47]",0.11,2.31,0.021
+bpdiaz_w6.5,female,"0.14 [0.08, 0.2]",0.03,4.52,< 0.001
+bpdiaz_w6.5,indig,"-0.01 [-0.19, 0.18]",0.09,-0.08,0.93
+bpdiaz_w6.5,ses_w6,"-0.01 [-0.04, 0.02]",0.02,-0.71,0.48
+bpdiaz_w6.5,bad_diet,"0.1 [0.02, 0.18]",0.04,2.57,0.010
+bpdiaz_w6.5,sexualmaturity_numeric_w6.5,"-0.08 [-0.11, -0.05]",0.01,-5.49,< 0.001
+bpdiaz_w6.5,st_intercept,"0.07 [-0.01, 0.14]",0.04,1.75,0.080
+bpdiaz_w6.5,st_slope,"0.24 [0.02, 0.46]",0.11,2.16,0.031
+bpdiaz_w6.5,female,"0.11 [0.05, 0.18]",0.03,3.44,< 0.001
+bpdiaz_w6.5,indig,"-0.02 [-0.2, 0.17]",0.09,-0.19,0.85
+bpdiaz_w6.5,ses_w6,"-0.01 [-0.04, 0.02]",0.02,-0.55,0.58
+bpdiaz_w6.5,bad_diet,"0.1 [0.02, 0.18]",0.04,2.57,0.010
+bpdiaz_w6.5,sexualmaturity_numeric_w6.5,"-0.09 [-0.12, -0.06]",0.01,-6.09,< 0.001
+bpdiaz_w6.5,accmvpa_w6.5_scaled,"-0.06 [-0.1, -0.02]",0.02,-2.7,0.007
+bpdiaz_w6.5,accsed_w6.5_scaled,"0 [-0.04, 0.04]",0.02,0.18,0.85
+trigly_w6.5,st_intercept,"-0.01 [-0.11, 0.08]",0.05,-0.28,0.78
+trigly_w6.5,st_slope,"0.2 [-0.07, 0.47]",0.14,1.46,0.14
+trigly_w6.5,female,"0.11 [0.04, 0.19]",0.04,3.05,0.002
+trigly_w6.5,indig,"0 [-0.29, 0.29]",0.15,0,1.00
+trigly_w6.5,ses_w6,"-0.06 [-0.1, -0.02]",0.02,-3.21,0.001
+trigly_w6.5,bad_diet,"-0.04 [-0.14, 0.05]",0.05,-0.9,0.37
+trigly_w6.5,sexualmaturity_numeric_w6.5,"-0.01 [-0.05, 0.03]",0.02,-0.56,0.58
+trigly_w6.5,fastingtime_w6.5,"-0.03 [-0.06, -0.01]",0.01,-2.48,0.013
+trigly_w6.5,st_intercept,"-0.01 [-0.1, 0.08]",0.05,-0.22,0.83
+trigly_w6.5,st_slope,"0.19 [-0.08, 0.46]",0.14,1.35,0.18
+trigly_w6.5,female,"0.08 [0.01, 0.16]",0.04,2.12,0.034
+trigly_w6.5,indig,"0 [-0.29, 0.29]",0.15,0,1.00
+trigly_w6.5,ses_w6,"-0.06 [-0.1, -0.02]",0.02,-3.06,0.002
+trigly_w6.5,bad_diet,"-0.05 [-0.14, 0.05]",0.05,-0.93,0.35
+trigly_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.06, 0.02]",0.02,-1.09,0.28
+trigly_w6.5,fastingtime_w6.5,"-0.03 [-0.06, -0.01]",0.01,-2.42,0.016
+trigly_w6.5,accmvpa_w6.5_scaled,"-0.06 [-0.1, -0.01]",0.02,-2.42,0.015
+trigly_w6.5,accsed_w6.5_scaled,"-0.02 [-0.07, 0.02]",0.02,-0.95,0.34
+cholesttotal_w6.5,st_intercept,"-0.05 [-0.17, 0.06]",0.06,-0.88,0.38
+cholesttotal_w6.5,st_slope,"-0.03 [-0.37, 0.31]",0.17,-0.17,0.86
+cholesttotal_w6.5,female,"0.14 [0.05, 0.23]",0.05,2.92,0.003
+cholesttotal_w6.5,indig,"0.05 [-0.32, 0.41]",0.19,0.26,0.79
+cholesttotal_w6.5,ses_w6,"-0.03 [-0.08, 0.02]",0.02,-1.18,0.24
+cholesttotal_w6.5,bad_diet,"-0.06 [-0.18, 0.06]",0.06,-1.01,0.31
+cholesttotal_w6.5,sexualmaturity_numeric_w6.5,"-0.12 [-0.16, -0.07]",0.02,-5.17,< 0.001
+cholesttotal_w6.5,fastingtime_w6.5,"0 [-0.03, 0.04]",0.02,0.23,0.82
+cholesttotal_w6.5,st_intercept,"-0.06 [-0.18, 0.06]",0.06,-0.97,0.33
+cholesttotal_w6.5,st_slope,"-0.04 [-0.38, 0.3]",0.17,-0.24,0.81
+cholesttotal_w6.5,female,"0.12 [0.02, 0.22]",0.05,2.34,0.019
+cholesttotal_w6.5,indig,"0.03 [-0.33, 0.4]",0.19,0.18,0.86
+cholesttotal_w6.5,ses_w6,"-0.03 [-0.08, 0.02]",0.02,-1.16,0.24
+cholesttotal_w6.5,bad_diet,"-0.06 [-0.18, 0.06]",0.06,-1.05,0.29
+cholesttotal_w6.5,sexualmaturity_numeric_w6.5,"-0.13 [-0.17, -0.08]",0.02,-5.5,< 0.001
+cholesttotal_w6.5,fastingtime_w6.5,"0 [-0.03, 0.04]",0.02,0.21,0.83
+cholesttotal_w6.5,accmvpa_w6.5_scaled,"-0.04 [-0.1, 0.01]",0.03,-1.45,0.15
+cholesttotal_w6.5,accsed_w6.5_scaled,"0.01 [-0.05, 0.07]",0.03,0.3,0.76
+cholesttotalhdl_w6.5,st_intercept,"-0.02 [-0.06, 0.03]",0.03,-0.62,0.53
+cholesttotalhdl_w6.5,st_slope,"-0.06 [-0.2, 0.08]",0.07,-0.82,0.41
+cholesttotalhdl_w6.5,female,"0 [-0.03, 0.04]",0.02,0.19,0.85
+cholesttotalhdl_w6.5,indig,"0.04 [-0.11, 0.19]",0.08,0.48,0.63
+cholesttotalhdl_w6.5,ses_w6,"0.01 [-0.01, 0.03]",0.01,1.33,0.19
+cholesttotalhdl_w6.5,bad_diet,"0 [-0.05, 0.05]",0.03,-0.01,0.99
+cholesttotalhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.05 [-0.07, -0.03]",0.01,-5.46,< 0.001
+cholesttotalhdl_w6.5,fastingtime_w6.5,"0.01 [0, 0.03]",0.01,1.49,0.14
+cholesttotalhdl_w6.5,st_intercept,"-0.01 [-0.06, 0.04]",0.03,-0.41,0.68
+cholesttotalhdl_w6.5,st_slope,"-0.05 [-0.19, 0.09]",0.07,-0.64,0.53
+cholesttotalhdl_w6.5,female,"0.02 [-0.02, 0.06]",0.02,1.05,0.29
+cholesttotalhdl_w6.5,indig,"0.05 [-0.1, 0.2]",0.08,0.62,0.54
+cholesttotalhdl_w6.5,ses_w6,"0.01 [-0.01, 0.03]",0.01,1.29,0.20
+cholesttotalhdl_w6.5,bad_diet,"0 [-0.05, 0.05]",0.03,-0.02,0.99
+cholesttotalhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.04 [-0.06, -0.02]",0.01,-4.48,< 0.001
+cholesttotalhdl_w6.5,fastingtime_w6.5,"0.01 [0, 0.02]",0.01,1.39,0.16
+cholesttotalhdl_w6.5,accmvpa_w6.5_scaled,"0.04 [0.01, 0.06]",0.01,3.12,0.002
+cholesttotalhdl_w6.5,accsed_w6.5_scaled,"-0.01 [-0.03, 0.02]",0.01,-0.73,0.47
+cholestnonhdl_w6.5,st_intercept,"-0.02 [-0.07, 0.03]",0.02,-0.86,0.39
+cholestnonhdl_w6.5,st_slope,"0.01 [-0.13, 0.15]",0.07,0.13,0.90
+cholestnonhdl_w6.5,female,"0.07 [0.03, 0.11]",0.02,3.56,< 0.001
+cholestnonhdl_w6.5,indig,"-0.03 [-0.18, 0.12]",0.08,-0.38,0.71
+cholestnonhdl_w6.5,ses_w6,"-0.01 [-0.03, 0.01]",0.01,-1.29,0.20
+cholestnonhdl_w6.5,bad_diet,"-0.04 [-0.09, 0.01]",0.02,-1.51,0.13
+cholestnonhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.02 [-0.04, 0]",0.01,-2.12,0.034
+cholestnonhdl_w6.5,fastingtime_w6.5,"-0.01 [-0.02, 0.01]",0.01,-0.92,0.36
+cholestnonhdl_w6.5,st_intercept,"-0.03 [-0.07, 0.02]",0.02,-1.07,0.28
+cholestnonhdl_w6.5,st_slope,"0 [-0.14, 0.13]",0.07,-0.03,0.97
+cholestnonhdl_w6.5,female,"0.05 [0.01, 0.09]",0.02,2.6,0.009
+cholestnonhdl_w6.5,indig,"-0.04 [-0.19, 0.11]",0.08,-0.55,0.58
+cholestnonhdl_w6.5,ses_w6,"-0.01 [-0.03, 0.01]",0.01,-1.3,0.19
+cholestnonhdl_w6.5,bad_diet,"-0.04 [-0.09, 0.01]",0.02,-1.58,0.12
+cholestnonhdl_w6.5,sexualmaturity_numeric_w6.5,"-0.03 [-0.05, -0.01]",0.01,-3.01,0.003
+cholestnonhdl_w6.5,fastingtime_w6.5,"-0.01 [-0.02, 0.01]",0.01,-0.92,0.36
+cholestnonhdl_w6.5,accmvpa_w6.5_scaled,"-0.04 [-0.06, -0.01]",0.01,-2.96,0.003
+cholestnonhdl_w6.5,accsed_w6.5_scaled,"0.01 [-0.01, 0.03]",0.01,0.77,0.44
+glucose_w6.5,st_intercept,"-0.06 [-0.15, 0.02]",0.04,-1.41,0.16
+glucose_w6.5,st_slope,"-0.02 [-0.27, 0.23]",0.13,-0.17,0.86
+glucose_w6.5,female,"-0.06 [-0.12, 0.01]",0.03,-1.6,0.11
+glucose_w6.5,indig,"-0.19 [-0.46, 0.08]",0.14,-1.4,0.16
+glucose_w6.5,ses_w6,"-0.01 [-0.04, 0.03]",0.02,-0.45,0.65
+glucose_w6.5,bad_diet,"0.01 [-0.08, 0.1]",0.05,0.28,0.78
+glucose_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.03, 0.03]",0.02,-0.03,0.98
+glucose_w6.5,fastingtime_w6.5,"-0.07 [-0.09, -0.04]",0.01,-5.08,< 0.001
+glucose_w6.5,st_intercept,"-0.07 [-0.15, 0.02]",0.04,-1.47,0.14
+glucose_w6.5,st_slope,"-0.02 [-0.27, 0.23]",0.13,-0.12,0.90
+glucose_w6.5,female,"-0.04 [-0.11, 0.03]",0.04,-1.15,0.25
+glucose_w6.5,indig,"-0.19 [-0.46, 0.08]",0.14,-1.39,0.16
+glucose_w6.5,ses_w6,"-0.01 [-0.04, 0.03]",0.02,-0.54,0.59
+glucose_w6.5,bad_diet,"0.01 [-0.08, 0.1]",0.05,0.19,0.85
+glucose_w6.5,sexualmaturity_numeric_w6.5,"0 [-0.03, 0.04]",0.02,0.15,0.88
+glucose_w6.5,fastingtime_w6.5,"-0.07 [-0.1, -0.04]",0.01,-5.16,< 0.001
+glucose_w6.5,accmvpa_w6.5_scaled,"0.02 [-0.02, 0.07]",0.02,1.05,0.29
+glucose_w6.5,accsed_w6.5_scaled,"0.01 [-0.03, 0.06]",0.02,0.59,0.56

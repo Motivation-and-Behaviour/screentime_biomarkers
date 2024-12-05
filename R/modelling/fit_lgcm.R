@@ -11,7 +11,7 @@
 #' @export
 fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = FALSE) {
   require(lavaan)
-  
+
   covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
   covariates <- paste(covariates_v, collapse = " + ")
 
@@ -32,8 +32,10 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
   )
   factor_vars <- sapply(transformed_data[, all_vars_used, with = FALSE], is.factor)
   if (any(factor_vars)) {
-    stop("The following columns are factors:", 
-         paste(names(factor_vars)[factor_vars], collapse = ", "))
+    stop(
+      "The following columns are factors:",
+      paste(names(factor_vars)[factor_vars], collapse = ", ")
+    )
   }
 
   model <- glue::glue(
@@ -71,12 +73,12 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
 
   model_outputs$lgcm_fit <- lavaan::growth(
     model,
-    data = transformed_data, missing = "fiml"
+    data = transformed_data, missing = "fiml", fixed.x = FALSE
   )
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
     adj_model,
-    data = transformed_data, missing = "fiml"
+    data = transformed_data, missing = "fiml", fixed.x = FALSE
   )
 
   model_outputs
