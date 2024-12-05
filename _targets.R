@@ -131,5 +131,6 @@ list(
     model_tables,
     model_builder[["model_tables"]]
   ),
+   tar_target(table1, make_table1(scored_data)),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
