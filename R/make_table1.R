@@ -2,7 +2,8 @@ make_table1 <- function(scored_data) {
   require(gtsummary)
   require(dplyr)
   theme_gtsummary_journal("jama", set_theme = TRUE)
-  scored_data %>%
+  # get table data
+  table_dat <- scored_data %>%
     dplyr::select(
       wave,
       age, sex, indig, ses, st_total, accmvpa, accsed, diet, sexualmaturity, vo2, waistcm,
@@ -20,8 +21,9 @@ make_table1 <- function(scored_data) {
         6.5 ~ "Checkpoint"
       ) %>%
         factor(levels = c("Wave 3", "Wave 4", "Wave 5", "Wave 6", "Checkpoint"))
-    ) %>%
-    tbl_summary(
+    )
+
+    tbl_summary(table_dat,
       by = wave,
       statistic = list(
         all_continuous() ~ "{mean} ({sd})",
