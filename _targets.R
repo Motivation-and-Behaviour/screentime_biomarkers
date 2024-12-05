@@ -129,5 +129,9 @@ list(
     model_tables,
     model_builder[["model_tables"]]
    ),
+    tar_target(
+    model_predictions,
+    make_model_predictions(model_vo2_w6.5, transformed_data)
+    ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
