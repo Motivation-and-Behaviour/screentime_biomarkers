@@ -20,10 +20,6 @@ knitr::opts_chunk$set(echo = FALSE)
 tar_read(table1)
 ```
 
-
-```{r diagnostic-outputs, include = FALSE}
-# outputs csv for diagnostic purposes
-tar_read(model_tables) |> 
-  data.table::fwrite("outputs/model_tables.csv")
-
+```{r outcomes_table}
+tar_read(outcomes_table)
 ```

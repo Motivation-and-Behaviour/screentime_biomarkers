@@ -40,7 +40,7 @@ RUN tlmgr install academicons booktabs colortbl enumitem environ euenc \
 
 # Install renv
 ENV RENV_VERSION=1.0.7
-RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))" && \
+RUN R -e "install.packages('remotes')" && \
   R -e "remotes::install_github('rstudio/renv@v${RENV_VERSION}')" 
 
 # # Setup renv

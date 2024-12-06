@@ -26,8 +26,8 @@ make_table1 <- function(scored_data) {
     tbl_summary(table_dat,
       by = wave,
       statistic = list(
-        all_continuous() ~ "{mean} ({sd})",
-        all_categorical() ~ "{n} / {N} ({p}%)"
+        gtsummary::all_continuous() ~ "{mean} ({sd})",
+        gtsummary::all_categorical() ~ "{n} / {N} ({p}%)"
       ),
       label = list(
         age ~ "Age (Years)",
