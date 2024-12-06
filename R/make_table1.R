@@ -4,6 +4,7 @@ make_table1 <- function(scored_data) {
   theme_gtsummary_journal("jama", set_theme = TRUE)
   # get table data
   table_dat <- scored_data %>%
+  dplyr::filter(health_condition == "No health condition")%>% 
     dplyr::select(
       wave,
       age, sex, indig, ses, st_total, accmvpa, accsed, diet, sexualmaturity, vo2, waistcm,
@@ -34,7 +35,7 @@ make_table1 <- function(scored_data) {
         sex ~ "Sex",
         indig ~ "Indigenous Status",
         ses ~ "Socioeconomic Status",
-        st_total ~ "Aggregated Screen Time (min/w)",
+        st_total ~ "Aggregated Screen Time (min/day)",
         accmvpa ~ "MVPA (min/day)",
         accsed ~ "Sedentary Time (min/day)",
         diet ~ "Diet",

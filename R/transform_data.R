@@ -11,9 +11,6 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
     data.table()
 
   if (filter_valid) {
-    # When in doubt keep the data (when validity is not provided)
-    is_valid_wear <- transformed_data$valid_pa_w6.5 == "Valid" | is.na(transformed_data$valid_pa_w6.5)
-    transformed_data <- transformed_data[is_valid_wear]
     ## Remove kids with health conditions
     has_condition <- transformed_data$health_condition_w6.5 == "Health condition"
     transformed_data <- transformed_data[!has_condition]
