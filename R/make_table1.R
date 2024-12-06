@@ -77,5 +77,6 @@ make_table1 <- function(scored_data) {
     modify_table_body(
       ~ .x %>%
         dplyr::mutate(label = if_else(label == "meets guidelines", "Meets Guidelines", label))
-    )
+    ) %>% 
+    modify_caption("**Table 1. Descriptive statistics of the LSAC Checkpoint cohort.**")
 }

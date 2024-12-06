@@ -142,6 +142,11 @@ list(
     format = "file"
   ),
   tar_target(table1, make_table1(scored_data)),
+  tar_target(
+    table1_file,
+    save_table(table1, "doc/table1.docx"),
+    format = "file"
+  ),
   tar_combine(
     outcomes_table,
     model_builder[["model_table_gt"]],
@@ -152,5 +157,10 @@ list(
     model_builder[["model_predictions"]]
     ),
   tar_target(prediction_plot, plot_predictions(model_predictions)),
+  tar_target(
+    outcomes_table_file,
+    save_table(outcomes_table, "doc/outcomes_table.docx"),
+    format = "file"
+  ),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
