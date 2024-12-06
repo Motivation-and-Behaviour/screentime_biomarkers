@@ -9,19 +9,41 @@
 #' @return
 #' @author {Taren Sanders}
 #' @export
-fit_lgcm <- function(transformed_data, outcome, bloods) {
+fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = FALSE) {
   require(lavaan)
-  covariates <- "female + indig + ses_w6 + bad_diet + sexualmaturity_numeric_w6.5"
+
+  covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
+  covariates <- paste(covariates_v, collapse = " + ")
+
+  if (standardised_outcome) {
+    transformed_data[[outcome]] <- scale(transformed_data[[outcome]])
+  }
+
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
+  }
+  # Check for factors in the transformed_data using all_vars_used
+  # These need to be converted to numeric to prevent mistakes
+  all_vars_used <- c(
+    covariates_v,
+    outcome,
+    grep("^st", names(transformed_data), value = TRUE),
+    grep("^acc", names(transformed_data), value = TRUE)
+  )
+  factor_vars <- sapply(transformed_data[, all_vars_used, with = FALSE], is.factor)
+  if (any(factor_vars)) {
+    stop(
+      "The following columns are factors:",
+      paste(names(factor_vars)[factor_vars], collapse = ", ")
+    )
   }
 
   model <- glue::glue(
     # nolint start
     "
     # lgcm
-    st_intercept =~ 1 * st_total_w3_scaled + 1 * st_total_w4_scaled + 1 * st_total_w5_scaled + 1 * st_total_w6_scaled
-    st_slope =~ 0 * st_total_w3_scaled + 1 * st_total_w4_scaled + 2 * st_total_w5_scaled + 3 * st_total_w6_scaled
+    st_intercept =~ 1 * st_totalz_w3 + 1 * st_totalz_w4 + 1 * st_totalz_w5 + 1 * st_totalz_w6
+    st_slope =~ 0 * st_totalz_w3 + 1 * st_totalz_w4 + 2 * st_totalz_w5 + 3 * st_totalz_w6
 
     # variances and covariances
     st_intercept ~~ st_intercept
@@ -29,10 +51,10 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
     st_intercept ~~ st_slope
 
     # residual variances
-    st_total_w3_scaled ~~ residual_var*st_total_w3_scaled
-    st_total_w4_scaled ~~ residual_var*st_total_w4_scaled
-    st_total_w5_scaled ~~ residual_var*st_total_w5_scaled
-    st_total_w6_scaled ~~ residual_var*st_total_w6_scaled
+    st_totalz_w3 ~~ residual_var*st_totalz_w3
+    st_totalz_w4 ~~ residual_var*st_totalz_w4
+    st_totalz_w5 ~~ residual_var*st_totalz_w5
+    st_totalz_w6 ~~ residual_var*st_totalz_w6
     residual_var > 0
 
     # regression of health outcome on latent factors and covariates
@@ -51,15 +73,12 @@ fit_lgcm <- function(transformed_data, outcome, bloods) {
 
   model_outputs$lgcm_fit <- lavaan::growth(
     model,
-    data = transformed_data, missing = "fiml"
+    data = transformed_data, missing = "fiml", fixed.x = FALSE
   )
-  mi <- lavaan::modindices(model_outputs$lgcm_fit)
-  mi[order(mi$mi, decreasing = TRUE),][1:10,]
-  fitMeasures(model_outputs$lgcm_fit, c("rmsea", "cfi", "tli", "bic", "aic"))
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
     adj_model,
-    data = transformed_data, missing = "fiml"
+    data = transformed_data, missing = "fiml", fixed.x = FALSE
   )
 
   attr(model_outputs, "covariates") <- covariates

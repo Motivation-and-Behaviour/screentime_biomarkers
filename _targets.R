@@ -6,7 +6,9 @@ tar_source()
 
 # Use parallel processing where possible
 tar_option_set(
-  controller = crew_controller_local(workers = 20, seconds_idle = 15)
+  controller = crew_controller_local(
+    workers = min(parallel::detectCores() - 2, 20), seconds_idle = 15
+  )
 )
 
 lsac_path <- Sys.getenv("LSAC_PATH")
@@ -38,11 +40,15 @@ outcome_variables <- tribble(
 model_builder <- tar_map(
   values = outcome_variables,
   names = "variable",
+  unlist = FALSE,
   tar_target(model, fit_lgcm(transformed_data, variable, bloods)),
-  tar_target(model_fit_measures, get_measures(model),
-    pattern = map(model)
+  tar_target(model_fit_measures, get_measures(model)),
+  tar_target(model_df, make_model_dfs(model, model_fit_measures)),
+  tar_target(model_table_gt, make_lgcm_gt(model, variable, model_fit_measures)),
+  tar_target(
+    model_table_gt_supps,
+    make_lgcm_gt(model, variable, model_fit_measures, main = FALSE)
   ),
-  tar_target(model_tables, get_model_table(model)),
   tar_target(model_predictions, make_model_predictions(model, transformed_data))
 )
 
@@ -100,7 +106,7 @@ list(
     df_clean_alt, # This is the sensitivity dataset
     clean_data(
       waves_joined, biomarkers_data,
-      checkpoint_only = FALSE, remove_outliers = FALSE
+      checkpoint_only = FALSE, no_outliers = FALSE
     ),
   ),
   tar_target(
@@ -126,14 +132,25 @@ list(
       ) |>
       dplyr::select(model_name, everything(), -variable)
   ),
-   tar_combine(
-    model_tables,
-    model_builder[["model_tables"]]
-   ),
-    tar_combine(
+  tar_combine(
+    model_dfs,
+    model_builder[["model_df"]]
+  ),
+  tar_target(
+    diagnostic_table,
+    make_diagnostic_table(model_dfs),
+    format = "file"
+  ),
+  tar_target(table1, make_table1(scored_data)),
+  tar_combine(
+    outcomes_table,
+    model_builder[["model_table_gt"]],
+    command = make_outcomes_table(!!!.x)
+  ),
+  tar_combine(
     model_predictions,
     model_builder[["model_predictions"]]
     ),
-    tar_target(prediction_plot, plot_predictions(model_predictions)),
-    tar_render(manuscript, "doc/manuscript.Rmd")
+  tar_target(prediction_plot, plot_predictions(model_predictions)),
+  tar_render(manuscript, "doc/manuscript.Rmd")
 )
