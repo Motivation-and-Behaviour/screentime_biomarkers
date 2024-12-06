@@ -1,6 +1,5 @@
 ---
-title: "Untitled Draft"
-author: "Report Author"
+title: "Supplementary Materials"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
@@ -11,15 +10,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ## lapply(list.files(here::here("./R"), full.names = TRUE), source)
 ```
 
-```{r load-targets, include=FALSE}
-# tar_load(c(target_1, target_2, target_3))
-```
-
+See Table 1 for the full sample with exclusions.
 
 ```{r table-1}
 tar_read(table1)
 ```
 
+The full outcome table is in Table 2.
+
 ```{r outcomes_table}
-tar_read(outcomes_table)
+tar_read(outcomes_table_supps)
 ```

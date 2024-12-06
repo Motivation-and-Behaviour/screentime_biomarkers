@@ -206,7 +206,7 @@ list(
     save_table(outcomes_table, "doc/outcomes_table.docx"),
     format = "file"
   ),
-  tar_target(prediction_plot_supps, plot_predictions(model_predictions_supps)),
+  tar_target(prediction_plot_supps, plot_predictions(model_predictions_supps, suffix = "_supps")),
   tar_render(manuscript, "doc/manuscript.Rmd"),
   tar_render(supps, "doc/supps.Rmd")
 )

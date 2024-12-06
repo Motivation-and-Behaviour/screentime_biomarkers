@@ -1,4 +1,4 @@
-plot_predictions <- function(model_predictions){
+plot_predictions <- function(model_predictions, suffix = ""){
   require(ggplot2)
   model_predictions$outcome <- gsub("_", " ", model_predictions$outcome)
   model_predictions$outcome <- gsub(" w6.5", "", model_predictions$outcome)
@@ -45,6 +45,6 @@ plot_predictions <- function(model_predictions){
                 width = 30,
                 height = 20,
                 units = "cm",
-                filename = glue::glue("outputs/model_predictions.png"))
+                filename = glue::glue("outputs/model_predictions{suffix}.png"))
 
 }
