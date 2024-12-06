@@ -27,7 +27,7 @@ make_gt_table <- function(model_fit, variable, main = TRUE) {
     "pulsepressamp_w6.5" = "Pulse Pressure Amplification",
     "bpsysz_w6.5" = "Sysolic Blood Pressure (z-score)",
     "bpdiaz_w6.5" = "Diastolic Blood Pressure (z-score)",
-    "trigly_w6.5" = "Triacylglycerides",
+    "trigly_w6.5" = "Triglycerides",
     "cholesttotal_w6.5" = "Total Cholesterol",
     "cholesttotalhdl_w6.5" = "HDL Cholesterol",
     "cholestnonhdl_w6.5" = "Non-HDL Cholesterol",
@@ -70,7 +70,8 @@ make_gt_table <- function(model_fit, variable, main = TRUE) {
   }
 
   base_table <-
-    tbl_regression(model_fit, include = c(variable), label = names_map) |>
+    tbl_regression(model_fit, include = c(variable), label = names_map, 
+    digits = list()) |>
     bold_p() |>
     bold_labels() |>
     modify_table_body(dplyr::mutate, label = dplyr::recode(label, !!!terms_map)) |>
