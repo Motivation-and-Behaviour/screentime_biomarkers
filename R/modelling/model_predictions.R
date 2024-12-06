@@ -19,7 +19,7 @@ make_model_predictions <- function(m = model_vo2_w6.5, transformed_data) {
 
 make_prediction <- function(m, type, int_vals = c(-2,0,2), outcome, covariates, transformed_data) {
 
-  st_vars <- grep("^st.*_scaled", colnames(transformed_data), value = TRUE) |>
+  st_vars <- grep("^st_totalz.*", colnames(transformed_data), value = TRUE) |>
     sort()
   # Set all screen time variables to
   param_grid <- expand.grid(int = int_vals)
