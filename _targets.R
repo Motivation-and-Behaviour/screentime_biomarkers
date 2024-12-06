@@ -189,7 +189,7 @@ list(
   ),
   tar_combine(
     outcomes_table_supps,
-    model_builder_supps[["model_table_gt_supps"]],
+    model_builder_supps[["model_table_gt_full_supps"]],
     command = make_outcomes_table(!!!.x)
   ),
   tar_combine(
