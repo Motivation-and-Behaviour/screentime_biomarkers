@@ -27,48 +27,25 @@ plot_predictions <- function(model_predictions){
       .default = outcome  # keeps original value if not matched
     )
   )
-  model_predictions$st_slope <- as.factor(model_predictions$st_slope)
-browser()
+
   model_predictions$type <- factor(model_predictions$type, levels = c("Not adjusted", "Adjusted"))
-    plot_subpreds <-  function(dat, label) {
-      fig_plot <- dat |>
-        ggplot(aes(x = st_int, y = mean, color = st_slope, group = st_slope)) +
+  
+  fig_plot <- model_predictions |>
+        ggplot(aes(x = st_int, y = mean, color = type, group = type)) +
         geom_point() +
         geom_line() +
-        facet_grid(rows = vars(outcome_recode), cols = vars(type), scales = "free_y") +
+        geom_blank(aes(y = y_min)) +
+        geom_blank(aes(y = y_max)) +
+        facet_wrap(~ outcome_recode,scales = "free_y" ) +
         theme_bw() +
         theme(text = element_text(family = "serif"),
               strip.text.y = element_text(angle = 0)) + 
         labs(color = "Screentime slope (z)", x = "Screen Time Intercept (z)", y = "Health Outcome")
-      ggplot2::ggsave(fig_plot,
-                    width = 25,
-                    height = 30,
-                    units = "cm",
-                    filename = glue::glue("outputs/{label}.png"))
-  }
-
-  # Define groups
-  metabolic_lipid_profiles <- c(
-    "apoba1 ratio", "glycoprotein", "phospholipids", 
-    "trigly", "cholesttotal", "cholesttotalhdl", 
-    "cholestnonhdl", "glucose"
-  )
-
-  anthropometric_cardiovascular <- c(
-    "cardio index", "vo2", "waistcm", "waist2height", 
-    "bmiz", "bodyfat", "bpsysamp", "pulsepressamp", 
-    "bpsysz", "bpdiaz"  
-  )
-
-# Filter code
-  filtered_data_metabolic <- model_predictions |>
-    dplyr::filter(outcome %in% metabolic_lipid_profiles)
-
-  filtered_data_anthropometric <- model_predictions |>
-    dplyr::filter(outcome %in% anthropometric_cardiovascular)
-
-  # Plot code
-  plot_subpreds(filtered_data_metabolic, "metabolic_lipid_profiles")
-  plot_subpreds(filtered_data_anthropometric, "anthropometric_cardiovascular")
+  fig_plot
+  ggplot2::ggsave(fig_plot,
+                width = 35,
+                height = 20,
+                units = "cm",
+                filename = glue::glue("outputs/model_predictions.png"))
 
 }
