@@ -207,5 +207,6 @@ list(
     format = "file"
   ),
   tar_target(prediction_plot_supps, plot_predictions(model_predictions_supps)),
-  tar_render(manuscript, "doc/manuscript.Rmd")
+  tar_render(manuscript, "doc/manuscript.Rmd"),
+  tar_render(supps, "doc/supps.Rmd")
 )
