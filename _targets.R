@@ -148,12 +148,31 @@ list(
       dplyr::select(model_name, everything(), -variable)
   ),
   tar_combine(
+    fit_measures_supps,
+    model_builder_supps[["model_fit_measures_supps"]],
+    command = dplyr::bind_rows(!!!.x, .id = "variable") |>
+      dplyr::mutate(
+        model_name = stringr::str_remove(variable, "model_fit_measures_supps_"),
+        across(where(is.numeric), round, 2)
+      ) |>
+      dplyr::select(model_name, everything(), -variable)
+  ),
+  tar_combine(
     model_dfs,
     model_builder[["model_df"]]
+  ),
+  tar_combine(
+    model_dfs_supps,
+    model_builder_supps[["model_df_supps"]]
   ),
   tar_target(
     diagnostic_table,
     make_diagnostic_table(model_dfs),
+    format = "file"
+  ),
+  tar_target(
+    diagnostic_table_supps,
+    make_diagnostic_table(model_dfs_supps),
     format = "file"
   ),
   tar_target(table1, make_table1(scored_data)),
@@ -168,14 +187,24 @@ list(
     command = make_outcomes_table(!!!.x)
   ),
   tar_combine(
+    outcomes_table_supps,
+    model_builder_supps[["model_table_gt_supps"]],
+    command = make_outcomes_table(!!!.x)
+  ),
+  tar_combine(
     model_predictions,
     model_builder[["model_predictions"]]
     ),
+   tar_combine(
+    model_predictions_supps,
+    model_builder_supps[["model_predictions_supps"]]
+  ),
   tar_target(prediction_plot, plot_predictions(model_predictions)),
   tar_target(
     outcomes_table_file,
     save_table(outcomes_table, "doc/outcomes_table.docx"),
     format = "file"
   ),
+  tar_target(prediction_plot_supps, plot_predictions(model_predictions_supps)),
   tar_render(manuscript, "doc/manuscript.Rmd")
 )
