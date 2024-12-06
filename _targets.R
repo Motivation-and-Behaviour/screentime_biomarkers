@@ -52,6 +52,21 @@ model_builder <- tar_map(
   tar_target(model_predictions, make_model_predictions(model, transformed_data))
 )
 
+model_builder_supps <- tar_map(
+  values = outcome_variables,
+  names = "variable",
+  unlist = FALSE,
+  tar_target(model_supps, fit_lgcm(transformed_data_no_filter, variable, bloods)),
+  tar_target(model_fit_measures_supps, get_measures(model_supps)),
+  tar_target(model_df_supps, make_model_dfs(model_supps, model_fit_measures_supps)),
+  tar_target(model_table_gt_supps, make_lgcm_gt(model_supps, variable, model_fit_measures_supps)),
+  tar_target(
+    model_table_gt_full_supps,
+    make_lgcm_gt(model_supps, variable, model_fit_measures_supps, main = FALSE)
+  ),
+  tar_target(model_predictions_supps, make_model_predictions(model_supps, transformed_data_no_filter))
+)
+
 list(
   tar_file_read(
     biomarkers_data,
