@@ -48,7 +48,8 @@ model_builder <- tar_map(
   tar_target(
     model_table_gt_supps,
     make_lgcm_gt(model, variable, model_fit_measures, main = FALSE)
-  )
+  ),
+  tar_target(model_predictions, make_model_predictions(model, transformed_data))
 )
 
 list(
@@ -151,6 +152,11 @@ list(
     model_builder[["model_table_gt"]],
     command = make_outcomes_table(!!!.x)
   ),
+  tar_combine(
+    model_predictions,
+    model_builder[["model_predictions"]]
+    ),
+  tar_target(prediction_plot, plot_predictions(model_predictions)),
   tar_target(
     outcomes_table_file,
     save_table(outcomes_table, "doc/outcomes_table.docx"),
