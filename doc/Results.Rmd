@@ -1,0 +1,118 @@
+---
+title: "Untitled Draft"
+author: "Report Author"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: bookdown::word_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r load-targets, include=FALSE}
+library(targets)
+library(gtsummary)
+library(flextable)
+tar_load(c(table1, outcomes_table, scored_data, fit_measures, model_vo2_w6.5),
+  store = here::here("_targets")
+)
+
+# Easier printing
+pn <- function(val, acc = 0.01) {
+  scales::number(val, accuracy = acc)
+}
+```
+
+```{r results_nums, include=FALSE}
+health_excluded <-
+  dplyr::filter(scored_data, health_condition == "Health condition")
+n_health_excluded <- dplyr::n_distinct(health_excluded$id)
+```
+
+# Results
+
+We excluded `r nrow(health_excluded)` data points from `r n_health_excluded` participants with a reported health condition at the Checkpoint data collection point.
+Table \@ref(tab:table1) provides an overview of the demographic, anthropometric, and cardio-metabolic characteristics of the remaining `r inline_text(table1, variable = "age", column = "Checkpoint", pattern = "{N_obs}")` participants.
+The cohort was evenly distributed by sex, with `r inline_text(table1, variable = "sex", column = "Wave 6", level = "Female", pattern = "{p}%")` females across all wave points.
+Majority of participants were non-Indigenous (98%), which is representative of the population.
+The participant cohort was predominantly in early to mid-puberty, with the majority classified as Tanner stages 2 `r inline_text(table1, variable = "sexualmaturity", column = "Checkpoint", level = "Tanner2", pattern = "{p}%")` and 3 `r inline_text(table1, variable = "sexualmaturity", column = "Checkpoint", level = "Tanner3", pattern = "{p}%")`.
+The LSAC is designed to be representative of the Australian population, and therefore the standardized socioeconomic status indicator is expected to have a mean of 0 (standard deviation = 1).
+Participants included in the Checkpoint data were on average from slightly higher socioeconomic families than the entire LSAC dataset (Wave 3 mean `r inline_text(table1, variable = "ses", column = "Wave 3", pattern = "{mean}; SD = {sd}")
+`).
+Participants average total screen time increased steadily across the study period, from a mean of `r inline_text(table1, variable = "st_total", column = "Wave 3", pattern = "{mean} minutes per week (SD = {sd})")` to `r inline_text(table1, variable = "st_total", column = "Wave 6", pattern = "{mean} minutes per week (SD = {sd})")` in Wave 6.
+
+```{r model_fit, include=FALSE}
+min_cfi <- pn(min(fit_measures$cfi))
+max_cfis <- pn(max(fit_measures$cfi))
+min_rmsea <- pn(min(fit_measures$rmsea))
+max_rmseas <- pn(max(fit_measures$rmsea))
+
+int_slope_df <- broom::tidy(model_vo2_w6.5$lgcm_adj_fit) %>%
+  dplyr::filter(term == "st_intercept ~~ st_slope")
+
+int_slope <- list()
+int_slope$cor <- pn(int_slope_df$estimate)
+int_slope$pval <- pn(int_slope_df$estimate, 0.001)
+```
+
+We fit latent growth curve models to estimate trajectories of screen time over time, and to examine if these trajectories were associated with health outcomes.
+The model fit was considered acceptable, with comparative fit indices ranging from `r min_cfi` to `r max_cfis`, and root mean square error of approximation ranging from `r min_rmsea` to `r max_rmseas`.
+There was a negative and statistically significant covariance between the initial screen time intercept and the screen time slope (correlation = `r int_slope$cor`; p = `r int_slope$pval`), suggesting that children with high levels of initial screen time tend to have slower rates of increase than those with low initial levels.
+
+```{r outcomes, include=FALSE}
+res <- outcomes_table$table_body %>%
+  dplyr::mutate(
+    unadj_text = glue::glue(
+      "*B* = {pn(estimate_1)}; 95%CI, {pn(conf.low_1)}-{pn(conf.high_1)}"
+    ),
+    adj_text = glue::glue(
+      "*B* = {pn(estimate_1)}; 95%CI, {pn(conf.low_1)}-{pn(conf.high_1)}"
+    ),
+    unadj_text_brack = glue::glue(
+      "*B* = {pn(estimate_1)} (95%CI, {pn(conf.low_1)}-{pn(conf.high_1)})"
+    ),
+    adj_text_brack = glue::glue(
+      "*B* = {pn(estimate_1)} (95%CI, {pn(conf.low_1)}-{pn(conf.high_1)})"
+    )
+  )
+
+
+p_out <- function(var, level = "int", type = "unadj", brackets = FALSE) {
+  extract <- glue::glue("{type}_text")
+  brack <- if (brackets) "_brack" else ""
+  extract <- extract + brack
+
+  level <- dplyr::case_match(
+    level,
+    "int" ~ "Screen Time Trajectory Intercept",
+    "slope" ~ "Screen Time Trajectory Slope"
+  )
+  res %>%
+    dplyr::filter(variable == var, label == level) %>%
+    dplyr::pull(any_of(extract))
+}
+```
+
+The results for the association between screen time trajectories and health outcomes are presented in Table \@ref(tab:outcomes_table) (full results are available in supplementary materials).
+After adjusting for movement behaviors, we found no evidence of associations between screen time trajectories and total cardio-metabolic risk score, ApoB/ApoA1 ratio, glycoprotein acetyls, phospholipids, triglycerides, glucose, measures of cholesterol, and measures of blood pressure.
+We did, however, find evidence that children's initial screen time (i.e., trajectory intercept) was associated with lower levels of cardiorespiratory fitness (unadjusted `r p_out("vo2_w6.5")`), higher waist circumference (unadjusted `r p_out("waistcm_w6.5")`), waist-to-height ratio (unadjusted `r p_out("waist2height_w6.5")`), body mass index (z-score; unadjusted `r p_out("bmiz_w6.5")`), and body fat percentage (unadjusted `r p_out("bodyfat_w6.5")`).
+Contrary to our hypothesis, these results were not attenuated after adjusting for movement behaviors.
+There was additionally weak evidence for an association between initial screen time and measures of systolic (z-score; unadjusted `r p_out("bpsysz_w6.5")`) and diastolic (z-score; unadjusted `r p_out("bpdiaz_w6.5")`) blood pressure, which were attenuated after adjusting for movement behaviors.
+
+There was some evidence to suggest that the rate of change in screen time (i.e., trajectory slope) was associated with higher waist circumference (unadjusted `r p_out("waistcm_w6.5", "slope")`), waist-to-height ratio (unadjusted `r p_out("waist2height_w6.5", "slope")`), and lower pulse pressure amplification (unadjusted `r p_out("pulsepressamp_w6.5", "slope")`).
+However, these associations were all attenuated after adjusting for movement behaviors.
+
+\newpage
+
+# Tables
+
+```{r table1}
+gtsummary::as_flex_table(table1) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+```{r outcomes_table}
+gtsummary::as_flex_table(outcomes_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```

@@ -3,11 +3,12 @@ make_lgcm_gt <- function(model, variable, model_fit, main = TRUE) {
 
   theme_gtsummary_journal("jama", set_theme = TRUE)
 
-  unadj <-make_gt_table(model$lgcm_fit, variable, main = main)
+  unadj <- make_gt_table(model$lgcm_fit, variable, main = main)
   adj <- make_gt_table(model$lgcm_adj_fit, variable, main = main)
 
-  merged_tbl <- tbl_merge(list(unadj, adj), 
-  tab_spanner = c("**Unadjusted**", "**Adjusted**"))
+  merged_tbl <- tbl_merge(list(unadj, adj),
+    tab_spanner = c("**Unadjusted**", "**Adjusted**")
+  )
 
   merged_tbl
 }
@@ -27,7 +28,7 @@ make_gt_table <- function(model_fit, variable, main = TRUE) {
     "pulsepressamp_w6.5" = "Pulse Pressure Amplification",
     "bpsysz_w6.5" = "Sysolic Blood Pressure (z-score)",
     "bpdiaz_w6.5" = "Diastolic Blood Pressure (z-score)",
-    "trigly_w6.5" = "Triacylglycerides",
+    "trigly_w6.5" = "Triglycerides",
     "cholesttotal_w6.5" = "Total Cholesterol",
     "cholesttotalhdl_w6.5" = "HDL Cholesterol",
     "cholestnonhdl_w6.5" = "Non-HDL Cholesterol",
