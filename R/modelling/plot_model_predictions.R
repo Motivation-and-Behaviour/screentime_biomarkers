@@ -42,7 +42,7 @@ plot_predictions <- function(model_predictions){
               strip.text.y = element_text(angle = 0)) + 
         labs(color = "Model type", x = "Screen Time (z; constant across timepoints)", y = "Health Outcome")
   ggplot2::ggsave(fig_plot,
-                width = 35,
+                width = 30,
                 height = 20,
                 units = "cm",
                 filename = glue::glue("outputs/model_predictions.png"))
