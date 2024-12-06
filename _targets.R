@@ -46,7 +46,7 @@ model_builder <- tar_map(
   tar_target(model_df, make_model_dfs(model, model_fit_measures)),
   tar_target(model_table_gt, make_lgcm_gt(model, variable, model_fit_measures)),
   tar_target(
-    model_table_gt_supps,
+    model_table_gt_full,
     make_lgcm_gt(model, variable, model_fit_measures, main = FALSE)
   ),
   tar_target(model_predictions, make_model_predictions(model, transformed_data))
