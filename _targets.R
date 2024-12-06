@@ -46,10 +46,25 @@ model_builder <- tar_map(
   tar_target(model_df, make_model_dfs(model, model_fit_measures)),
   tar_target(model_table_gt, make_lgcm_gt(model, variable, model_fit_measures)),
   tar_target(
-    model_table_gt_supps,
+    model_table_gt_full,
     make_lgcm_gt(model, variable, model_fit_measures, main = FALSE)
   ),
   tar_target(model_predictions, make_model_predictions(model, transformed_data))
+)
+
+model_builder_supps <- tar_map(
+  values = outcome_variables,
+  names = "variable",
+  unlist = FALSE,
+  tar_target(model_supps, fit_lgcm(transformed_data_no_filter, variable, bloods)),
+  tar_target(model_fit_measures_supps, get_measures(model_supps)),
+  tar_target(model_df_supps, make_model_dfs(model_supps, model_fit_measures_supps)),
+  tar_target(model_table_gt_supps, make_lgcm_gt(model_supps, variable, model_fit_measures_supps)),
+  tar_target(
+    model_table_gt_full_supps,
+    make_lgcm_gt(model_supps, variable, model_fit_measures_supps, main = FALSE)
+  ),
+  tar_target(model_predictions_supps, make_model_predictions(model_supps, transformed_data_no_filter))
 )
 
 list(
@@ -122,6 +137,7 @@ list(
     transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
   ),
   model_builder,
+  model_builder_supps,
   tar_combine(
     fit_measures,
     model_builder[["model_fit_measures"]],
@@ -133,12 +149,31 @@ list(
       dplyr::select(model_name, everything(), -variable)
   ),
   tar_combine(
+    fit_measures_supps,
+    model_builder_supps[["model_fit_measures_supps"]],
+    command = dplyr::bind_rows(!!!.x, .id = "variable") |>
+      dplyr::mutate(
+        model_name = stringr::str_remove(variable, "model_fit_measures_supps_"),
+        across(where(is.numeric), round, 2)
+      ) |>
+      dplyr::select(model_name, everything(), -variable)
+  ),
+  tar_combine(
     model_dfs,
     model_builder[["model_df"]]
+  ),
+  tar_combine(
+    model_dfs_supps,
+    model_builder_supps[["model_df_supps"]]
   ),
   tar_target(
     diagnostic_table,
     make_diagnostic_table(model_dfs),
+    format = "file"
+  ),
+  tar_target(
+    diagnostic_table_supps,
+    make_diagnostic_table(model_dfs_supps),
     format = "file"
   ),
   tar_target(table1, make_table1(scored_data)),
@@ -147,20 +182,33 @@ list(
     save_table(table1, "doc/table1.docx"),
     format = "file"
   ),
+  tar_target(table1_supps, make_table1(scored_data,
+    exclude_health_conditions = FALSE)),
   tar_combine(
     outcomes_table,
     model_builder[["model_table_gt"]],
     command = make_outcomes_table(!!!.x)
   ),
   tar_combine(
+    outcomes_table_supps,
+    model_builder_supps[["model_table_gt_full_supps"]],
+    command = make_outcomes_table(!!!.x)
+  ),
+  tar_combine(
     model_predictions,
     model_builder[["model_predictions"]]
     ),
+   tar_combine(
+    model_predictions_supps,
+    model_builder_supps[["model_predictions_supps"]]
+  ),
   tar_target(prediction_plot, plot_predictions(model_predictions)),
   tar_target(
     outcomes_table_file,
     save_table(outcomes_table, "doc/outcomes_table.docx"),
     format = "file"
   ),
-  tar_render(manuscript, "doc/manuscript.Rmd")
+  tar_target(prediction_plot_supps, plot_predictions(model_predictions_supps, suffix = "_supps")),
+  tar_render(manuscript, "doc/manuscript.Rmd"),
+  tar_render(supps, "doc/supps.Rmd")
 )

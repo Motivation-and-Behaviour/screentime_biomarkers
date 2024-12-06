@@ -1,8 +1,12 @@
-make_table1 <- function(scored_data) {
+make_table1 <- function(scored_data, exclude_health_conditions = TRUE) {
   require(gtsummary)
   require(dplyr)
   theme_gtsummary_journal("jama", set_theme = TRUE)
   # get table data
+  if(exclude_health_conditions) {
+    scored_data <- scored_data |>
+      dplyr::filter(health_condition == "No health condition")
+  }
   table_dat <- scored_data %>%
     dplyr::select(
       wave,

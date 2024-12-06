@@ -1,0 +1,28 @@
+---
+title: "Supplementary Materials"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+## source(here::here("packages.R"))
+## lapply(list.files(here::here("./R"), full.names = TRUE), source)
+```
+
+See Table 1 for the full sample with exclusions.
+
+```{r table-1}
+tar_read(table1_supps)
+```
+
+The full outcome table is in Table 2.
+
+```{r outcomes_table}
+tar_read(outcomes_table_supps)
+```
+The predictions for the models using the full sample are in Figure 1
+
+```{r fig.cap = "Predictions for the models using the full sample"}
+# knitr::include_graphics(here::here("outputs", "model_predictions_supps.png"))
+```
