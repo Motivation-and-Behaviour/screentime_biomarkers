@@ -18,7 +18,7 @@ plot_predictions <- function(model_predictions){
       "bpsysamp"           = "Sys BP (amp)",
       "pulsepressamp"      = "Pulse pressure (amp)",
       "bpsysz"             = "Sys BP (z)",
-      "bpdiaz"             = "Dia BP",
+      "bpdiaz"             = "Dia BP (z)",
       "trigly"             = "Triglycerides",
       "cholesttotal"       = "Total cholesterol",
       "cholesttotalhdl"    = "HDL cholesterol",
@@ -40,8 +40,7 @@ plot_predictions <- function(model_predictions){
         theme_bw() +
         theme(text = element_text(family = "serif"),
               strip.text.y = element_text(angle = 0)) + 
-        labs(color = "Screentime slope (z)", x = "Screen Time Intercept (z)", y = "Health Outcome")
-  fig_plot
+        labs(color = "Model type", x = "Screen Time (z; constant across timepoints)", y = "Health Outcome")
   ggplot2::ggsave(fig_plot,
                 width = 35,
                 height = 20,
