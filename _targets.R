@@ -182,6 +182,8 @@ list(
     save_table(table1, "doc/table1.docx"),
     format = "file"
   ),
+  tar_target(table1_supps, make_table1(scored_data,
+    exclude_health_conditions = FALSE)),
   tar_combine(
     outcomes_table,
     model_builder[["model_table_gt"]],
