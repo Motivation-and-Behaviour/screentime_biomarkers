@@ -137,6 +137,7 @@ list(
     transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
   ),
   model_builder,
+  model_builder_supps,
   tar_combine(
     fit_measures,
     model_builder[["model_fit_measures"]],
