@@ -3,11 +3,12 @@ make_lgcm_gt <- function(model, variable, model_fit, main = TRUE) {
 
   theme_gtsummary_journal("jama", set_theme = TRUE)
 
-  unadj <-make_gt_table(model$lgcm_fit, variable, main = main)
+  unadj <- make_gt_table(model$lgcm_fit, variable, main = main)
   adj <- make_gt_table(model$lgcm_adj_fit, variable, main = main)
 
-  merged_tbl <- tbl_merge(list(unadj, adj), 
-  tab_spanner = c("**Unadjusted**", "**Adjusted**"))
+  merged_tbl <- tbl_merge(list(unadj, adj),
+    tab_spanner = c("**Unadjusted**", "**Adjusted**")
+  )
 
   merged_tbl
 }
@@ -70,8 +71,7 @@ make_gt_table <- function(model_fit, variable, main = TRUE) {
   }
 
   base_table <-
-    tbl_regression(model_fit, include = c(variable), label = names_map, 
-    digits = list()) |>
+    tbl_regression(model_fit, include = c(variable), label = names_map) |>
     bold_p() |>
     bold_labels() |>
     modify_table_body(dplyr::mutate, label = dplyr::recode(label, !!!terms_map)) |>
