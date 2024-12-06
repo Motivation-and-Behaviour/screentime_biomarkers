@@ -73,12 +73,12 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
 
   model_outputs$lgcm_fit <- lavaan::growth(
     model,
-    data = transformed_data, missing = "fiml", fixed.x = FALSE
+    data = transformed_data, missing = "fiml"
   )
 
   model_outputs$lgcm_adj_fit <- lavaan::growth(
     adj_model,
-    data = transformed_data, missing = "fiml", fixed.x = FALSE
+    data = transformed_data, missing = "fiml"
   )
 
   attr(model_outputs, "covariates") <- covariates
