@@ -57,3 +57,5 @@ _targets/meta
 _targets/
 .Rprofile
 .lintr
+
+scratch.R
