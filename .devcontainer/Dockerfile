@@ -34,11 +34,7 @@ RUN /rocker_scripts/install_pandoc.sh
 RUN /rocker_scripts/install_texlive.sh
 
 # These are all the latex packages that sometimes aren't installed
-RUN tlmgr install academicons anyfontsize booktabs caption colortbl enumitem \
-  environ euenc fancyhdr fontawesome fontspec float fp ifmtarg l3packages \ 
-  latex-amsmath-dev lwarp makecell multirow pdflscape pgf ragged2e setspace \
-  sourcesanspro tabu tcolorbox threeparttable threeparttablex tipa trimspaces \
-  ulem unicode-math varwidth wrapfig xifthen xunicode
+RUN tlmgr install academicons anyfontsize booktabs caption colortbl enumitem   environ euenc fancyhdr fontawesome fontspec float fp ifmtarg l3packages   latex-amsmath-dev lwarp makecell multirow pdflscape pgf ragged2e setspace  sourcesanspro tabu tcolorbox threeparttable threeparttablex tipa trimspaces ulem unicode-math varwidth wrapfig xifthen xunicode
 
 # Install renv
 ENV RENV_VERSION=1.0.7

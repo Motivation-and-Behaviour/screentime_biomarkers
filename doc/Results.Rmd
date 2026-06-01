@@ -39,7 +39,7 @@ The participant cohort was predominantly in early to mid-puberty, with the major
 The LSAC is designed to be representative of the Australian population, and therefore the standardized socioeconomic status indicator is expected to have a mean of 0 (standard deviation = 1).
 Participants included in the Checkpoint data were on average from slightly higher socioeconomic families than the entire LSAC dataset (Wave 3 mean `r inline_text(table1, variable = "ses", column = "Wave 3", pattern = "{mean}; SD = {sd}")
 `).
-Participants average total screen time increased steadily across the study period, from a mean of `r inline_text(table1, variable = "st_total", column = "Wave 3", pattern = "{mean} minutes per week (SD = {sd})")` to `r inline_text(table1, variable = "st_total", column = "Wave 6", pattern = "{mean} minutes per week (SD = {sd})")` in Wave 6.
+Participants average total screen time increased steadily across the study period, from a mean of `r inline_text(table1, variable = "st_total", column = "Wave 3", pattern = "{mean} minutes per day (SD = {sd})")` to `r inline_text(table1, variable = "st_total", column = "Wave 6", pattern = "{mean} minutes per day (SD = {sd})")` in Wave 6.
 
 ```{r model_fit, include=FALSE}
 min_cfi <- pn(min(fit_measures$cfi))
