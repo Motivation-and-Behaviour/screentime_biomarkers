@@ -17,6 +17,7 @@ score_data <- function(df_clean) {
   # Estimate st_total and remove outliers
   df_clean$st_total <- df_clean$st_comp_minweek + df_clean$st_vg_minweek + df_clean$st_tv_minweek
   df_clean$st_total <- remove_outliers(df_clean$st_total)
+  df_clean$st_total <- df_clean$st_total / 7 # use min/day
   # return df_clean
 
   # Handle factors with  factors cannot have more than 2 levels

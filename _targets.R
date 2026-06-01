@@ -7,7 +7,7 @@ tar_source()
 # Use parallel processing where possible
 tar_option_set(
   controller = crew_controller_local(
-    workers = min(parallel::detectCores() - 2, 20), seconds_idle = 15
+    workers = min(parallel::detectCores() - 2, 28), seconds_idle = 15
   )
 )
 
@@ -155,12 +155,12 @@ list(
   tar_combine(
     model_predictions,
     model_builder[["model_predictions"]]
-    ),
+  ),
   tar_target(prediction_plot, plot_predictions(model_predictions)),
   tar_target(
     outcomes_table_file,
     save_table(outcomes_table, "doc/outcomes_table.docx"),
     format = "file"
   ),
-  tar_render(manuscript, "doc/manuscript.Rmd")
+  tar_render(results_section, "doc/Results.Rmd")
 )
