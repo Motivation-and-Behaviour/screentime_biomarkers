@@ -3,7 +3,7 @@
   "image": "ghcr.io/tarensanders/r-base:latest",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-      "packages": "DT, flextable, github::crsh/prereg, github::crsh/papaja, github::conig/metaKIN, gittargets, lavaan, parameters",
+      "packages": "DT, flextable, github::crsh/prereg, github::crsh/papaja, github::conig/metaKIN, gittargets, lavaan, lme4, lmerTest, broom.mixed, parameters",
       "installSystemRequirements": true
     }
   },

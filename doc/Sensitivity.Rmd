@@ -1,0 +1,145 @@
+---
+title: "Supplementary sensitivity analyses"
+author: "Report Author"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: bookdown::word_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r load-targets, include=FALSE}
+library(targets)
+library(gtsummary)
+library(flextable)
+tar_load(
+  c(w3_table, lmm_table, w3_dfs, lmm_dfs, st_trajectory_lmm, model_vo2_w6.5),
+  store = here::here("_targets")
+)
+
+# Easier printing
+pn <- function(val, acc = 0.01) {
+  scales::number(val, accuracy = acc)
+}
+
+# Pull a formatted estimate (B and 95% CI) from the tidy sensitivity data
+pull_lm <- function(df, outcome, term, type = "unadjusted", brackets = FALSE) {
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  txt <- glue::glue(
+    "*B* = {pn(row$estimate)}; 95%CI, {pn(row$conf.low)}-{pn(row$conf.high)}"
+  )
+  if (brackets) {
+    txt <- glue::glue(
+      "*B* = {pn(row$estimate)} (95%CI, {pn(row$conf.low)}-{pn(row$conf.high)})"
+    )
+  }
+  txt
+}
+```
+
+# Sensitivity analyses
+
+To confirm that the associations attributed to early screen time are present in
+the data itself, and that the trajectory findings are robust to the choice of
+modelling framework, we conducted two complementary sensitivity analyses. Both
+use the same analysis sample and the same covariate adjustment structure as the
+primary latent growth curve models.
+
+## Observed Wave 3 screen time as the exposure
+
+The latent intercept in the growth model is a model-derived quantity estimated
+from the full repeated-measures structure and is therefore not identical to the
+observed Wave 3 value. As a sensitivity analysis, we replaced the latent
+intercept with the *observed* (standardised) Wave 3 screen-time value and
+re-estimated the association with each outcome using ordinary least squares
+regression (complete cases), with the same covariates as the primary models
+(Table \@ref(tab:w3-table)).
+
+```{r w3-results, include=FALSE}
+v <- "st_totalz_w3"
+```
+
+The pattern of findings was consistent with the primary analysis. Higher
+observed Wave 3 screen time was associated with lower cardiorespiratory fitness
+(`r pull_lm(w3_dfs, "vo2_w6.5", v)`), higher waist circumference
+(`r pull_lm(w3_dfs, "waistcm_w6.5", v)`), higher waist-to-height ratio
+(`r pull_lm(w3_dfs, "waist2height_w6.5", v)`), higher body mass index (z-score;
+`r pull_lm(w3_dfs, "bmiz_w6.5", v)`), and higher body fat percentage
+(`r pull_lm(w3_dfs, "bodyfat_w6.5", v)`). The associations were in the same
+direction as, and of comparable magnitude to, those for the latent intercept,
+indicating that these findings reflect the observed data rather than the latent
+growth-model specification.
+
+\newpage
+
+```{r w3-table}
+gtsummary::as_flex_table(w3_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Mixed-model (random intercept / random slope) framework
+
+We additionally re-estimated the screen-time trajectory using a conventional
+linear mixed model with a random intercept and random slope for time
+(`st_totalz ~ time + (time | id)`, fitted with `lme4`), with time coded 0-3
+across Waves 3-6 to match the loadings of the latent growth model.
+
+```{r lmm-trajectory, include=FALSE}
+lmm <- st_trajectory_lmm$model
+
+fe <- broom.mixed::tidy(lmm, effects = "fixed")
+fe_int <- fe[fe$term == "(Intercept)", ]
+fe_slope <- fe[fe$term == "time", ]
+
+vc <- as.data.frame(lme4::VarCorr(lmm))
+sd_int <- vc$sdcor[vc$grp == "id" & vc$var1 == "(Intercept)" & is.na(vc$var2)]
+sd_slope <- vc$sdcor[vc$grp == "id" & vc$var1 == "time" & is.na(vc$var2)]
+cor_is <- vc$sdcor[vc$grp == "id" & !is.na(vc$var2)]
+
+# Latent growth model intercept-slope covariance for comparison
+lgm_is <- broom::tidy(model_vo2_w6.5$lgcm_adj_fit) %>%
+  dplyr::filter(term == "st_intercept ~~ st_slope")
+```
+
+The mixed model reproduced the trajectory described by the latent growth model.
+The mean trajectory increased over time (slope = `r pn(fe_slope$estimate)`
+*z*-units per wave). There was meaningful between-child variation in both the
+intercept (SD = `r pn(sd_int)`) and the slope (SD = `r pn(sd_slope)`), and the
+intercept and slope were negatively correlated (*r* = `r pn(cor_is)`),
+consistent with the negative intercept-slope covariance observed in the latent
+growth model (`r pn(lgm_is$estimate)`): children with higher initial screen time
+tended to have slower subsequent increases.
+
+To relate the trajectories to later health outcomes in this framework, we
+extracted each child's subject-specific (best linear unbiased predictor)
+intercept and slope and regressed each outcome on these, using ordinary least
+squares with the same covariates as the primary models
+(Table \@ref(tab:lmm-table)).
+
+```{r lmm-results, include=FALSE}
+vi <- "blup_intercept"
+```
+
+As in the primary analysis, the subject-specific intercept was associated with
+lower cardiorespiratory fitness (`r pull_lm(lmm_dfs, "vo2_w6.5", vi)`), higher
+waist circumference (`r pull_lm(lmm_dfs, "waistcm_w6.5", vi)`), higher
+waist-to-height ratio (`r pull_lm(lmm_dfs, "waist2height_w6.5", vi)`), higher
+body mass index (z-score; `r pull_lm(lmm_dfs, "bmiz_w6.5", vi)`), and higher body
+fat percentage (`r pull_lm(lmm_dfs, "bodyfat_w6.5", vi)`).
+
+We note that subject-specific intercepts and slopes are shrunken towards the
+population mean and that this two-stage approach treats them as observed without
+propagating the uncertainty in their estimation. These estimates are therefore
+conservative, and the consistency of the findings across the latent growth model,
+the observed Wave 3 exposure, and the mixed-model framework increases confidence
+in the conclusions.
+
+\newpage
+
+```{r lmm-table}
+gtsummary::as_flex_table(lmm_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```

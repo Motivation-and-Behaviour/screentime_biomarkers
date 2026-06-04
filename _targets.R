@@ -50,7 +50,27 @@ model_builder <- tar_map(
     model_table_gt_supps,
     make_lgcm_gt(model, variable, model_fit_measures, main = FALSE)
   ),
-  tar_target(model_predictions, make_model_predictions(model, transformed_data))
+  tar_target(model_predictions, make_model_predictions(model, transformed_data)),
+  # Sensitivity analysis 1: observed Wave 3 screen time as exposure
+  tar_target(model_w3, fit_observed_w3(transformed_data, variable, bloods)),
+  tar_target(
+    model_w3_gt,
+    make_lm_gt(model_w3, variable, c(st_totalz_w3 = "Observed Wave 3 Screen Time"))
+  ),
+  tar_target(model_w3_df, tidy_lm_pair(model_w3)),
+  # Sensitivity analysis 2: mixed-model (lme4) trajectory, two-stage
+  tar_target(
+    model_lmm,
+    fit_lmm_outcome(st_trajectory_lmm, transformed_data, variable, bloods)
+  ),
+  tar_target(
+    model_lmm_gt,
+    make_lm_gt(model_lmm, variable, c(
+      blup_intercept = "Screen Time Intercept (mixed model)",
+      blup_slope = "Screen Time Slope (mixed model)"
+    ))
+  ),
+  tar_target(model_lmm_df, tidy_lm_pair(model_lmm))
 )
 
 list(
@@ -125,6 +145,8 @@ list(
     transformed_data_no_filter,
     transform_data(scored_data, bio_ref_data, filter_valid = FALSE)
   ),
+  # Sensitivity analysis 2 (stage 1): fit the mixed-model trajectory once
+  tar_target(st_trajectory_lmm, fit_st_trajectory_lmm(transformed_data)),
   model_builder,
   tar_combine(
     fit_measures,
@@ -166,5 +188,50 @@ list(
     save_table(outcomes_table, "doc/outcomes_table.docx"),
     format = "file"
   ),
-  tar_render(results_section, "doc/Results.Rmd")
+  # Sensitivity analysis outputs
+  tar_combine(
+    w3_table,
+    model_builder[["model_w3_gt"]],
+    command = make_sensitivity_table(
+      !!!.x,
+      caption = paste(
+        "Sensitivity analysis 1. Associations between observed Wave 3",
+        "screen time and health outcomes (observed exposure in place of the",
+        "latent intercept)."
+      )
+    )
+  ),
+  tar_combine(
+    lmm_table,
+    model_builder[["model_lmm_gt"]],
+    command = make_sensitivity_table(
+      !!!.x,
+      caption = paste(
+        "Sensitivity analysis 2. Associations between mixed-model screen-time",
+        "trajectories (subject-specific intercept and slope) and health outcomes."
+      )
+    )
+  ),
+  tar_combine(
+    w3_dfs,
+    model_builder[["model_w3_df"]],
+    command = dplyr::bind_rows(!!!.x)
+  ),
+  tar_combine(
+    lmm_dfs,
+    model_builder[["model_lmm_df"]],
+    command = dplyr::bind_rows(!!!.x)
+  ),
+  tar_target(
+    w3_diagnostic_table,
+    make_lm_diagnostic_table(w3_dfs, "outputs/sensitivity_w3_tables.csv"),
+    format = "file"
+  ),
+  tar_target(
+    lmm_diagnostic_table,
+    make_lm_diagnostic_table(lmm_dfs, "outputs/sensitivity_lmm_tables.csv"),
+    format = "file"
+  ),
+  tar_render(results_section, "doc/Results.Rmd"),
+  tar_render(sensitivity_section, "doc/Sensitivity.Rmd")
 )
