@@ -7,34 +7,35 @@ tar_source()
 # Use parallel processing where possible
 tar_option_set(
   controller = crew_controller_local(
-    workers = min(parallel::detectCores() - 2, 28), seconds_idle = 15
+    workers = min(parallel::detectCores() - 2, 28),
+    seconds_idle = 15
   )
 )
-
+dotenv::load_dot_env()
 lsac_path <- Sys.getenv("LSAC_PATH")
 
 outcome_variables <- tribble(
-  ~variable, ~bloods,
+  ~variable              , ~bloods ,
   # Main outcomes
-  "cardio_index_w6.5", TRUE,
-  "ApoBA1_ratio_w6.5", TRUE,
-  "glycoprotein_w6.5", TRUE,
-  "phospholipids_w6.5", TRUE,
+  "cardio_index_w6.5"    , TRUE    ,
+  "ApoBA1_ratio_w6.5"    , TRUE    ,
+  "glycoprotein_w6.5"    , TRUE    ,
+  "phospholipids_w6.5"   , TRUE    ,
   # Additional outcomes
-  "vo2_w6.5", FALSE,
-  "waistcm_w6.5", FALSE,
-  "waist2height_w6.5", FALSE,
-  "bmiz_w6.5", FALSE,
-  "bodyfat_w6.5", FALSE,
-  "bpsysamp_w6.5", FALSE,
-  "pulsepressamp_w6.5", FALSE,
-  "bpsysz_w6.5", FALSE,
-  "bpdiaz_w6.5", FALSE,
-  "trigly_w6.5", TRUE,
-  "cholesttotal_w6.5", TRUE,
-  "cholesttotalhdl_w6.5", TRUE,
-  "cholestnonhdl_w6.5", TRUE,
-  "glucose_w6.5", TRUE
+  "vo2_w6.5"             , FALSE   ,
+  "waistcm_w6.5"         , FALSE   ,
+  "waist2height_w6.5"    , FALSE   ,
+  "bmiz_w6.5"            , FALSE   ,
+  "bodyfat_w6.5"         , FALSE   ,
+  "bpsysamp_w6.5"        , FALSE   ,
+  "pulsepressamp_w6.5"   , FALSE   ,
+  "bpsysz_w6.5"          , FALSE   ,
+  "bpdiaz_w6.5"          , FALSE   ,
+  "trigly_w6.5"          , TRUE    ,
+  "cholesttotal_w6.5"    , TRUE    ,
+  "cholesttotalhdl_w6.5" , TRUE    ,
+  "cholestnonhdl_w6.5"   , TRUE    ,
+  "glucose_w6.5"         , TRUE
 )
 
 model_builder <- tar_map(
@@ -91,7 +92,8 @@ list(
   tar_target(
     waves_data,
     read_waves_data(waves),
-    pattern = map(waves), iteration = "list"
+    pattern = map(waves),
+    iteration = "list"
   ),
   tar_target(
     waves_joined,
@@ -105,8 +107,10 @@ list(
   tar_target(
     df_clean_alt, # This is the sensitivity dataset
     clean_data(
-      waves_joined, biomarkers_data,
-      checkpoint_only = FALSE, no_outliers = FALSE
+      waves_joined,
+      biomarkers_data,
+      checkpoint_only = FALSE,
+      no_outliers = FALSE
     ),
   ),
   tar_target(
