@@ -14,7 +14,11 @@ library(targets)
 library(gtsummary)
 library(flextable)
 tar_load(
-  c(w3_table, lmm_table, w3_dfs, lmm_dfs, st_trajectory_lmm, model_vo2_w6.5),
+  c(
+    w3_table, lmm_table, w3_dfs, lmm_dfs, st_trajectory_lmm, model_vo2_w6.5,
+    consistent_table, early_table, late_table,
+    consistent_dfs, model_dfs, early_dfs, late_dfs, st_wave_plot
+  ),
   store = here::here("_targets")
 )
 
@@ -23,8 +27,11 @@ pn <- function(val, acc = 0.01) {
   scales::number(val, accuracy = acc)
 }
 
-# Pull a formatted estimate (B and 95% CI) from the tidy sensitivity data
+# Pull a formatted estimate (B and 95% CI) from the tidy sensitivity data.
+# Coerce to a plain data.frame first: some targets are data.tables, whose
+# non-standard `[` evaluation would resolve the bare argument names to columns.
 pull_lm <- function(df, outcome, term, type = "unadjusted", brackets = FALSE) {
+  df <- as.data.frame(df)
   row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
   txt <- glue::glue(
     "*B* = {pn(row$estimate)}; 95%CI, {pn(row$conf.low)}-{pn(row$conf.high)}"
@@ -35,6 +42,13 @@ pull_lm <- function(df, outcome, term, type = "unadjusted", brackets = FALSE) {
     )
   }
   txt
+}
+
+# Pull a formatted estimate (B and 95% CI) from a lavaan diagnostic data.frame
+pull_lgcm <- function(df, outcome, term = "st_intercept", type = "unadjusted") {
+  df <- as.data.frame(df)
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  glue::glue("*B* = {pn(row$coef)}; 95%CI, {pn(row$ci_l)}-{pn(row$ci_u)}")
 }
 ```
 
@@ -141,5 +155,103 @@ in the conclusions.
 
 ```{r lmm-table}
 gtsummary::as_flex_table(lmm_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Change in screen-time exposure definition across waves
+
+Our total screen-time measure combines three components: television, electronic
+games, and computer/other electronic-device use. The television and
+electronic-games items were measured identically at all four waves, but the
+computer-use item was reworded between Wave 4 and Wave 5 (from time using a
+computer to time using other electronic devices/games), so the exposure
+definition is not perfectly constant across the trajectory. We conducted two
+further sensitivity analyses to assess whether this measurement change affects
+our inferences.
+
+As an initial visual check, Figure \@ref(fig:st-wave-plot) shows mean total
+screen time at each wave. The trajectory increases steadily across all four
+waves with no discontinuity at the Wave 4-5 boundary where the computer/other
+item was reworded, and the definition-invariant total (television + electronic
+games) follows a parallel progression. This suggests the change in item wording
+did not introduce a step change in the measured exposure.
+
+```{r st-wave-plot, fig.width=7, fig.height=4.5, fig.cap="Mean total screen time (minutes/day, with 95% confidence intervals) at each wave, for the full three-component total and the definition-invariant total (television + electronic games). The dashed line marks the Wave 4-5 boundary at which the computer/other component was reworded."}
+st_wave_plot
+```
+
+### Definition-invariant components only
+
+We first refit the latent growth curve model using a screen-time exposure built
+only from the two definition-invariant components (television and electronic
+games), excluding the reworded computer/other component
+(Table \@ref(tab:consistent-table)).
+
+```{r consistent-results, include=FALSE}
+ti <- "st_intercept"
+```
+
+The trajectory associations were materially unchanged. Using the
+definition-invariant exposure, the trajectory intercept remained associated with
+lower cardiorespiratory fitness (`r pull_lgcm(consistent_dfs, "vo2_w6.5", ti)`;
+primary model `r pull_lgcm(model_dfs, "vo2_w6.5", ti)`), higher waist
+circumference (`r pull_lgcm(consistent_dfs, "waistcm_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "waistcm_w6.5", ti)`), higher waist-to-height ratio
+(`r pull_lgcm(consistent_dfs, "waist2height_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "waist2height_w6.5", ti)`), higher body mass index
+(z-score; `r pull_lgcm(consistent_dfs, "bmiz_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "bmiz_w6.5", ti)`), and higher body fat percentage
+(`r pull_lgcm(consistent_dfs, "bodyfat_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "bodyfat_w6.5", ti)`). Estimates were consistent in
+direction and similar in magnitude to the primary full-component model.
+
+\newpage
+
+```{r consistent-table}
+gtsummary::as_flex_table(consistent_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+### Early (Waves 3-4) and later (Waves 5-6) periods modelled separately
+
+We then modelled the two definition regimes separately, using the average
+standardised screen time within the early period (Waves 3-4, original
+computer-item definition) and within the later period (Waves 5-6, revised
+definition) as the exposure in ordinary least squares models with the same
+covariates (Tables \@ref(tab:early-table) and \@ref(tab:late-table)).
+
+```{r period-results, include=FALSE}
+te <- "st_earlyz"
+tl <- "st_latez"
+```
+
+Associations were consistent in direction across the two periods. For example,
+both the early-period exposure (original definition) and the later-period
+exposure (revised definition) were associated with lower cardiorespiratory
+fitness (Waves 3-4 `r pull_lm(early_dfs, "vo2_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "vo2_w6.5", tl)`), higher waist circumference
+(Waves 3-4 `r pull_lm(early_dfs, "waistcm_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "waistcm_w6.5", tl)`), and higher body fat percentage
+(Waves 3-4 `r pull_lm(early_dfs, "bodyfat_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "bodyfat_w6.5", tl)`). Taken together with the
+definition-invariant analysis, these results indicate that the change in the
+computer-item definition between Waves 4 and 5 does not materially affect our
+inferences.
+
+\newpage
+
+```{r early-table}
+gtsummary::as_flex_table(early_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+```{r late-table}
+gtsummary::as_flex_table(late_table) %>%
   flextable::set_table_properties(layout = "autofit")
 ```

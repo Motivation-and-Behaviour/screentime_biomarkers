@@ -1,7 +1,8 @@
 transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
   transformed_data <- scored_data |>
     dplyr::mutate(
-      st_totalz = scale(st_total) # use grand mean and sd for screen time
+      st_totalz = scale(st_total), # use grand mean and sd for screen time
+      st_consistentz = scale(st_consistent) # definition-invariant total (sens. 3)
     ) |>
     tidyr::pivot_wider(
       names_from = wave, # Create columns based on wave
@@ -49,6 +50,14 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
     st_total_w4,
     st_total_w5,
     st_total_w6,
+    st_consistentz_w3,
+    st_consistentz_w4,
+    st_consistentz_w5,
+    st_consistentz_w6,
+    st_consistent_w3,
+    st_consistent_w4,
+    st_consistent_w5,
+    st_consistent_w6,
     bpdia_w6.5,
     bpsys_w6.5,
     bpsysamp_w6.5,
@@ -79,6 +88,19 @@ transform_data <- function(scored_data, bio_ref_data, filter_valid = TRUE) {
     health_condition_w6.5,
     valid_pa_w6.5
   )]
+
+  # Period-average exposures for the Waves 3-4 vs 5-6 sensitivity analysis.
+  # Built from the already grand-mean standardised wave columns and named with a
+  # trailing 'z' so scale_variables() leaves them unscaled. The early period uses
+  # the original computer item; the late period uses the reworded item.
+  transformed_data[, st_earlyz := rowMeans(
+    .SD,
+    na.rm = TRUE
+  ), .SDcols = c("st_totalz_w3", "st_totalz_w4")]
+  transformed_data[, st_latez := rowMeans(
+    .SD,
+    na.rm = TRUE
+  ), .SDcols = c("st_totalz_w5", "st_totalz_w6")]
 
   transformed_data <- scale_variables(transformed_data, id_var = "id")
 

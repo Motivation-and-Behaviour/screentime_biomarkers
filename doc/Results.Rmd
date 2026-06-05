@@ -102,7 +102,7 @@ There was additionally weak evidence for an association between initial screen t
 There was some evidence to suggest that the rate of change in screen time (i.e., trajectory slope) was associated with higher waist circumference (unadjusted `r p_out("waistcm_w6.5", "slope")`), waist-to-height ratio (unadjusted `r p_out("waist2height_w6.5", "slope")`), and lower pulse pressure amplification (unadjusted `r p_out("pulsepressamp_w6.5", "slope")`).
 However, these associations were all attenuated after adjusting for movement behaviors.
 
-These findings were robust in two sensitivity analyses (see supplementary materials): one replacing the latent intercept with the observed Wave 3 screen-time value as the exposure, and one re-estimating the trajectories using a conventional `lme4` random intercept/random slope mixed model.
+These findings were robust in a series of sensitivity analyses (see supplementary materials): replacing the latent intercept with the observed Wave 3 screen-time value as the exposure; re-estimating the trajectories using a conventional `lme4` random intercept/random slope mixed model; restricting the exposure to the screen-time components measured identically across all waves (television and electronic games); and modelling the earlier (Waves 3-4) and later (Waves 5-6) measurement periods separately.
 
 \newpage
 

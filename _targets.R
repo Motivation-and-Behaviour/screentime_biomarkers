@@ -70,7 +70,36 @@ model_builder <- tar_map(
       blup_slope = "Screen Time Slope (mixed model)"
     ))
   ),
-  tar_target(model_lmm_df, tidy_lm_pair(model_lmm))
+  tar_target(model_lmm_df, tidy_lm_pair(model_lmm)),
+  # Sensitivity analysis 3a: definition-invariant trajectory (TV + games only)
+  tar_target(
+    model_consistent,
+    fit_lgcm(transformed_data, variable, bloods, st_prefix = "st_consistentz")
+  ),
+  tar_target(
+    model_consistent_gt,
+    make_lgcm_gt(model_consistent, variable, model_fit_measures)
+  ),
+  tar_target(model_consistent_df, make_model_dfs(model_consistent, model_fit_measures)),
+  # Sensitivity analysis 3b: period-specific exposures (Waves 3-4 vs 5-6)
+  tar_target(
+    model_early,
+    fit_observed_w3(transformed_data, variable, bloods, exposure = "st_earlyz")
+  ),
+  tar_target(
+    model_early_gt,
+    make_lm_gt(model_early, variable, c(st_earlyz = "Waves 3-4 Mean Screen Time"))
+  ),
+  tar_target(model_early_df, tidy_lm_pair(model_early)),
+  tar_target(
+    model_late,
+    fit_observed_w3(transformed_data, variable, bloods, exposure = "st_latez")
+  ),
+  tar_target(
+    model_late_gt,
+    make_lm_gt(model_late, variable, c(st_latez = "Waves 5-6 Mean Screen Time"))
+  ),
+  tar_target(model_late_df, tidy_lm_pair(model_late))
 )
 
 list(
@@ -147,6 +176,9 @@ list(
   ),
   # Sensitivity analysis 2 (stage 1): fit the mixed-model trajectory once
   tar_target(st_trajectory_lmm, fit_st_trajectory_lmm(transformed_data)),
+  # Sensitivity analysis 3: mean screen time across waves (visual check for a
+  # discontinuity at the Wave 4-5 exposure-definition boundary)
+  tar_target(st_wave_plot, plot_st_wave_trajectory(transformed_data)),
   model_builder,
   tar_combine(
     fit_measures,
@@ -230,6 +262,70 @@ list(
   tar_target(
     lmm_diagnostic_table,
     make_lm_diagnostic_table(lmm_dfs, "outputs/sensitivity_lmm_tables.csv"),
+    format = "file"
+  ),
+  # Sensitivity analysis 3: exposure definition change across waves
+  tar_combine(
+    consistent_table,
+    model_builder[["model_consistent_gt"]],
+    command = make_outcomes_table(
+      !!!.x,
+      caption = paste(
+        "Sensitivity analysis 3a. Associations between screen-time trajectories",
+        "and health outcomes using only the definition-invariant components",
+        "(television and electronic games)."
+      )
+    )
+  ),
+  tar_combine(
+    consistent_dfs,
+    model_builder[["model_consistent_df"]]
+  ),
+  tar_target(
+    consistent_diagnostic_table,
+    make_diagnostic_table(consistent_dfs, "outputs/sensitivity_consistent_tables.csv"),
+    format = "file"
+  ),
+  tar_combine(
+    early_table,
+    model_builder[["model_early_gt"]],
+    command = make_sensitivity_table(
+      !!!.x,
+      caption = paste(
+        "Sensitivity analysis 3b. Associations between Waves 3-4 average screen",
+        "time (original computer-item definition) and health outcomes."
+      )
+    )
+  ),
+  tar_combine(
+    late_table,
+    model_builder[["model_late_gt"]],
+    command = make_sensitivity_table(
+      !!!.x,
+      caption = paste(
+        "Sensitivity analysis 3b. Associations between Waves 5-6 average screen",
+        "time (revised computer-item definition) and health outcomes."
+      )
+    )
+  ),
+  tar_combine(
+    early_dfs,
+    model_builder[["model_early_df"]],
+    command = dplyr::bind_rows(!!!.x)
+  ),
+  tar_combine(
+    late_dfs,
+    model_builder[["model_late_df"]],
+    command = dplyr::bind_rows(!!!.x)
+  ),
+  tar_target(
+    early_diagnostic_table,
+    make_lm_diagnostic_table(early_dfs, "outputs/sensitivity_early_tables.csv"),
+    format = "file"
+  ),
+  tar_target(
+    late_diagnostic_table,
+    make_lm_diagnostic_table(late_dfs, "outputs/sensitivity_late_tables.csv"),
     format = "file"
   ),
   tar_render(results_section, "doc/Results.Rmd"),

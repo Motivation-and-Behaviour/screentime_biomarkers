@@ -11,14 +11,19 @@
 #' @param transformed_data data.table. The wide analysis data (one row per id).
 #' @param outcome character. The outcome variable name.
 #' @param bloods logical. Is the outcome from a blood test (adds fasting time)?
+#' @param exposure character. The single screen-time exposure column to use in
+#'   place of the latent intercept. Defaults to the observed Wave 3 value; also
+#'   used for the Waves 3-4 (`st_earlyz`) and Waves 5-6 (`st_latez`)
+#'   period-average exposures in the definition-change sensitivity analysis.
 #' @return A list of two `lm` objects (`w3_fit`, `w3_adj_fit`) with an
 #'   `"outcome"` attribute, mirroring the shape returned by [fit_lgcm()].
 #' @author Taren Sanders
 #' @export
-fit_observed_w3 <- function(transformed_data, outcome, bloods) {
+fit_observed_w3 <- function(transformed_data, outcome, bloods,
+                            exposure = "st_totalz_w3") {
   # Same covariate set as the main latent growth curve model (fit_lgcm.R)
   covariates_v <- c(
-    "st_totalz_w3", # observed Wave 3 screen time, in place of latent intercept
+    exposure, # observed screen-time exposure, in place of latent intercept
     "female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5"
   )
   if (bloods) {

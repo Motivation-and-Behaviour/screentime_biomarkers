@@ -18,6 +18,14 @@ score_data <- function(df_clean) {
   df_clean$st_total <- df_clean$st_comp_minweek + df_clean$st_vg_minweek + df_clean$st_tv_minweek
   df_clean$st_total <- remove_outliers(df_clean$st_total)
   df_clean$st_total <- df_clean$st_total / 7 # use min/day
+
+  # Definition-invariant screen time: television + electronic games only. The
+  # computer/other component (st_comp_minweek) was reworded between Waves 4 and
+  # 5 (comweek -> othweek); this total drops it so the exposure definition is
+  # constant across all waves (sensitivity analysis 3).
+  df_clean$st_consistent <- df_clean$st_vg_minweek + df_clean$st_tv_minweek
+  df_clean$st_consistent <- remove_outliers(df_clean$st_consistent)
+  df_clean$st_consistent <- df_clean$st_consistent / 7 # use min/day
   # return df_clean
 
   # Handle factors with  factors cannot have more than 2 levels
