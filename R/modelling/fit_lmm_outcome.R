@@ -1,10 +1,4 @@
-#' Sensitivity analysis 2 (stage 2): outcomes on mixed-model trajectories
-#'
-#' Regresses each health outcome on the subject-specific intercept and slope
-#' estimated by the `lme4` trajectory model ([fit_st_trajectory_lmm()]), using
-#' the same covariate adjustment structure as the latent growth curve model.
-#' This provides a mixed-model analog of the main SEM analysis. Models are
-#' ordinary least squares (listwise deletion).
+#' Sensitivity 2 (stage 2): regress outcomes on BLUPs from [fit_st_trajectory_lmm()].
 #'
 #' @param st_trajectory_lmm list. Output of [fit_st_trajectory_lmm()] (must
 #'   contain `blups`).
@@ -23,8 +17,6 @@ fit_lmm_outcome <- function(st_trajectory_lmm, transformed_data, outcome, bloods
     all.x = TRUE
   )
 
-  # blup_intercept / blup_slope replace the latent intercept / slope; remaining
-  # covariates match the main latent growth curve model (fit_lgcm.R)
   covariates_v <- c(
     "blup_intercept", "blup_slope",
     "female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5"

@@ -1,12 +1,6 @@
-#' Plot mean total screen time across waves
-#'
-#' Shows mean screen time (minutes/day, with 95% confidence intervals) at each
-#' wave for the full three-component total and for the definition-invariant
-#' total (television + electronic games). The computer/other component was
-#' reworded between Waves 4 and 5; a smooth progression with no discontinuity at
-#' that boundary (marked with a dashed line) indicates the change in item
-#' definition did not produce a step change in the exposure (sensitivity
-#' analysis 3).
+#' Plot mean screen time (min/day, 95% CI) across waves.
+#' Dashed line marks the Wave 4/5 boundary where the computer/other item
+#' was reworded; used to assess definition-change sensitivity (sensitivity 3).
 #'
 #' @param transformed_data data.table. The wide analysis data (one row per id),
 #'   containing `st_total_w3..w6` and `st_consistent_w3..w6` (minutes/day).

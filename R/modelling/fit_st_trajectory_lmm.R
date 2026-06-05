@@ -1,16 +1,7 @@
-#' Sensitivity analysis 2 (stage 1): mixed-model screen-time trajectory
-#'
-#' Fits a conventional longitudinal random intercept / random slope mixed model
-#' to the standardised screen-time measures, analogous to the latent growth
-#' curve model but in an `lme4` framework that will be more familiar to readers
-#' used to mixed models. Time is coded 0, 1, 2, 3 across Waves 3-6 to match the
-#' factor loadings of the latent slope in [fit_lgcm()].
-#'
-#' Subject-specific (BLUP) intercepts and slopes are extracted so that the
-#' second stage ([fit_lmm_outcome()]) can relate the individual trajectories to
-#' later health outcomes. These subject-specific estimates are shrunken towards
-#' the population mean and do not propagate trajectory-estimation uncertainty;
-#' this is acknowledged in the supplementary text.
+#' Sensitivity 2 (stage 1): random intercept/slope LMM of screen-time
+#' trajectories.
+#' Time coded 0-3 (Waves 3-6) to match [fit_lgcm()] slope loadings.
+#' BLUPs passed to [fit_lmm_outcome()] for stage 2.
 #'
 #' @param transformed_data data.table. The wide analysis data (one row per id).
 #' @return A list with `model` (the fitted `lmerMod`) and `blups`
@@ -27,7 +18,6 @@ fit_st_trajectory_lmm <- function(transformed_data) {
     variable.name = "wave",
     value.name = "st_totalz"
   )
-  # Map wave label -> time score (0,1,2,3), matching the LGM slope loadings
   long[, time := match(wave, st_vars) - 1L]
 
   model <- lme4::lmer(
@@ -36,7 +26,6 @@ fit_st_trajectory_lmm <- function(transformed_data) {
     REML = TRUE
   )
 
-  # Subject-specific intercepts and slopes (fixed + random effect BLUPs)
   subj_coef <- stats::coef(model)$id
   blups <- data.frame(
     id = rownames(subj_coef),

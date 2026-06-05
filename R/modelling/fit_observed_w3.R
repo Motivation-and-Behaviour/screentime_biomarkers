@@ -1,12 +1,5 @@
-#' Sensitivity analysis 1: observed Wave 3 screen time as the exposure
-#'
-#' Re-fits the outcome regressions used in the latent growth curve model
-#' ([fit_lgcm()]) but replaces the model-derived latent intercept with the
-#' *observed* standardised Wave 3 screen-time value (`st_totalz_w3`). This
-#' addresses the reviewer concern that the latent intercept is not identical to
-#' the raw Wave 3 exposure and may borrow information from later waves. Models
-#' are ordinary least squares (listwise deletion) so the associations reflect
-#' the data directly rather than the SEM specification.
+#' Sensitivity 1: replaces the latent intercept with observed `st_totalz_w3`.
+#' Also handles period-average exposures (st_earlyz, st_latez) via `exposure`.
 #'
 #' @param transformed_data data.table. The wide analysis data (one row per id).
 #' @param outcome character. The outcome variable name.
@@ -21,7 +14,6 @@
 #' @export
 fit_observed_w3 <- function(transformed_data, outcome, bloods,
                             exposure = "st_totalz_w3") {
-  # Same covariate set as the main latent growth curve model (fit_lgcm.R)
   covariates_v <- c(
     exposure, # observed screen-time exposure, in place of latent intercept
     "female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5"
@@ -37,7 +29,6 @@ fit_observed_w3 <- function(transformed_data, outcome, bloods,
     data = data
   )
 
-  # Adjusted model adds the accelerometer-measured movement behaviours
   adj_covariates_v <- c(covariates_v, "accmvpa_w6.5_scaled", "accsed_w6.5_scaled")
   w3_adj_fit <- stats::lm(
     stats::reformulate(adj_covariates_v, response = outcome),

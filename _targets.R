@@ -38,6 +38,28 @@ outcome_variables <- tribble(
   "glucose_w6.5"         , TRUE
 )
 
+# Sensitivity analysis 4: standalone outcomes re-fit on the natural-log scale.
+# The set is data-driven: outcomes flagged by make_outcome_skewness() as at least
+# moderately right-skewed (marginal skewness > 0.8) and strictly positive (a
+# requirement for the log transform). See outputs/outcome_skewness.csv. Skewness
+# values from the analysis sample are shown in comments for transparency.
+skewed_outcomes <- tribble(
+  ~variable              , ~bloods ,
+  "trigly_w6.5"          , TRUE    , # skew 1.39
+  "waist2height_w6.5"    , FALSE   , # skew 1.23
+  "waistcm_w6.5"         , FALSE   , # skew 1.07
+  "glycoprotein_w6.5"    , TRUE    , # skew 1.03
+  "ApoBA1_ratio_w6.5"    , TRUE    , # skew 0.96
+  "glucose_w6.5"         , TRUE      # skew 0.92
+)
+
+# Candidate continuous outcomes screened for skewness (excludes the composite
+# index and the already-standardised z-score outcomes, which are not log-able).
+skew_candidates <- setdiff(
+  outcome_variables$variable,
+  c("cardio_index_w6.5", "bmiz_w6.5", "bpsysz_w6.5", "bpdiaz_w6.5")
+)
+
 model_builder <- tar_map(
   values = outcome_variables,
   names = "variable",
@@ -100,6 +122,19 @@ model_builder <- tar_map(
     make_lm_gt(model_late, variable, c(st_latez = "Waves 5-6 Mean Screen Time"))
   ),
   tar_target(model_late_df, tidy_lm_pair(model_late))
+)
+
+# Sensitivity analysis 4: re-fit the right-skewed standalone outcomes on the
+# natural-log scale (same LGCM specification as the primary models).
+log_outcome_builder <- tar_map(
+  values = skewed_outcomes,
+  names = "variable",
+  unlist = FALSE,
+  tar_target(
+    model_logoutcome,
+    fit_lgcm(transformed_data, variable, bloods, log_outcome = TRUE)
+  ),
+  tar_target(model_logoutcome_df, make_model_dfs(model_logoutcome, NULL))
 )
 
 list(
@@ -326,6 +361,34 @@ list(
   tar_target(
     late_diagnostic_table,
     make_lm_diagnostic_table(late_dfs, "outputs/sensitivity_late_tables.csv"),
+    format = "file"
+  ),
+  # Sensitivity analysis 4: log-transformed skewed outcomes
+  tar_target(
+    outcome_skewness,
+    make_outcome_skewness(transformed_data, skew_candidates)
+  ),
+  tar_target(
+    outcome_skewness_file,
+    {
+      data.table::fwrite(outcome_skewness, "outputs/outcome_skewness.csv")
+      "outputs/outcome_skewness.csv"
+    },
+    format = "file"
+  ),
+  log_outcome_builder,
+  tar_combine(
+    logoutcome_dfs,
+    log_outcome_builder[["model_logoutcome_df"]]
+  ),
+  tar_target(logoutcome_table, make_logoutcome_table(logoutcome_dfs)),
+  tar_target(
+    logoutcome_diagnostic_table,
+    make_diagnostic_table(
+      logoutcome_dfs,
+      "outputs/sensitivity_logoutcome_tables.csv",
+      exponentiate = TRUE
+    ),
     format = "file"
   ),
   tar_render(results_section, "doc/Results.Rmd"),

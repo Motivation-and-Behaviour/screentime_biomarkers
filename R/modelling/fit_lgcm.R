@@ -10,7 +10,7 @@
 #' @author {Taren Sanders}
 #' @export
 fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = FALSE,
-                     st_prefix = "st_totalz") {
+                     st_prefix = "st_totalz", log_outcome = FALSE) {
   require(lavaan)
 
   covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
@@ -20,11 +20,16 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     transformed_data[[outcome]] <- scale(transformed_data[[outcome]])
   }
 
+  # Sensitivity 4: log-transform right-skewed outcomes
+  # (see make_outcome_skewness())
+  if (log_outcome) {
+    transformed_data[[outcome]] <- log(transformed_data[[outcome]])
+  }
+
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
   }
-  # Check for factors in the transformed_data using all_vars_used
-  # These need to be converted to numeric to prevent mistakes
+  # Factors cause silent errors in lavaan
   all_vars_used <- c(
     covariates_v,
     outcome,

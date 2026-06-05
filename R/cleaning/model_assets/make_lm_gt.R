@@ -1,4 +1,3 @@
-#' Friendly outcome labels shared by the sensitivity tables (mirrors make_lgcm_gt)
 lm_names_map <- function() {
   list(
     "cardio_index_w6.5" = "Cardio-metabolic Risk Score",
@@ -22,12 +21,7 @@ lm_names_map <- function() {
   )
 }
 
-#' Build a merged unadjusted/adjusted gt table for a sensitivity lm pair
-#'
-#' Shows only the exposure rows (the observed Wave 3 term, or the mixed-model
-#' intercept/slope), recoded to friendly labels. The friendly outcome name is
-#' attached as the `"outcome_label"` attribute so [make_sensitivity_table()] can
-#' use it as a stacked group header.
+#' Merged unadjusted/adjusted gtsummary table for a sensitivity lm pair.
 #'
 #' @param model_pair list. Two `lm` objects (unadjusted, adjusted).
 #' @param variable character. The outcome variable name.

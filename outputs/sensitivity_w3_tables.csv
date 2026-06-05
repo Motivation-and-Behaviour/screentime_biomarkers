@@ -1,22 +1,22 @@
 Outcome,Term,Coef,SE,t,p,type
-cardio_index_w6.5,(Intercept),"-1.69 [-1.91, -1.48]",0.11,-15.54,< 0.001,unadjusted
-cardio_index_w6.5,st_totalz_w3,"-0.01 [-0.05, 0.04]",0.02,-0.27,0.78,unadjusted
-cardio_index_w6.5,female,"0.08 [-0.01, 0.17]",0.05,1.83,0.067,unadjusted
-cardio_index_w6.5,indig,"0.16 [-0.29, 0.62]",0.23,0.7,0.49,unadjusted
-cardio_index_w6.5,ses_w6,"-0.1 [-0.14, -0.05]",0.02,-4.23,< 0.001,unadjusted
-cardio_index_w6.5,bad_diet,"-0.01 [-0.13, 0.11]",0.06,-0.14,0.89,unadjusted
-cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.07 [0.03, 0.11]",0.02,3.06,0.002,unadjusted
-cardio_index_w6.5,fastingtime_w6.5,"-0.04 [-0.07, 0]",0.02,-2.05,0.041,unadjusted
-cardio_index_w6.5,(Intercept),"-1.62 [-1.86, -1.38]",0.12,-13.41,< 0.001,adjusted
-cardio_index_w6.5,st_totalz_w3,"-0.02 [-0.07, 0.04]",0.03,-0.59,0.55,adjusted
-cardio_index_w6.5,female,"0.02 [-0.08, 0.13]",0.05,0.43,0.67,adjusted
-cardio_index_w6.5,indig,"0.05 [-0.49, 0.6]",0.28,0.19,0.85,adjusted
-cardio_index_w6.5,ses_w6,"-0.1 [-0.16, -0.05]",0.03,-3.99,< 0.001,adjusted
-cardio_index_w6.5,bad_diet,"-0.01 [-0.14, 0.12]",0.07,-0.15,0.88,adjusted
-cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.05 [0, 0.11]",0.03,2.06,0.040,adjusted
-cardio_index_w6.5,fastingtime_w6.5,"-0.04 [-0.08, 0]",0.02,-2.11,0.035,adjusted
-cardio_index_w6.5,accmvpa_w6.5_scaled,"-0.09 [-0.15, -0.03]",0.03,-2.93,0.003,adjusted
-cardio_index_w6.5,accsed_w6.5_scaled,"0 [-0.06, 0.05]",0.03,-0.14,0.89,adjusted
+cardio_index_w6.5,(Intercept),"0.22 [0.05, 0.38]",0.08,2.62,0.009,unadjusted
+cardio_index_w6.5,st_totalz_w3,"0 [-0.04, 0.03]",0.02,-0.17,0.86,unadjusted
+cardio_index_w6.5,female,"0.03 [-0.04, 0.1]",0.04,0.92,0.36,unadjusted
+cardio_index_w6.5,indig,"-0.05 [-0.4, 0.3]",0.18,-0.28,0.78,unadjusted
+cardio_index_w6.5,ses_w6,"-0.06 [-0.1, -0.03]",0.02,-3.55,< 0.001,unadjusted
+cardio_index_w6.5,bad_diet,"-0.07 [-0.16, 0.03]",0.05,-1.38,0.17,unadjusted
+cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.09 [0.06, 0.13]",0.02,5.17,< 0.001,unadjusted
+cardio_index_w6.5,fastingtime_w6.5,"-0.06 [-0.08, -0.03]",0.01,-4.09,< 0.001,unadjusted
+cardio_index_w6.5,(Intercept),"0.32 [0.13, 0.51]",0.1,3.25,0.001,adjusted
+cardio_index_w6.5,st_totalz_w3,"-0.01 [-0.05, 0.03]",0.02,-0.42,0.67,adjusted
+cardio_index_w6.5,female,"-0.03 [-0.11, 0.06]",0.04,-0.61,0.54,adjusted
+cardio_index_w6.5,indig,"0.05 [-0.4, 0.49]",0.23,0.21,0.83,adjusted
+cardio_index_w6.5,ses_w6,"-0.07 [-0.11, -0.03]",0.02,-3.26,0.001,adjusted
+cardio_index_w6.5,bad_diet,"-0.07 [-0.18, 0.04]",0.06,-1.32,0.19,adjusted
+cardio_index_w6.5,sexualmaturity_numeric_w6.5,"0.06 [0.02, 0.1]",0.02,2.94,0.003,adjusted
+cardio_index_w6.5,fastingtime_w6.5,"-0.06 [-0.09, -0.02]",0.02,-3.44,< 0.001,adjusted
+cardio_index_w6.5,accmvpa_w6.5_scaled,"-0.1 [-0.15, -0.05]",0.02,-4.15,< 0.001,adjusted
+cardio_index_w6.5,accsed_w6.5_scaled,"-0.01 [-0.06, 0.04]",0.02,-0.33,0.74,adjusted
 ApoBA1_ratio_w6.5,(Intercept),"0.49 [0.46, 0.51]",0.01,34.3,< 0.001,unadjusted
 ApoBA1_ratio_w6.5,st_totalz_w3,"0 [-0.01, 0.01]",0,-0.19,0.85,unadjusted
 ApoBA1_ratio_w6.5,female,"0.02 [0.01, 0.03]",0.01,3.16,0.002,unadjusted

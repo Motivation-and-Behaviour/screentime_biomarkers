@@ -17,7 +17,8 @@ tar_load(
   c(
     w3_table, lmm_table, w3_dfs, lmm_dfs, st_trajectory_lmm, model_vo2_w6.5,
     consistent_table, early_table, late_table,
-    consistent_dfs, model_dfs, early_dfs, late_dfs, st_wave_plot
+    consistent_dfs, model_dfs, early_dfs, late_dfs, st_wave_plot,
+    outcome_skewness, logoutcome_table, logoutcome_dfs
   ),
   store = here::here("_targets")
 )
@@ -49,6 +50,16 @@ pull_lgcm <- function(df, outcome, term = "st_intercept", type = "unadjusted") {
   df <- as.data.frame(df)
   row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
   glue::glue("*B* = {pn(row$coef)}; 95%CI, {pn(row$ci_l)}-{pn(row$ci_u)}")
+}
+
+# Pull a back-transformed (multiplicative, per-SD) estimate from a log-scale
+# lavaan diagnostic data.frame: exp(coef) is a ratio, 1.00 = no association.
+pull_logexp <- function(df, outcome, term = "st_intercept", type = "unadjusted") {
+  df <- as.data.frame(df)
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  glue::glue(
+    "ratio = {pn(exp(row$coef))}; 95%CI, {pn(exp(row$ci_l))}-{pn(exp(row$ci_u))}"
+  )
 }
 ```
 
@@ -254,4 +265,70 @@ gtsummary::as_flex_table(early_table) %>%
 ```{r late-table}
 gtsummary::as_flex_table(late_table) %>%
   flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Right-skewed outcomes modelled on the natural-log scale
+
+Several of the standalone health outcomes are right-skewed, which can affect the
+normality of model residuals and the validity of the standard errors in the
+primary models (which are fit in the outcomes' natural units). As a sensitivity
+analysis we identified the materially skewed outcomes from the data and re-fit
+them on the natural-log scale.
+
+Selection was data-driven: we computed the marginal skewness of every continuous
+outcome on the analysis sample (Table \@ref(tab:skewness-table)) and re-fit, on
+the log scale, those that were at least moderately right-skewed (skewness > 0.8)
+and strictly positive. This flagged
+`r nrow(as.data.frame(logoutcome_dfs)[!duplicated(as.data.frame(logoutcome_dfs)$outcome), ])`
+outcomes: triglycerides, waist-to-height ratio, waist circumference, glycoprotein
+acetyls, the ApoB/ApoA1 ratio, and glucose. The already-standardised z-score
+outcomes (BMI, blood pressure) and the composite risk score were not eligible,
+and the remaining outcomes were not materially skewed. Each flagged outcome was
+re-estimated with the same latent growth curve specification and covariates as
+the primary models; because the exposure is standardised, the log-scale
+coefficients back-transform to a multiplicative change (a ratio) in the outcome
+per 1 SD of screen time (Table \@ref(tab:logoutcome-table)).
+
+```{r skewness-table}
+os <- as.data.frame(outcome_skewness)
+os$skewness <- pn(os$skewness, 0.01)
+os$min <- pn(os$min, 0.01)
+os$median <- pn(os$median, 0.01)
+os$max <- pn(os$max, 0.01)
+os$log_flag <- ifelse(os$log_flag, "Yes", "No")
+flextable::flextable(
+  os[, c("outcome", "n", "min", "median", "max", "skewness", "log_flag")]
+) |>
+  flextable::set_header_labels(
+    outcome = "Outcome", skewness = "Skewness",
+    log_flag = "Log-transformed"
+  ) |>
+  flextable::set_caption(
+    "Marginal skewness of candidate continuous outcomes on the analysis sample. Outcomes with skewness > 0.8 and strictly positive values were re-fit on the log scale."
+  ) |>
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+The findings were consistent with the primary analysis. For example, the
+trajectory intercept remained positively associated with waist circumference
+(back-transformed `r pull_logexp(logoutcome_dfs, "waistcm_w6.5")`; primary
+natural-unit `r pull_lgcm(model_dfs, "waistcm_w6.5")`) and waist-to-height ratio
+(`r pull_logexp(logoutcome_dfs, "waist2height_w6.5")`), while there remained no
+clear association with triglycerides
+(`r pull_logexp(logoutcome_dfs, "trigly_w6.5")`), glycoprotein acetyls
+(`r pull_logexp(logoutcome_dfs, "glycoprotein_w6.5")`), the ApoB/ApoA1 ratio
+(`r pull_logexp(logoutcome_dfs, "ApoBA1_ratio_w6.5")`), or glucose
+(`r pull_logexp(logoutcome_dfs, "glucose_w6.5")`). Modelling these outcomes on
+the log scale did not change the statistical significance of any association
+relative to the primary models, and the direction of every non-null effect was
+unchanged.
+
+\newpage
+
+```{r logoutcome-table}
+logoutcome_table
 ```
