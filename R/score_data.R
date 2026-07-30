@@ -1,7 +1,6 @@
 score_data <- function(df_clean) {
   df_clean$ApoBA1_ratio <- df_clean$apolipb / df_clean$apolipa1
 
-  # Diet classificaiton
   df_clean$diet_SSB_flag <- df_clean$servessoftdrink == "I don't drink soft drinks, cordials or sports drinks"
   df_clean$diet_fruit_flag <- as.numeric(df_clean$servesfruit) >= 5
   df_clean$diet_veg_flag <- as.numeric(df_clean$servesveg) >= 6
