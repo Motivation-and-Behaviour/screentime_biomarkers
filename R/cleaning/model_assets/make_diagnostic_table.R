@@ -1,7 +1,14 @@
 make_diagnostic_table <- function(
     model_tables,
-    outpath = "outputs/model_tables.csv") {
+    outpath = "outputs/model_tables.csv",
+    exponentiate = FALSE) {
   model_tables$pvalue <- metaKIN::round_p(model_tables$pvalue)
+  if (exponentiate) {
+    # Back-transform log-scale coefficients to multiplicative (per-SD) effects.
+    model_tables$coef <- exp(model_tables$coef)
+    model_tables$ci_l <- exp(model_tables$ci_l)
+    model_tables$ci_u <- exp(model_tables$ci_u)
+  }
   model_tables$est <- round(model_tables$coef, 2)
   model_tables$ci.lower <- round(model_tables$ci_l, 2)
   model_tables$ci.upper <- round(model_tables$ci_u, 2)
