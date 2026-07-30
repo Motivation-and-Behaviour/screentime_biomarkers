@@ -1,0 +1,334 @@
+---
+title: "Supplementary sensitivity analyses"
+author: "Report Author"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: bookdown::word_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r load-targets, include=FALSE}
+library(targets)
+library(gtsummary)
+library(flextable)
+tar_load(
+  c(
+    w3_table, lmm_table, w3_dfs, lmm_dfs, st_trajectory_lmm, model_vo2_w6.5,
+    consistent_table, early_table, late_table,
+    consistent_dfs, model_dfs, early_dfs, late_dfs, st_wave_plot,
+    outcome_skewness, logoutcome_table, logoutcome_dfs
+  ),
+  store = here::here("_targets")
+)
+
+# Easier printing
+pn <- function(val, acc = 0.01) {
+  scales::number(val, accuracy = acc)
+}
+
+# Pull a formatted estimate (B and 95% CI) from the tidy sensitivity data.
+# Coerce to a plain data.frame first: some targets are data.tables, whose
+# non-standard `[` evaluation would resolve the bare argument names to columns.
+pull_lm <- function(df, outcome, term, type = "unadjusted", brackets = FALSE) {
+  df <- as.data.frame(df)
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  txt <- glue::glue(
+    "*B* = {pn(row$estimate)}; 95%CI, {pn(row$conf.low)}-{pn(row$conf.high)}"
+  )
+  if (brackets) {
+    txt <- glue::glue(
+      "*B* = {pn(row$estimate)} (95%CI, {pn(row$conf.low)}-{pn(row$conf.high)})"
+    )
+  }
+  txt
+}
+
+# Pull a formatted estimate (B and 95% CI) from a lavaan diagnostic data.frame
+pull_lgcm <- function(df, outcome, term = "st_intercept", type = "unadjusted") {
+  df <- as.data.frame(df)
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  glue::glue("*B* = {pn(row$coef)}; 95%CI, {pn(row$ci_l)}-{pn(row$ci_u)}")
+}
+
+# Pull a back-transformed (multiplicative, per-SD) estimate from a log-scale
+# lavaan diagnostic data.frame: exp(coef) is a ratio, 1.00 = no association.
+pull_logexp <- function(df, outcome, term = "st_intercept", type = "unadjusted") {
+  df <- as.data.frame(df)
+  row <- df[df$outcome == outcome & df$term == term & df$type == type, ]
+  glue::glue(
+    "ratio = {pn(exp(row$coef))}; 95%CI, {pn(exp(row$ci_l))}-{pn(exp(row$ci_u))}"
+  )
+}
+```
+
+# Sensitivity analyses
+
+To confirm that the associations attributed to early screen time are present in
+the data itself, and that the trajectory findings are robust to the choice of
+modelling framework, we conducted two complementary sensitivity analyses. Both
+use the same analysis sample and the same covariate adjustment structure as the
+primary latent growth curve models.
+
+## Observed Wave 3 screen time as the exposure
+
+The latent intercept in the growth model is a model-derived quantity estimated
+from the full repeated-measures structure and is therefore not identical to the
+observed Wave 3 value. As a sensitivity analysis, we replaced the latent
+intercept with the *observed* (standardised) Wave 3 screen-time value and
+re-estimated the association with each outcome using ordinary least squares
+regression (complete cases), with the same covariates as the primary models
+(Table \@ref(tab:w3-table)).
+
+```{r w3-results, include=FALSE}
+v <- "st_totalz_w3"
+```
+
+The pattern of findings was consistent with the primary analysis. Higher
+observed Wave 3 screen time was associated with lower cardiorespiratory fitness
+(`r pull_lm(w3_dfs, "vo2_w6.5", v)`), higher waist circumference
+(`r pull_lm(w3_dfs, "waistcm_w6.5", v)`), higher waist-to-height ratio
+(`r pull_lm(w3_dfs, "waist2height_w6.5", v)`), higher body mass index (z-score;
+`r pull_lm(w3_dfs, "bmiz_w6.5", v)`), and higher body fat percentage
+(`r pull_lm(w3_dfs, "bodyfat_w6.5", v)`). The associations were in the same
+direction as, and of comparable magnitude to, those for the latent intercept,
+indicating that these findings reflect the observed data rather than the latent
+growth-model specification.
+
+\newpage
+
+```{r w3-table}
+gtsummary::as_flex_table(w3_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Mixed-model (random intercept / random slope) framework
+
+We additionally re-estimated the screen-time trajectory using a conventional
+linear mixed model with a random intercept and random slope for time
+(`st_totalz ~ time + (time | id)`, fitted with `lme4`), with time coded 0-3
+across Waves 3-6 to match the loadings of the latent growth model.
+
+```{r lmm-trajectory, include=FALSE}
+lmm <- st_trajectory_lmm$model
+
+fe <- broom.mixed::tidy(lmm, effects = "fixed")
+fe_int <- fe[fe$term == "(Intercept)", ]
+fe_slope <- fe[fe$term == "time", ]
+
+vc <- as.data.frame(lme4::VarCorr(lmm))
+sd_int <- vc$sdcor[vc$grp == "id" & vc$var1 == "(Intercept)" & is.na(vc$var2)]
+sd_slope <- vc$sdcor[vc$grp == "id" & vc$var1 == "time" & is.na(vc$var2)]
+cor_is <- vc$sdcor[vc$grp == "id" & !is.na(vc$var2)]
+
+# Latent growth model intercept-slope covariance for comparison
+lgm_is <- broom::tidy(model_vo2_w6.5$lgcm_adj_fit) %>%
+  dplyr::filter(term == "st_intercept ~~ st_slope")
+```
+
+The mixed model reproduced the trajectory described by the latent growth model.
+The mean trajectory increased over time (slope = `r pn(fe_slope$estimate)`
+*z*-units per wave). There was meaningful between-child variation in both the
+intercept (SD = `r pn(sd_int)`) and the slope (SD = `r pn(sd_slope)`), and the
+intercept and slope were negatively correlated (*r* = `r pn(cor_is)`),
+consistent with the negative intercept-slope covariance observed in the latent
+growth model (`r pn(lgm_is$estimate)`): children with higher initial screen time
+tended to have slower subsequent increases.
+
+To relate the trajectories to later health outcomes in this framework, we
+extracted each child's subject-specific (best linear unbiased predictor)
+intercept and slope and regressed each outcome on these, using ordinary least
+squares with the same covariates as the primary models
+(Table \@ref(tab:lmm-table)).
+
+```{r lmm-results, include=FALSE}
+vi <- "blup_intercept"
+```
+
+As in the primary analysis, the subject-specific intercept was associated with
+lower cardiorespiratory fitness (`r pull_lm(lmm_dfs, "vo2_w6.5", vi)`), higher
+waist circumference (`r pull_lm(lmm_dfs, "waistcm_w6.5", vi)`), higher
+waist-to-height ratio (`r pull_lm(lmm_dfs, "waist2height_w6.5", vi)`), higher
+body mass index (z-score; `r pull_lm(lmm_dfs, "bmiz_w6.5", vi)`), and higher body
+fat percentage (`r pull_lm(lmm_dfs, "bodyfat_w6.5", vi)`).
+
+We note that subject-specific intercepts and slopes are shrunken towards the
+population mean and that this two-stage approach treats them as observed without
+propagating the uncertainty in their estimation. These estimates are therefore
+conservative, and the consistency of the findings across the latent growth model,
+the observed Wave 3 exposure, and the mixed-model framework increases confidence
+in the conclusions.
+
+\newpage
+
+```{r lmm-table}
+gtsummary::as_flex_table(lmm_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Change in screen-time exposure definition across waves
+
+Our total screen-time measure combines three components: television, electronic
+games, and computer/other electronic-device use. The television and
+electronic-games items were measured identically at all four waves, but the
+computer-use item was reworded between Wave 4 and Wave 5 (from time using a
+computer to time using other electronic devices/games), so the exposure
+definition is not perfectly constant across the trajectory. We conducted two
+further sensitivity analyses to assess whether this measurement change affects
+our inferences.
+
+As an initial visual check, Figure \@ref(fig:st-wave-plot) shows mean total
+screen time at each wave. The trajectory increases steadily across all four
+waves with no discontinuity at the Wave 4-5 boundary where the computer/other
+item was reworded, and the definition-invariant total (television + electronic
+games) follows a parallel progression. This suggests the change in item wording
+did not introduce a step change in the measured exposure.
+
+```{r st-wave-plot, fig.width=7, fig.height=4.5, fig.cap="Mean total screen time (minutes/day, with 95% confidence intervals) at each wave, for the full three-component total and the definition-invariant total (television + electronic games). The dashed line marks the Wave 4-5 boundary at which the computer/other component was reworded."}
+st_wave_plot
+```
+
+### Definition-invariant components only
+
+We first refit the latent growth curve model using a screen-time exposure built
+only from the two definition-invariant components (television and electronic
+games), excluding the reworded computer/other component
+(Table \@ref(tab:consistent-table)).
+
+```{r consistent-results, include=FALSE}
+ti <- "st_intercept"
+```
+
+The trajectory associations were materially unchanged. Using the
+definition-invariant exposure, the trajectory intercept remained associated with
+lower cardiorespiratory fitness (`r pull_lgcm(consistent_dfs, "vo2_w6.5", ti)`;
+primary model `r pull_lgcm(model_dfs, "vo2_w6.5", ti)`), higher waist
+circumference (`r pull_lgcm(consistent_dfs, "waistcm_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "waistcm_w6.5", ti)`), higher waist-to-height ratio
+(`r pull_lgcm(consistent_dfs, "waist2height_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "waist2height_w6.5", ti)`), higher body mass index
+(z-score; `r pull_lgcm(consistent_dfs, "bmiz_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "bmiz_w6.5", ti)`), and higher body fat percentage
+(`r pull_lgcm(consistent_dfs, "bodyfat_w6.5", ti)`; primary
+`r pull_lgcm(model_dfs, "bodyfat_w6.5", ti)`). Estimates were consistent in
+direction and similar in magnitude to the primary full-component model.
+
+\newpage
+
+```{r consistent-table}
+gtsummary::as_flex_table(consistent_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+### Early (Waves 3-4) and later (Waves 5-6) periods modelled separately
+
+We then modelled the two definition regimes separately, using the average
+standardised screen time within the early period (Waves 3-4, original
+computer-item definition) and within the later period (Waves 5-6, revised
+definition) as the exposure in ordinary least squares models with the same
+covariates (Tables \@ref(tab:early-table) and \@ref(tab:late-table)).
+
+```{r period-results, include=FALSE}
+te <- "st_earlyz"
+tl <- "st_latez"
+```
+
+Associations were consistent in direction across the two periods. For example,
+both the early-period exposure (original definition) and the later-period
+exposure (revised definition) were associated with lower cardiorespiratory
+fitness (Waves 3-4 `r pull_lm(early_dfs, "vo2_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "vo2_w6.5", tl)`), higher waist circumference
+(Waves 3-4 `r pull_lm(early_dfs, "waistcm_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "waistcm_w6.5", tl)`), and higher body fat percentage
+(Waves 3-4 `r pull_lm(early_dfs, "bodyfat_w6.5", te)`; Waves 5-6
+`r pull_lm(late_dfs, "bodyfat_w6.5", tl)`). Taken together with the
+definition-invariant analysis, these results indicate that the change in the
+computer-item definition between Waves 4 and 5 does not materially affect our
+inferences.
+
+\newpage
+
+```{r early-table}
+gtsummary::as_flex_table(early_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+```{r late-table}
+gtsummary::as_flex_table(late_table) %>%
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+## Right-skewed outcomes modelled on the natural-log scale
+
+Several of the standalone health outcomes are right-skewed, which can affect the
+normality of model residuals and the validity of the standard errors in the
+primary models (which are fit in the outcomes' natural units). As a sensitivity
+analysis we identified the materially skewed outcomes from the data and re-fit
+them on the natural-log scale.
+
+Selection was data-driven: we computed the marginal skewness of every continuous
+outcome on the analysis sample (Table \@ref(tab:skewness-table)) and re-fit, on
+the log scale, those that were at least moderately right-skewed (skewness > 0.8)
+and strictly positive. This flagged
+`r nrow(as.data.frame(logoutcome_dfs)[!duplicated(as.data.frame(logoutcome_dfs)$outcome), ])`
+outcomes: triglycerides, waist-to-height ratio, waist circumference, glycoprotein
+acetyls, the ApoB/ApoA1 ratio, and glucose. The already-standardised z-score
+outcomes (BMI, blood pressure) and the composite risk score were not eligible,
+and the remaining outcomes were not materially skewed. Each flagged outcome was
+re-estimated with the same latent growth curve specification and covariates as
+the primary models; because the exposure is standardised, the log-scale
+coefficients back-transform to a multiplicative change (a ratio) in the outcome
+per 1 SD of screen time (Table \@ref(tab:logoutcome-table)).
+
+```{r skewness-table}
+os <- as.data.frame(outcome_skewness)
+os$skewness <- pn(os$skewness, 0.01)
+os$min <- pn(os$min, 0.01)
+os$median <- pn(os$median, 0.01)
+os$max <- pn(os$max, 0.01)
+os$log_flag <- ifelse(os$log_flag, "Yes", "No")
+flextable::flextable(
+  os[, c("outcome", "n", "min", "median", "max", "skewness", "log_flag")]
+) |>
+  flextable::set_header_labels(
+    outcome = "Outcome", skewness = "Skewness",
+    log_flag = "Log-transformed"
+  ) |>
+  flextable::set_caption(
+    "Marginal skewness of candidate continuous outcomes on the analysis sample. Outcomes with skewness > 0.8 and strictly positive values were re-fit on the log scale."
+  ) |>
+  flextable::set_table_properties(layout = "autofit")
+```
+
+\newpage
+
+The findings were consistent with the primary analysis. For example, the
+trajectory intercept remained positively associated with waist circumference
+(back-transformed `r pull_logexp(logoutcome_dfs, "waistcm_w6.5")`; primary
+natural-unit `r pull_lgcm(model_dfs, "waistcm_w6.5")`) and waist-to-height ratio
+(`r pull_logexp(logoutcome_dfs, "waist2height_w6.5")`), while there remained no
+clear association with triglycerides
+(`r pull_logexp(logoutcome_dfs, "trigly_w6.5")`), glycoprotein acetyls
+(`r pull_logexp(logoutcome_dfs, "glycoprotein_w6.5")`), the ApoB/ApoA1 ratio
+(`r pull_logexp(logoutcome_dfs, "ApoBA1_ratio_w6.5")`), or glucose
+(`r pull_logexp(logoutcome_dfs, "glucose_w6.5")`). Modelling these outcomes on
+the log scale did not change the statistical significance of any association
+relative to the primary models, and the direction of every non-null effect was
+unchanged.
+
+\newpage
+
+```{r logoutcome-table}
+logoutcome_table
+```

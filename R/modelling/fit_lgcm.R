@@ -9,7 +9,8 @@
 #' @return
 #' @author {Taren Sanders}
 #' @export
-fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = FALSE) {
+fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = FALSE,
+                     st_prefix = "st_totalz", log_outcome = FALSE) {
   require(lavaan)
 
   covariates_v <- c("female", "indig", "ses_w6", "bad_diet", "sexualmaturity_numeric_w6.5")
@@ -19,11 +20,16 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     transformed_data[[outcome]] <- scale(transformed_data[[outcome]])
   }
 
+  # Sensitivity 4: log-transform right-skewed outcomes
+  # (see make_outcome_skewness())
+  if (log_outcome) {
+    transformed_data[[outcome]] <- log(transformed_data[[outcome]])
+  }
+
   if (bloods) {
     covariates <- glue::glue("{covariates} + fastingtime_w6.5")
   }
-  # Check for factors in the transformed_data using all_vars_used
-  # These need to be converted to numeric to prevent mistakes
+  # Factors cause silent errors in lavaan
   all_vars_used <- c(
     covariates_v,
     outcome,
@@ -42,8 +48,8 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     # nolint start
     "
     # lgcm
-    st_intercept =~ 1 * st_totalz_w3 + 1 * st_totalz_w4 + 1 * st_totalz_w5 + 1 * st_totalz_w6
-    st_slope =~ 0 * st_totalz_w3 + 1 * st_totalz_w4 + 2 * st_totalz_w5 + 3 * st_totalz_w6
+    st_intercept =~ 1 * {st_prefix}_w3 + 1 * {st_prefix}_w4 + 1 * {st_prefix}_w5 + 1 * {st_prefix}_w6
+    st_slope =~ 0 * {st_prefix}_w3 + 1 * {st_prefix}_w4 + 2 * {st_prefix}_w5 + 3 * {st_prefix}_w6
 
     # variances and covariances
     st_intercept ~~ st_intercept
@@ -51,10 +57,10 @@ fit_lgcm <- function(transformed_data, outcome, bloods, standardised_outcome = F
     st_intercept ~~ st_slope
 
     # residual variances
-    st_totalz_w3 ~~ residual_var*st_totalz_w3
-    st_totalz_w4 ~~ residual_var*st_totalz_w4
-    st_totalz_w5 ~~ residual_var*st_totalz_w5
-    st_totalz_w6 ~~ residual_var*st_totalz_w6
+    {st_prefix}_w3 ~~ residual_var*{st_prefix}_w3
+    {st_prefix}_w4 ~~ residual_var*{st_prefix}_w4
+    {st_prefix}_w5 ~~ residual_var*{st_prefix}_w5
+    {st_prefix}_w6 ~~ residual_var*{st_prefix}_w6
     residual_var > 0
 
     # regression of health outcome on latent factors and covariates

@@ -1,22 +1,23 @@
 #' Calculate Cardiovascular Index
 #'
-#' This function calculates the cardiovascular index based on various health metrics.
+#' Calculates a continuous cardiometabolic risk score as the mean of age- and
+#' sex-standardised z-scores, following Stavnsbo et al. (2018). Waist
+#' circumference and triglycerides are natural-log transformed and standardised
+#' against the log-scale reference values; HDL-C is inverted (after
+#' standardising) because it is protective; systolic and diastolic blood
+#' pressure are averaged into a single combined component.
 #'
-#' @param age Numeric. Age of the individual.
-#' @param gender Character. Gender of the individual ("Male" or "Female").
+#' @param age Numeric. Age of the individual (years, integer-matched to the reference data).
+#' @param sex Character. Sex of the individual ("Male" or "Female").
 #' @param SBP Numeric. Systolic Blood Pressure (mmHg).
 #' @param DBP Numeric. Diastolic Blood Pressure (mmHg).
-#' @param BMI Numeric. Body Mass Index (kg/m2).
-#' @param waist_circumference Numeric. Waist Circumference (cm).
-#' @param total_body_fat Numeric. Total Body Fat percentage.
-#' @param total_cholesterol Numeric. Total Cholesterol (mmol/L).
-#' @param LDL_C Numeric. LDL Cholesterol (mmol/L).
+#' @param waist_circumference Numeric. Waist Circumference (cm); log-transformed internally.
 #' @param HDL_C Numeric. HDL Cholesterol (mmol/L).
-#' @param triglycerides Numeric. Triglycerides (mmol/L).
+#' @param triglycerides Numeric. Triglycerides (mmol/L); log-transformed internally.
 #' @param glucose Numeric. Glucose (mmol/L).
 #' @param bio_ref_data Data frame. Reference data containing mean and standard deviation for each metric.
 #'
-#' @return Numeric. The calculated cardiovascular index.
+#' @return Numeric. The calculated cardiometabolic risk score.
 #' @export
 #'
 get_cardio_index <- function(age,
@@ -32,7 +33,6 @@ get_cardio_index <- function(age,
   calc_z <- function(value, mean, sd) {
     (value - mean) / sd
   }
-  inverted_HDL_C <- HDL_C * -1
 
   get_z <- function(val, outcome, i) {
     if (!is.null(val)) {
@@ -47,14 +47,17 @@ get_cardio_index <- function(age,
       NA
     }
   }
-   metrics <- c("SBP (mmHg)", "DBP (mmHg)", "WC (cm)", "HDL-C (mmol/L)", "TG (mmol/L)", "Glucose (mmol/L)")
+  # WC and TG log-transformed per Stavnsbo et al. (2018)
+  metrics <- c("SBP (mmHg)", "DBP (mmHg)", "WC (log)", "HDL-C (mmol/L)", "TG (log)", "Glucose (mmol/L)")
 
-  vals <- c(SBP, DBP, waist_circumference,
-            inverted_HDL_C, triglycerides, glucose)
+  vals <- c(SBP, DBP, log(waist_circumference),
+            HDL_C, log(triglycerides), glucose)
 
   cardio_index <- lapply(seq_along(metrics),
                          function(i) get_z(vals[i], metrics[i], i))
   names(cardio_index) <- metrics
+  # HDL-C is protective — invert so higher values lower composite risk
+  cardio_index[["HDL-C (mmol/L)"]] <- -1 * cardio_index[["HDL-C (mmol/L)"]]
   cardio_index$BP_combined <- mean(unlist(cardio_index[c("SBP (mmHg)", "DBP (mmHg)")]), na.rm = TRUE)
   
   cardio_index[c("SBP (mmHg)", "DBP (mmHg)")] <- NULL
