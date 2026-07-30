@@ -10,6 +10,5 @@
   "mounts": [
     "source=/mnt/c/Users/TaSandersAdmin/OneDrive - Australian Catholic University/LSAC Data,target=/data,type=bind",
     "source=claude-code-config-${devcontainerId},target=/home/rstudio/.claude,type=volume"
-  ],
-  "postCreateCommand": "sudo chown -R rstudio:rstudio /home/rstudio/.claude"
+  ]
 }

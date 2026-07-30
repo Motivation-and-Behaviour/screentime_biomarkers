@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript -e 'cat\\(\"lme4:\", requireNamespace\\(\"lme4\", quietly=TRUE\\), \"lmerTest:\", requireNamespace\\(\"lmerTest\", quietly=TRUE\\), \"broom.mixed:\", requireNamespace\\(\"broom.mixed\", quietly=TRUE\\), \"\\\\n\"\\)')"
+    ]
+  }
+}
